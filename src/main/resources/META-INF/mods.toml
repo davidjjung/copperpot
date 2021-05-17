@@ -1,0 +1,44 @@
+modLoader = "javafml"
+loaderVersion = "[32,)"
+issueTrackerURL = ""
+license = "MIT License"
+
+[[mods]]
+    modId = "copperpot"
+    version = "1.16.5-1.0.0"
+#     logoFile = "logo.png"
+    itemIcon = "minecraft:dirt"
+    authors = "DavigJ"
+    credits = "DavigJ"
+    displayName = "Copper Pot"
+    description = '''
+    Adds a copper pot for those stuck waiting on the iron age.
+    '''
+
+[[dependencies.template_mod]]
+    modId = "minecraft"
+    mandatory = true
+    versionRange = "[1.16.5,1.17)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.template_mod]]
+    modId = "forge"
+    mandatory = true
+    versionRange = "[36.1.0,)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.template_mod]]
+    modId = "abnormals_core"
+    mandatory = true
+    versionRange = "[3.1.1,)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.irregularchef]]
+    modId = "farmersdelight"
+    mandatory = true
+    versionRange = "[0.4.2,)"
+    ordering = "AFTER"
+    side = "BOTH"

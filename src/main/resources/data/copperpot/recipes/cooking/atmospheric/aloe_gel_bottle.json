@@ -1,0 +1,20 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "atmospheric:aloe_leaves"
+    },
+    {
+      "item": "atmospheric:aloe_leaves"
+    },
+    {
+      "item": "atmospheric:aloe_leaves"
+    }
+  ],
+  "result": {
+    "item": "atmospheric:aloe_gel_bottle"
+  },
+  "container": {
+    "item": "minecraft:glass_bottle"
+  }
+}

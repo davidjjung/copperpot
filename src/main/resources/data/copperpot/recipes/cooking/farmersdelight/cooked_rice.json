@@ -1,0 +1,18 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "tag": "forge:crops/rice"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:cooked_rice",
+    "count": 1
+  },
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "effecttrue": true,
+  "effect": "minecraft:hunger",
+  "effectduration": 600
+}

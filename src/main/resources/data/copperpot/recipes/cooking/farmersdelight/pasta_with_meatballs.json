@@ -1,0 +1,24 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "farmersdelight:minced_beef"
+    },
+    {
+      "tag": "forge:pasta"
+    },
+    {
+      "item": "farmersdelight:tomato_sauce"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:pasta_with_meatballs",
+    "count": 1
+  },
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "effecttrue": true,
+  "effect": "minecraft:poison",
+  "effectduration": 400
+}

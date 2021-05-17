@@ -1,0 +1,20 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "atmospheric:yucca_fruit"
+    },
+    {
+      "item": "atmospheric:yucca_fruit"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "atmospheric:yucca_juice"
+  },
+  "container": {
+    "item": "minecraft:glass_bottle"
+  }
+}

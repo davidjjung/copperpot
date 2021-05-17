@@ -1,0 +1,9 @@
+{
+  "block.copperpot.copper_pot_block": "Copper Pot",
+
+  "copperpot.container.copper_pot": "Copper Pot",
+  "copperpot.container.copper_pot.served_on": "Served on: %s",
+
+  "copperpot.tooltip.copper_pot.empty": "Empty",
+  "copperpot.jei.cooking": "Cooking"
+}

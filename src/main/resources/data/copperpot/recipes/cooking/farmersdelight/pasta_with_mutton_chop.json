@@ -1,0 +1,24 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "tag": "forge:raw_mutton"
+    },
+    {
+      "tag": "forge:pasta"
+    },
+    {
+      "item": "farmersdelight:tomato_sauce"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:pasta_with_mutton_chop"
+  },
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "effecttrue": true,
+  "effect": "minecraft:poison",
+  "effectduration": 200,
+  "effectamplifier": 1
+}

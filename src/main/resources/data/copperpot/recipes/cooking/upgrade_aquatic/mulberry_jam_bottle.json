@@ -1,0 +1,24 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:mulberry"
+    },
+    {
+      "item": "upgrade_aquatic:mulberry"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "upgrade_aquatic:mulberry_jam_bottle",
+    "count": 2
+  },
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "effecttrue": true,
+  "effect": "minecraft:water_breathing",
+  "effectduration": 100
+}

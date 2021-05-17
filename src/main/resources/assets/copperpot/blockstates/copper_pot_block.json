@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,down=false": {
+      "model": "copperpot:block/copper_pot_block"
+    },
+    "facing=south,down=false": {
+      "model": "copperpot:block/copper_pot_block",
+      "y": 180
+    },
+    "facing=west,down=false": {
+      "model": "copperpot:block/copper_pot_block",
+      "y": 270
+    },
+    "facing=east,down=false": {
+      "model": "copperpot:block/copper_pot_block",
+      "y": 90
+    },
+    "facing=north,down=true": {
+      "model": "copperpot:block/copper_pot_supported"
+    },
+    "facing=south,down=true": {
+      "model": "copperpot:block/copper_pot_supported",
+      "y": 180
+    },
+    "facing=west,down=true": {
+      "model": "copperpot:block/copper_pot_supported",
+      "y": 270
+    },
+    "facing=east,down=true": {
+      "model": "copperpot:block/copper_pot_supported",
+      "y": 90
+    }
+  }
+}
