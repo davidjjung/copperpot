@@ -1,0 +1,28 @@
+{ 
+    "type": "copperpot:cooking",
+    "ingredients": [
+        {
+            "tag": "forge:milk"
+        },
+        {
+            "tag": "minecraft:leaves"
+        }
+
+    ],
+    "container": {
+        "item": "minecraft:glass_bottle"
+    },
+    "result": { 
+        "item": "create:builders_tea"
+    },
+    "conditions": [
+        {
+            "type": "forge:mod_loaded",
+            "modid": "create"
+        }
+    ],
+    "effecttrue": true,
+    "effect": "minecraft:mining_fatigue",
+    "effectduration": 100,
+    "effectamplifier": 1
+}
