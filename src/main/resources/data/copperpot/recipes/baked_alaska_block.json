@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mmm",
+    "wNw"
+  ],
+  "key": {
+    "m": {
+      "item": "copperpot:meringue"
+    },
+    "N": {
+      "item": "neapolitan:neapolitan_ice_cream"
+    },
+    "w": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "result": {
+    "item": "copperpot:baked_alaska_block"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "neapolitan"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "neapolitan:strawberries",
+    "minecraft:carrot",
+    "#forge:salad_ingredients"
+  ]
+}

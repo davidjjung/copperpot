@@ -69,7 +69,7 @@ public class CopperPotRecipe implements IRecipe<IInventory> {
         this.effect = effect;
         this.effectDuration = effectDuration;
         this.effectAmplifier = effectAmplifier;
-        LOGGER.debug(effecttrue + ", " + effect + ", " + effectDuration + ", " + effectAmplifier);
+//        LOGGER.debug(effecttrue + ", " + effect + ", " + effectDuration + ", " + effectAmplifier);
     }
 
     public ResourceLocation getId() {

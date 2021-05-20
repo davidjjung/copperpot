@@ -72,7 +72,6 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
 
     protected final IIntArray copperPotData;
     protected final IRecipeType<? extends CopperPotRecipe> recipeType;
-    public static final Logger LOGGER = LogManager.getLogger();
 
     public CopperPotTileEntity(TileEntityType<?> tileEntityTypeIn, IRecipeType<? extends CopperPotRecipe> recipeTypeIn) {
         super(tileEntityTypeIn);
@@ -346,15 +345,14 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
             double baseZ;
             if (random.nextFloat() < 0.13F) {
                 baseX = (double)blockpos.getX() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
-                // originally baseY had + 0.7D
                 baseY = (double)blockpos.getY() + 0.4D;
                 baseZ = (double)blockpos.getZ() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
-                world.addParticle(ParticleTypes.BUBBLE_POP, baseX, baseY, baseZ, 0.0D, 0.0D, 0.0D);
+                // pick your particles, come pick yourself some particles
+                world.addParticle(ParticleTypes.CRIT, baseX, baseY, baseZ, 0.0D, 0.0D, 0.0D);
             }
 
             if (random.nextFloat() < 0.03F) {
                 baseX = (double)blockpos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-                // originally baseY had + 0.7D
                 baseY = (double)blockpos.getY() + 0.4D;
                 baseZ = (double)blockpos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
                 world.addParticle(ParticleTypes.EFFECT, baseX, baseY, baseZ, 0.0D, 0.0D, 0.0D);
@@ -364,7 +362,6 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     }
 
     public ItemStack getMeal() {
-        // originally getStackInSlot(6)
         return this.itemHandler.getStackInSlot(3);
     }
 
@@ -383,7 +380,6 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
 
     public NonNullList<ItemStack> getDroppableInventory() {
         NonNullList<ItemStack> drops = NonNullList.create();
-        // originally i < 9, drops.add(i==6)
         for(int i = 0; i < 6; ++i) {
             drops.add(i == 3 ? ItemStack.EMPTY : this.itemHandler.getStackInSlot(i));
         }
@@ -391,7 +387,6 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     }
 
     private void moveMealToOutput() {
-        // originally 6, 8
         ItemStack mealDisplay = this.itemHandler.getStackInSlot(3);
         ItemStack finalOutput = this.itemHandler.getStackInSlot(5);
         int mealCount = Math.min(mealDisplay.getCount(), mealDisplay.getMaxStackSize() - finalOutput.getCount());

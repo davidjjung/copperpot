@@ -1,0 +1,10 @@
+{
+  "parent": "block/cake_slice3",
+  "textures": {
+    "particle": "copperpot:block/baked_alaska_block_side",
+    "bottom": "copperpot:block/baked_alaska_block_bottom",
+    "top": "copperpot:block/baked_alaska_block_top",
+    "side": "copperpot:block/baked_alaska_block_side",
+    "inside": "copperpot:block/baked_alaska_block_inner"
+  }
+}

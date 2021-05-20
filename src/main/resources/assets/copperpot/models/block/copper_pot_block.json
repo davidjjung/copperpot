@@ -6,7 +6,7 @@
     "3": "copperpot:block/copper_pot_block_handle",
     "4": "copperpot:block/copper_pot_block_bottom",
     "5": "copperpot:block/copper_pot_block_ladle",
-    "particle": "copperpotblock:block/copper_pot_block_side"
+    "particle": "copperpot:block/copper_pot_block_side"
   },
   "elements": [
     {

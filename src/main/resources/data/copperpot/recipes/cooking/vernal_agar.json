@@ -1,0 +1,17 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "tag": "copperpot:spring_small_produce"
+    },
+    {
+      "tag": "copperpot:spring_produce"
+    },
+    {
+      "item": "minecraft:kelp"
+    }
+  ],
+  "result": {
+    "item": "copperpot:vernal_agar"
+  }
+}

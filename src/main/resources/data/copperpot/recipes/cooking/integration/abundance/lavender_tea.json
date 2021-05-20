@@ -1,0 +1,25 @@
+{ 
+    "type": "copperpot:cooking",
+    "ingredients": [
+        {
+            "item": "abundance:lavender"
+        },
+        {
+            "tag": "minecraft:leaves"
+        }
+
+    ],
+    "container": {
+        "item": "minecraft:glass_bottle"
+    },
+    "result": { 
+        "item": "abundance:lavender_tea"
+    },
+    "conditions": [
+        {
+            "type": "forge:mod_loaded",
+            "modid": "abundance"
+        }
+    ],
+    "effecttrue": false
+}

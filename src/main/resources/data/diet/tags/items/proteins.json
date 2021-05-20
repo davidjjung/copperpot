@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [  ],
+  "optional": [
+    "copperpot:maple_bacon_fudge",
+    "copperpot:meringue",
+    "copperpot:mint_meringue",
+    "copperpot:raw_meringue"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "copperpot:raw_meringue",
+    "count": 2
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "neapolitan:adzuki_beans"
+    },
+    {
+      "item": "neapolitan:adzuki_beans"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "copperpot:adzuki_paste",
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "neapolitan"
+    }
+  ],
+  "effecttrue": true,
+  "effect": "neapolitan:harmony",
+  "effectDuration": "60"
+}

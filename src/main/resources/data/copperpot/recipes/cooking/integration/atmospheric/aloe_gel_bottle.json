@@ -14,6 +14,12 @@
   "result": {
     "item": "atmospheric:aloe_gel_bottle"
   },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "atmospheric"
+    }
+  ],
   "container": {
     "item": "minecraft:glass_bottle"
   }

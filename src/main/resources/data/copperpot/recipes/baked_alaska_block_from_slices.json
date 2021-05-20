@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "copperpot:baked_alaska_slice"
+    },
+    {
+      "item": "copperpot:baked_alaska_slice"
+    },
+    {
+      "item": "copperpot:baked_alaska_slice"
+    },
+    {
+      "item": "copperpot:baked_alaska_slice"
+    },
+    {
+      "item": "copperpot:baked_alaska_slice"
+    },
+    {
+      "item": "copperpot:baked_alaska_slice"
+    },
+    {
+      "item": "copperpot:baked_alaska_slice"
+    }
+  ],
+  "result": {
+    "item": "copperpot:baked_alaska_block"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "neapolitan"
+    }
+  ]
+}

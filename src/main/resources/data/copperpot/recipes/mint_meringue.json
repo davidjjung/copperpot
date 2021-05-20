@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "copperpot:meringue"
+    },
+    {
+      "item": "copperpot:meringue"
+    },
+    {
+      "item": "neapolitan:mint_chocolate"
+    },
+    {
+      "item": "farmersdelight:tree_bark"
+    }
+  ],
+  "result": {
+    "item": "copperpot:mint_meringue",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "neapolitan"
+    }
+  ]
+}

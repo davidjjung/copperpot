@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "bites=0": {
+      "model": "copperpot:block/baked_alaska_block"
+    },
+    "bites=1": {
+      "model": "copperpot:block/baked_alaska_block1"
+    },
+    "bites=2": {
+      "model": "copperpot:block/baked_alaska_block2"
+    },
+    "bites=3": {
+      "model": "copperpot:block/baked_alaska_block3"
+    },
+    "bites=4": {
+      "model": "copperpot:block/baked_alaska_block4"
+    },
+    "bites=5": {
+      "model": "copperpot:block/baked_alaska_block5"
+    },
+    "bites=6": {
+      "model": "copperpot:block/baked_alaska_block6"
+    }
+  }
+}

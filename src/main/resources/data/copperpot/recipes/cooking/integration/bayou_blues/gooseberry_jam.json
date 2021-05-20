@@ -1,0 +1,30 @@
+{
+    "type": "copperpot:cooking",
+    "ingredients": [
+        {
+            "item": "bayou_blues:gooseberry_juice"
+        },
+        {
+            "item": "bayou_blues:gooseberry_juice"
+        },
+        {
+            "item": "minecraft:honey_bottle"
+        }
+    ],
+    "container": {
+        "item": "minecraft:glass_bottle"
+    },
+    "result": {
+        "item": "bayou_blues:gooseberry_jam",
+        "count": 2
+    },
+    "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "bayou_blues"
+        }
+      ],
+    "effecttrue": true,
+    "effect": "minecraft:nausea",
+    "effectduration": 75
+}

@@ -1,0 +1,35 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "fruitful:baked_apple"
+    },
+    {
+      "item": "fruitful:baked_apple"
+    },
+    {
+      "item": "abundance:lavender"
+    }
+  ],
+  "result": {
+    "item": "copperpot:spiced_apple_jam",
+    "count": 2
+  },
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "fruitful"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "abundance"
+    }
+  ],
+  "effecttrue": true,
+  "effect": "minecraft:weakness",
+  "effectduration": 200,
+  "effectamplifier": 1
+}

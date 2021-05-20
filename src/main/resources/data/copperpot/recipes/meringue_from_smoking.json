@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "copperpot:raw_meringue"
+  },
+  "result": "copperpot:meringue",
+  "experience": 0.1,
+  "cookingtime": 100
+}

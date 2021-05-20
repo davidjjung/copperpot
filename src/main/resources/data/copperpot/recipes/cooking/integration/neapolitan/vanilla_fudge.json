@@ -1,0 +1,27 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "neapolitan:dried_vanilla_pods"
+    },
+    {
+      "tag": "forge:milk"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "neapolitan:vanilla_fudge",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "neapolitan"
+    }
+  ],
+  "effecttrue": true,
+  "effect": "minecraft:poison",
+  "effectduration": 100
+}

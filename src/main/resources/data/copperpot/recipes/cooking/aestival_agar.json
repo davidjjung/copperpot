@@ -1,0 +1,17 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "tag": "copperpot:summer_produce"
+    },
+    {
+      "tag": "copperpot:summer_produce"
+    },
+    {
+      "item": "minecraft:kelp"
+    }
+  ],
+  "result": {
+    "item": "copperpot:aestival_agar"
+  }
+}
