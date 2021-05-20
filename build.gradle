@@ -66,7 +66,7 @@ sourceSets.main.resources {
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
     implementation fg.deobf("com.minecraftabnormals:abnormals-core:${project.minecraft}-${project.abnormalsCore}")
-    implementation fg.deobf("curse.maven:farmersdelight-398521:3295974")
+    implementation fg.deobf("curse.maven:farmersdelight-398521:3310983")
     implementation fg.deobf("curse.maven:upgrade_aquatic-326895:3249419")
     implementation fg.deobf("curse.maven:atmospheric-362393:3249309")
     implementation fg.deobf("curse.maven:abnormals_delight-442719:3301052")
