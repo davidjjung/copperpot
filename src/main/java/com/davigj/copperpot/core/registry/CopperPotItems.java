@@ -72,7 +72,7 @@ public class CopperPotItems {
 		public static final Food BAKED_ALASKA_SLICE = (new Food.Builder()).hunger(3).saturation(0.8F).fastToEat().build();
 		public static final Food ADZUKI_PASTE = (new Food.Builder()).hunger(2).saturation(0.5F).setAlwaysEdible().effect(() -> new EffectInstance(
 				getCompatEffect("neapolitan", new ResourceLocation("neapolitan", "harmony")).get(), 80), 0.8F).build();
-		public static final Food MAPLE_BACON_FUDGE = (new Food.Builder()).hunger(3).saturation(0.5F).effect(() -> new EffectInstance(Effects.RESISTANCE, 100, 1), 0.8F).build();
+		public static final Food MAPLE_BACON_FUDGE = (new Food.Builder()).hunger(5).saturation(0.5F).effect(() -> new EffectInstance(Effects.RESISTANCE, 100, 1), 0.8F).build();
 		public static final Food SPICED_APPLE_JAM = (new Food.Builder()).hunger(5).saturation(0.8F).effect(() -> new EffectInstance(
 				getCompatEffect("fruitful", new ResourceLocation("fruitful", "sustaining")).get(), 300, 0), 0.8F)
 				.effect(() -> new EffectInstance(getCompatEffect("abundance", new ResourceLocation("abundance", "supportive"))

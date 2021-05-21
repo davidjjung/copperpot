@@ -12,7 +12,8 @@
     }
   ],
   "result": {
-    "item": "copperpot:maple_bacon_fudge"
+    "item": "copperpot:maple_bacon_fudge",
+    "count": 2
   },
   "conditions": [
     {

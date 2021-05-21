@@ -2,10 +2,10 @@
   "type": "copperpot:cooking",
   "ingredients": [
     {
-      "item": "neapolitan:adzuki_beans"
+      "item": "neapolitan:roasted_adzuki_beans"
     },
     {
-      "item": "neapolitan:adzuki_beans"
+      "item": "neapolitan:roasted_adzuki_beans"
     },
     {
       "item": "minecraft:sugar"

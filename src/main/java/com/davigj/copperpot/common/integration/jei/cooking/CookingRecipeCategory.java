@@ -35,7 +35,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CopperPotRecipe> {
     private final IDrawable icon;
 
     public CookingRecipeCategory(IGuiHelper helper) {
-        ResourceLocation backgroundImage = new ResourceLocation("copperpot", "textures/gui/copper_pot.png");
+        ResourceLocation backgroundImage = new ResourceLocation("copperpot", "textures/gui/copper_pot_jei.png");
         this.background = helper.createDrawable(backgroundImage, 29, 16, 117, 57);
         this.icon = helper.createDrawableIngredient(new ItemStack((IItemProvider) CopperPotBlocks.COPPER_POT.get().asItem()));
         this.heatIndicator = helper.createDrawable(backgroundImage, 176, 0, 17, 15);

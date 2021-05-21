@@ -56,7 +56,6 @@ import java.util.function.Supplier;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class CopperPotTileEntity extends TileEntity implements INamedContainerProvider, ITickableTileEntity, INameable {
-    // originally 6 7 8 9
     public static final int MEAL_DISPLAY_SLOT = 3;
     public static final int CONTAINER_SLOT = 4;
     public static final int OUTPUT_SLOT = 5;
@@ -343,7 +342,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
             double baseX;
             double baseY;
             double baseZ;
-            if (random.nextFloat() < 0.13F) {
+            if (random.nextFloat() < 0.07F) {
                 baseX = (double)blockpos.getX() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
                 baseY = (double)blockpos.getY() + 0.4D;
                 baseZ = (double)blockpos.getZ() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);

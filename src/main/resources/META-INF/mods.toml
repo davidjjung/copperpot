@@ -7,12 +7,12 @@ license = "MIT License"
     modId = "copperpot"
     version = "1.16.5-1.0.0"
 #     logoFile = "logo.png"
-    itemIcon = "minecraft:dirt"
+    itemIcon = "copperpot:baked_alaska_block"
     authors = "DavigJ"
-    credits = "DavigJ"
+    credits = "DavigJ for some code, GracefulLion for gradle and recipe thingies, splet for splat, and Dannywaffles."
     displayName = "Copper Pot"
     description = '''
-    Adds a copper pot for those stuck waiting on the iron age.
+An unofficial add-on for Farmer's Delight! Adds a copper pot for those stuck waiting on the iron age.
     '''
 
 [[dependencies.template_mod]]

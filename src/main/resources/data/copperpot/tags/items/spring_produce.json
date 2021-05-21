@@ -3,6 +3,7 @@
   "values": [
     "neapolitan:strawberries",
     "minecraft:carrot",
+    "environmental:cherries",
     "#forge:salad_ingredients"
   ]
 }
