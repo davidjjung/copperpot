@@ -79,7 +79,7 @@ public class CopperPotItems {
 				getCompatEffect("fruitful", new ResourceLocation("fruitful", "sustaining")).get(), 300, 0), 0.8F)
 				.effect(() -> new EffectInstance(getCompatEffect("abundance", new ResourceLocation("abundance", "supportive"))
 						.get(), 160, 0), 0.8F).setAlwaysEdible().build();
-		public static final Food PORK_SANDWICH = (new Food.Builder()).hunger(11).saturation(0.8F).build();
+		public static final Food PORK_SANDWICH = (new Food.Builder()).hunger(10).saturation(0.8F).build();
 		public static final Food PEPPERMINT_BARK_MERINGUE = (new Food.Builder()).hunger(3).saturation(0.5F).effect(() -> new EffectInstance(
 				getCompatEffect("neapolitan", new ResourceLocation("neapolitan", "berserking")).get(), 100, 0), 0.8F)
 				.effect(() -> new EffectInstance(getCompatEffect("neapolitan", new ResourceLocation("neapolitan", "sugar_rush"))
