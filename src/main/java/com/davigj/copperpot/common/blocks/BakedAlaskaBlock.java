@@ -1,10 +1,10 @@
 package com.davigj.copperpot.common.blocks;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import com.davigj.copperpot.core.registry.CopperPotBlocks;
+import com.davigj.copperpot.core.registry.CopperPotItems;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.potion.Effect;
@@ -14,10 +14,7 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -26,8 +23,12 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
+import vectorwing.farmersdelight.registry.ModItems;
+import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import java.util.function.Supplier;
 
@@ -85,7 +86,7 @@ public class BakedAlaskaBlock extends Block {
                 } else if (random < 0.5 && random > 0.25) {
                     player.addPotionEffect(new EffectInstance(getCompatEffect("neapolitan", new ResourceLocation("neapolitan", "vanilla_scent")).get(), 100));
                 } else if (random > 0.5 && random < 0.8) {
-                    player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 200));
+                    player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 200, 1));
                 } else {
                     player.heal(4.0F);
                 }

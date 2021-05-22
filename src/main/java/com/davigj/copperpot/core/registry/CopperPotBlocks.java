@@ -28,5 +28,5 @@ public class CopperPotBlocks {
 
 	public static final RegistryObject<Block> MERINGUE_BLOCK = HELPER.createBlock("meringue_block", () -> new MeringueBlock(
 			AbstractBlock.Properties.create(Material.ORGANIC, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(
-					0.2F).sound(SoundType.SLIME)), ItemGroup.BUILDING_BLOCKS);
+					0.1F).sound(SoundType.SLIME)), ItemGroup.BUILDING_BLOCKS);
 }

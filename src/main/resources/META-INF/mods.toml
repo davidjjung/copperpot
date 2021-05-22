@@ -9,7 +9,7 @@ license = "MIT License"
 #     logoFile = "logo.png"
     itemIcon = "copperpot:baked_alaska_block"
     authors = "DavigJ"
-    credits = "DavigJ for some code, GracefulLion for gradle and recipe thingies, splet for splat, and Dannywaffles."
+    credits = "DavigJ for some code, GracefulLion for gradle/recipes and playtesting, splet for meringues, and dannyk11."
     displayName = "Copper Pot"
     description = '''
 An unofficial add-on for Farmer's Delight! Adds a copper pot for those stuck waiting on the iron age.
@@ -40,5 +40,68 @@ An unofficial add-on for Farmer's Delight! Adds a copper pot for those stuck wai
     modId = "farmersdelight"
     mandatory = true
     versionRange = "[0.4.2,)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.irregularchef]]
+    modId = "abnormals_delight"
+    mandatory = false
+    versionRange = "[1.1.1,)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.irregularchef]]
+    modId = "atmospheric"
+    mandatory = false
+    versionRange = "[3.1.0,)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.irregularchef]]
+    modId = "autumnity"
+    mandatory = false
+    versionRange = "[2.1.1,)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.irregularchef]]
+    modId = "bayou_blues"
+    mandatory = false
+    versionRange = "[1.0.4,)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.irregularchef]]
+    modId = "diet"
+    mandatory = false
+    versionRange = "[0.28,)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.irregularchef]]
+    modId = "environmental"
+    mandatory = false
+    versionRange = "[1.0.0,)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.irregularchef]]
+    modId = "fruitful"
+    mandatory = false
+    versionRange = "[2.0.0,)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.irregularchef]]
+    modId = "neapolitan"
+    mandatory = false
+    versionRange = "[2.1.0,)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.irregularchef]]
+    modId = "upgrade_aquatic"
+    mandatory = false
+    versionRange = "[3.1.0,)"
     ordering = "AFTER"
     side = "BOTH"

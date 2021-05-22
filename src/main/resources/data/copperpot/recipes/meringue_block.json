@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "copperpot:raw_meringue"
+    },
+    {
+      "item": "copperpot:raw_meringue"
+    },
+    {
+      "item": "copperpot:raw_meringue"
+    },
+    {
+      "item": "copperpot:raw_meringue"
+    }
+  ],
+  "result": {
+    "item": "copperpot:meringue_block"
+  }
+}

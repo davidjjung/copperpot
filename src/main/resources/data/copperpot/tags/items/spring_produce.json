@@ -1,9 +1,11 @@
 {
   "replace": false,
   "values": [
-    "neapolitan:strawberries",
     "minecraft:carrot",
-    "environmental:cherries",
     "#forge:salad_ingredients"
+  ],
+  "optional": [
+    "neapolitan:strawberries",
+    "environmental:cherries"
   ]
 }

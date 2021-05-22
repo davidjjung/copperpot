@@ -2,10 +2,12 @@
   "replace": false,
   "values": [
     "minecraft:apple",
-    "autumnity:foul_berries",
     "minecraft:red_mushroom",
     "farmersdelight:pumpkin_slice",
-    "minecraft:potato",
+    "minecraft:potato"
+  ],
+  "optional": [
+    "autumnity:foul_berries",
     "autumnity:syrup_bottle"
   ]
 }

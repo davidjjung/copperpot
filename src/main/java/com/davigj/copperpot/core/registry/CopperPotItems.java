@@ -63,6 +63,8 @@ public class CopperPotItems {
 			new Item.Properties().food(Foods.SPICED_APPLE_JAM).containerItem(Items.GLASS_BOTTLE).maxStackSize(16).group(ItemGroup.FOOD),
 			"effect.fruitful.sustaining", "effect.abundance.supportive"));
 
+	private static boolean modExists(String modId) {return ModList.get().isLoaded(modId);}
+
 	static class Foods {
 		private static Supplier<Effect> getCompatEffect(String modid, ResourceLocation effect) {
 			return (ModList.get().isLoaded(modid) ? () -> ForgeRegistries.POTIONS.getValue(effect) : () -> null);
