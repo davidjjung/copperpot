@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "copperpot:block/meringue_block"
+    "side": "copperpot:block/meringue_block_side",
+    "bottom": "copperpot:block/meringue_block_bottom",
+    "top": "copperpot:block/meringue_block_top"
   }
 }

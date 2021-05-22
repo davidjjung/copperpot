@@ -2,6 +2,7 @@
   "replace": false,
   "values": [  ],
   "optional": [
-    "copperpot:baked_alaska_slice"
+    "copperpot:baked_alaska_slice",
+    "copperpot:baked_alaska_block"
   ]
 }

@@ -9,7 +9,8 @@ license = "MIT License"
 #     logoFile = "logo.png"
     itemIcon = "copperpot:baked_alaska_block"
     authors = "DavigJ"
-    credits = "DavigJ for some code, GracefulLion for gradle/recipes and playtesting, splet for meringues, and dannyk11."
+    credits = "DavigJ for some code, GracefulLion for gradle/recipes and playtesting, splet for meringues, and dannyk11.
+    Big thanks to vectorwing for the Farmer's Delight mod to begin with!"
     displayName = "Copper Pot"
     description = '''
 An unofficial add-on for Farmer's Delight! Adds a copper pot for those stuck waiting on the iron age.

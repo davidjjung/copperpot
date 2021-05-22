@@ -97,10 +97,8 @@ public class MeringueBlock extends BreakableBlock {
 //                    }
 //                }
                 if (Math.abs(vector3d.y) < 0.3 + (amp * 0.1D)) {
-                    LOGGER.debug(vector3d.y);
                     entity.setMotion(new Vector3d(vector3d.x, Math.max(vector3d.y, vector3d.y + ((amp + 1) * 0.1D)), vector3d.z));
                 } else {
-                    LOGGER.debug(vector3d.y + "Help");
                     entity.setMotion(new Vector3d(vector3d.x, vector3d.y, vector3d.z));
                 }
                 if (Math.random() > 0.99) {
@@ -112,9 +110,7 @@ public class MeringueBlock extends BreakableBlock {
                 }
                 if (amp < 0) {
                     // Magic number is -0.03 so far
-//                    entity.setMotion(new Vector3d(vector3d.x, Math.min(0.5D, -0.03D - (amp)), vector3d.z));
-                    entity.setVelocity(vector3d.x, 0.1D, vector3d.z);
-                    LOGGER.debug(vector3d.y + "descent" + amp + " hm, " + (-0.1D-amp));
+                    entity.setMotion(new Vector3d(vector3d.x, Math.min(0.03D, -0.03D - (amp * 0.1)), vector3d.z));
                 }
                 if (Math.random() > 0.99) {
                     entity.playSound(SoundEvents.BLOCK_HONEY_BLOCK_STEP, 0.4F, 1.1F);
