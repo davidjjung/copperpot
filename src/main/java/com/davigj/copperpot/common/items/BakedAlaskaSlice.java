@@ -23,8 +23,7 @@ public class BakedAlaskaSlice extends Item {
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity livingEntity) {
-        LOGGER.debug("Spin the wheel");
-        if (!worldIn.isRemote) {
+        if (!worldIn.isRemote && ModList.get().isLoaded("neapolitan")) {
             double random = Math.random();
             if (random < 0.25) {
                 livingEntity.addPotionEffect(new EffectInstance(getCompatEffect("neapolitan", new ResourceLocation("neapolitan", "sugar_rush")).get(), 200, 2));

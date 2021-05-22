@@ -30,13 +30,15 @@ public class MintMeringue extends Item {
             double rand = Math.random();
             if(ModList.get().isLoaded("neapolitan")) {
                 if (rand < 0.7) {
+                    entityLiving.addPotionEffect(new EffectInstance(
+                            getCompatEffect("neapolitan", new ResourceLocation(
+                                    "neapolitan", "berserking")).get(), 100, 0));
+                }
+                if (rand > 0.3) {
                     entityLiving.addPotionEffect(new EffectInstance(new EffectInstance(
                             getCompatEffect("neapolitan", new ResourceLocation(
-                                    "neapolitan", "berserking")).get(), 100, 0)));
+                                    "neapolitan", "sugar_rush")).get(), 140, 0)));
                 }
-                entityLiving.addPotionEffect(new EffectInstance(new EffectInstance(
-                        getCompatEffect("neapolitan", new ResourceLocation(
-                                "neapolitan", "sugar_rush")).get(), 140, 0)));
                 if (rand > 0.3) {
                     extendEffect(entityLiving);
                 }
@@ -54,7 +56,7 @@ public class MintMeringue extends Item {
         while(effects.hasNext()) {
             EffectInstance effect = (EffectInstance)effects.next();
             if (effect.getDuration() > 10 && effect.getEffectName().equals(effect1) || effect.getEffectName().equals(effect2)) {
-                player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 140, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+                player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 240, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
             }
         }
     }

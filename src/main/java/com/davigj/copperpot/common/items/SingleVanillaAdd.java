@@ -13,10 +13,10 @@ import net.minecraft.world.World;
 
 import java.util.Iterator;
 
-public class SingleAdditive extends Item {
+public class SingleVanillaAdd extends Item {
     String effectName;
 
-    public SingleAdditive(Item.Properties properties, String effect) {
+    public SingleVanillaAdd(Item.Properties properties, String effect) {
         super(properties);
         this.effectName = effect;
     }
