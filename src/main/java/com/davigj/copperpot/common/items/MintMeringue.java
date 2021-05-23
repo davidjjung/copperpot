@@ -1,5 +1,6 @@
 package com.davigj.copperpot.common.items;
 
+import com.davigj.copperpot.core.CopperPotMod;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,12 +10,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Iterator;
 import java.util.function.Supplier;
 
 public class MintMeringue extends Item {
     String effect1;
+    Logger LOGGER = LogManager.getLogger(CopperPotMod.MOD_ID);
     String effect2;
 
     public MintMeringue(Item.Properties properties, String effect1, String effect2) {
@@ -28,7 +32,7 @@ public class MintMeringue extends Item {
         super.onItemUseFinish(stack, worldIn, entityLiving);
         if (!worldIn.isRemote) {
             double rand = Math.random();
-            if(ModList.get().isLoaded("neapolitan")) {
+            if (ModList.get().isLoaded("neapolitan")) {
                 if (rand < 0.7) {
                     entityLiving.addPotionEffect(new EffectInstance(
                             getCompatEffect("neapolitan", new ResourceLocation(
@@ -53,10 +57,15 @@ public class MintMeringue extends Item {
 
     public void extendEffect(LivingEntity player) {
         Iterator effects = player.getActivePotionEffects().iterator();
-        while(effects.hasNext()) {
-            EffectInstance effect = (EffectInstance)effects.next();
-            if (effect.getDuration() > 10 && effect.getEffectName().equals(effect1) || effect.getEffectName().equals(effect2)) {
-                player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 240, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+        while (effects.hasNext()) {
+            EffectInstance effect = (EffectInstance) effects.next();
+            double rand = Math.random();
+            if (effect != null && effect.getDuration() > 10 && effect.getEffectName().equals(effect1) || effect.getEffectName().equals(effect2)) {
+                if (rand > 0.4) {
+                    player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 240, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+                } else {
+                    player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration(), effect.getAmplifier() + 1, effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+                }
             }
         }
     }

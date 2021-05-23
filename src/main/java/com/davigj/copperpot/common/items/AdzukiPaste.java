@@ -48,7 +48,7 @@ public class AdzukiPaste extends Item {
                     if (rand < 0.7) {
                         entityLiving.addPotionEffect(new EffectInstance(new EffectInstance(
                                 getCompatEffect("neapolitan", new ResourceLocation(
-                                        "neapolitan", "harmony")).get(), 80)));
+                                        "neapolitan", "harmony")).get(), 40)));
                     }
                     if (rand > 0.2) {
                         extendEffect(entityLiving);
@@ -83,7 +83,7 @@ public class AdzukiPaste extends Item {
         while(effects.hasNext()) {
             EffectInstance effect = (EffectInstance)effects.next();
             if (effect.getDuration() > 10 && effect.getEffectName().equals(effectName)) {
-                player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 50, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+                player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 40, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
             }
         }
     }

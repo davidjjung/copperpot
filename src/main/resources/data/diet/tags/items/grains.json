@@ -3,6 +3,7 @@
   "values": [  ],
   "optional": [
     "copperpot:baked_alaska_slice",
-    "copperpot:baked_alaska_block"
+    "copperpot:baked_alaska_block",
+    "copperpot:pork_sandwich"
   ]
 }
