@@ -1,3 +1,6 @@
 {
-  "parent": "copperpot:block/copper_pot_block"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "copperpot:item/copper_pot_block"
+  }
 }

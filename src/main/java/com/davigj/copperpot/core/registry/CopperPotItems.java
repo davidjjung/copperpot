@@ -3,6 +3,7 @@ package com.davigj.copperpot.core.registry;
 import com.davigj.copperpot.common.items.*;
 import com.davigj.copperpot.core.CopperPotMod;
 import com.minecraftabnormals.abnormals_core.core.util.registry.ItemSubRegistryHelper;
+import net.minecraft.client.renderer.model.multipart.ICondition;
 import net.minecraft.item.*;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;

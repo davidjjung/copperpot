@@ -6,7 +6,7 @@ license = "MIT License"
 [[mods]]
     modId = "copperpot"
     version = "1.16.5-1.0.0"
-#     logoFile = "logo.png"
+    logoFile = "logo.png"
     itemIcon = "copperpot:baked_alaska_block"
     authors = "DavigJ"
     credits = "DavigJ for some code, GracefulLion for gradle/recipes and playtesting, splet for meringues, and dannyk11.
