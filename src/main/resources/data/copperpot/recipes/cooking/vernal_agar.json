@@ -13,5 +13,7 @@
   ],
   "result": {
     "item": "copperpot:vernal_agar"
-  }
+  },
+  "effecttrue": true,
+  "effect": "minecraft:jump_boost"
 }

@@ -88,6 +88,6 @@ public class CopperPotItems {
         public static final Food BRUMAL_AGAR = (new Food.Builder()).hunger(3).saturation(0.7F).effect(() -> new EffectInstance(
                 ModEffects.COMFORT.get(), 100), 0.2F).build();
         public static final Food VERNAL_AGAR = (new Food.Builder()).hunger(4).saturation(0.6F).effect(() -> new EffectInstance(
-                Effects.JUMP_BOOST, 100), 0.2F).build();
+                Effects.REGENERATION, 100), 0.2F).build();
     }
 }

@@ -13,5 +13,7 @@
   ],
   "result": {
     "item": "copperpot:autumnal_agar"
-  }
+  },
+  "effecttrue": true,
+  "effect": "minecraft:resistance"
 }

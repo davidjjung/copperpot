@@ -13,5 +13,7 @@
   ],
   "result": {
     "item": "copperpot:brumal_agar"
-  }
+  },
+  "effecttrue": true,
+  "effect": "minecraft:fire_resistance"
 }

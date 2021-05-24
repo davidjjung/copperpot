@@ -26,5 +26,8 @@
       "type": "forge:mod_loaded",
       "modid": "autumnity"
     }
-  ]
+  ],
+  "effecttrue": true,
+  "effect": "minecraft:slowness",
+  "effectamplifier": 1
 }

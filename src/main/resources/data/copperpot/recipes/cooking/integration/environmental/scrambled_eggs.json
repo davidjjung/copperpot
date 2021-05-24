@@ -25,5 +25,6 @@
       ],
     "effecttrue": true,
     "effect": "minecraft:slowness",
-    "effectduration": 100
+    "effectduration": 100,
+    "effectamplifier": 1
   }

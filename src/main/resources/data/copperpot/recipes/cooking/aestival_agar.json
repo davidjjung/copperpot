@@ -13,5 +13,7 @@
   ],
   "result": {
     "item": "copperpot:aestival_agar"
-  }
+  },
+  "effecttrue": true,
+  "effect": "minecraft:strength"
 }

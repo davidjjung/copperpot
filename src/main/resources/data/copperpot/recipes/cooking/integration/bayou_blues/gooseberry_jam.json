@@ -25,6 +25,6 @@
         }
       ],
     "effecttrue": true,
-    "effect": "minecraft:nausea",
-    "effectduration": 75
+    "effect": "minecraft:poison",
+    "effectamplifier": 1
 }
