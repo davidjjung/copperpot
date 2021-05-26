@@ -1,0 +1,22 @@
+{
+    "block.copperpot.copper_pot_block": "Kupfertopf",
+    "block.copperpot.baked_alaska_block": "Gebackenes Alaska",
+    "block.copperpot.meringue_block": "Baiser Block",
+    "item.copperpot.raw_meringue": "Rohes Baiser",
+    "item.copperpot.meringue": "Baiser",
+    "item.copperpot.mint_meringue": "Pfefferminzrindenbaiser",
+    "item.copperpot.baked_alaska_slice": "Gebackene Alaskascheibe",
+    "item.copperpot.adzuki_paste": "Adzuki Paste",
+    "item.copperpot.maple_bacon_fudge": "Ahorn-Speck Fudge",
+    "item.copperpot.spiced_apple_jam": "Gewürzte Apfelmarmelade",
+    "item.copperpot.pork_sandwich": "Würziges Schweinesandwich",
+    "item.copperpot.autumnal_agar": "Herbstlicher Agar",
+    "item.copperpot.aestival_agar": "Sommerlicher Agar",
+    "item.copperpot.brumal_agar": "Winterlicher Agar",
+    "item.copperpot.vernal_agar": "Frühlingshafter Agar",
+  
+    "copperpot.container.copper_pot": "Kupfertopf",
+    "copperpot.container.copper_pot.served_on": "Serviert auf: %s",
+  
+    "copperpot.jei.cooking": "Kochen"
+  }
