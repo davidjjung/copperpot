@@ -8,6 +8,7 @@ import com.davigj.copperpot.core.registry.CopperPotTileEntityTypes;
 import com.davigj.copperpot.core.utils.TextUtils;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HopperBlock;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -209,7 +210,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
         World worldIn = this.world;
         BlockPos pos = this.pos;
         if (!this.world.isRemote) {
-            if (isHeated && this.hasInput()) {
+            if (isHeated && this.hasInput() && this.getBlockState().get(HopperBlock.ENABLED)) {
                 CopperPotRecipe irecipe = (CopperPotRecipe)this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).orElse(null);
                 if (this.canCook(irecipe)) {
                     ++this.cookTime;

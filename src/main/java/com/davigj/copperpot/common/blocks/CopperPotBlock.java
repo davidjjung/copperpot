@@ -47,13 +47,14 @@ import java.util.Random;
 public class CopperPotBlock extends HorizontalBlock implements IWaterLoggable {
     public static final BooleanProperty SUPPORTED = BlockStateProperties.DOWN;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 5.0D, 14.0D);
     protected static final VoxelShape SHAPE_SUPPORTED = VoxelShapes.or(SHAPE, Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
 
     public CopperPotBlock(Properties builder) {
         super(builder);
         this.setDefaultState((BlockState)((BlockState)((BlockState)((BlockState)this.stateContainer.getBaseState()).with(
-                HORIZONTAL_FACING, Direction.NORTH)).with(SUPPORTED, false)).with(WATERLOGGED, false));
+                HORIZONTAL_FACING, Direction.NORTH)).with(SUPPORTED, false)).with(WATERLOGGED, false).with(ENABLED, Boolean.valueOf(true)));
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -70,7 +71,7 @@ public class CopperPotBlock extends HorizontalBlock implements IWaterLoggable {
         FluidState ifluidstate = world.getFluidState(context.getPos());
         return (BlockState)((BlockState)((BlockState)this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing()
                 .getOpposite())).with(SUPPORTED, this.needsTrayForHeatSource(world.getBlockState(blockpos.down())))).with(
-                        WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
+                        WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER).with(ENABLED, Boolean.valueOf(true));
     }
 
     public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
@@ -78,6 +79,12 @@ public class CopperPotBlock extends HorizontalBlock implements IWaterLoggable {
             worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
         }
         return facing == Direction.DOWN ? (BlockState)stateIn.with(SUPPORTED, this.needsTrayForHeatSource(facingState)) : stateIn;
+    }
+
+    public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+        if (!oldState.isIn(state.getBlock())) {
+            this.updateState(worldIn, pos, state);
+        }
     }
 
     private boolean needsTrayForHeatSource(BlockState state) {
@@ -117,6 +124,17 @@ public class CopperPotBlock extends HorizontalBlock implements IWaterLoggable {
         return itemstack;
     }
 
+    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+        this.updateState(worldIn, pos, state);
+    }
+
+    private void updateState(World worldIn, BlockPos pos, BlockState state) {
+        boolean flag = !worldIn.isBlockPowered(pos);
+        if (flag != state.get(ENABLED)) {
+            worldIn.setBlockState(pos, state.with(ENABLED, Boolean.valueOf(flag)), 4);
+        }
+    }
+
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -129,7 +147,7 @@ public class CopperPotBlock extends HorizontalBlock implements IWaterLoggable {
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
-        builder.add(new Property[]{HORIZONTAL_FACING, SUPPORTED, WATERLOGGED});
+        builder.add(new Property[]{HORIZONTAL_FACING, SUPPORTED, WATERLOGGED, ENABLED});
     }
 
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
