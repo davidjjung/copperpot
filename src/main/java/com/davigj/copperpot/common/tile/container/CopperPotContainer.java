@@ -56,7 +56,6 @@ public class CopperPotContainer extends Container {
             }
         }
 
-        // originally 6, 7
         this.addSlot(new CopperPotMealSlot(this.inventoryHandler, 3, 124, 26));
         this.addSlot(new SlotItemHandler(this.inventoryHandler, 4, 92, 55) {
             @OnlyIn(Dist.CLIENT)
@@ -64,7 +63,6 @@ public class CopperPotContainer extends Container {
                 return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE, CopperPotContainer.EMPTY_CONTAINER_SLOT_BOWL);
             }
         });
-        // originally index 8
         this.addSlot(new CopperPotResultSlot(this.inventoryHandler, 5, 124, 55));
 
 		// Main Player Inventory
@@ -104,7 +102,6 @@ public class CopperPotContainer extends Container {
 
     // determines how the player inventory looks, at least, I think
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-        // original numbers 6 7 8
         int indexMealDisplay = 3;
         int indexContainerInput = 4;
         int indexOutput = 5;

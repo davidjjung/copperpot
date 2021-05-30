@@ -5,6 +5,7 @@ import com.davigj.copperpot.core.registry.CopperPotContainerTypes;
 import com.davigj.copperpot.core.registry.CopperPotRecipeSerializers;
 import com.davigj.copperpot.core.registry.CopperPotTileEntityTypes;
 import com.davigj.copperpot.core.setup.ClientEventHandler;
+import com.davigj.copperpot.core.setup.CommonEventHandler;
 import com.minecraftabnormals.abnormals_core.core.util.registry.RegistryHelper;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,6 +26,8 @@ public class CopperPotMod {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
 		bus.addListener(ClientEventHandler::init);
+		bus.addListener(CommonEventHandler::init);
+
 		bus.addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
 
 		REGISTRY_HELPER.register(bus);

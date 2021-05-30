@@ -22,7 +22,7 @@ public class CopperPotItems {
     public static final ItemSubRegistryHelper HELPER = CopperPotMod.REGISTRY_HELPER.getItemSubHelper();
 
     public static final RegistryObject<Item> COPPER_POT = HELPER.createItem("copper_pot_block", () -> new BlockItem(
-            CopperPotBlocks.COPPER_POT.get(), new Item.Properties().maxStackSize(16).group(ItemGroup.BUILDING_BLOCKS)));
+            CopperPotBlocks.COPPER_POT.get(), new Item.Properties().maxStackSize(1).group(ItemGroup.BUILDING_BLOCKS)));
 
     public static final RegistryObject<Item> RAW_MERINGUE = HELPER.createItem("raw_meringue", () -> new Item(
             new Item.Properties().food(Foods.RAW_MERINGUE).group(ItemGroup.FOOD)));

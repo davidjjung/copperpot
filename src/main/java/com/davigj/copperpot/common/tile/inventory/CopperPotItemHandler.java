@@ -8,8 +8,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class CopperPotItemHandler implements IItemHandler {
-    //remember to change the funny numbers !!
-//    6 7 8 hohoh;
     private static final int SLOTS_INPUT = 3;
     private static final int SLOT_CONTAINER_INPUT = 4;
     private static final int SLOT_MEAL_OUTPUT = 5;
@@ -37,10 +35,8 @@ public class CopperPotItemHandler implements IItemHandler {
     @Nonnull
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
         if (this.side != null && !this.side.equals(Direction.UP)) {
-            // 7
             return slot == 4 ? this.itemHandler.insertItem(slot, stack, simulate) : stack;
         } else {
-            // 6
             return slot < 3 ? this.itemHandler.insertItem(slot, stack, simulate) : stack;
         }
     }
@@ -48,10 +44,8 @@ public class CopperPotItemHandler implements IItemHandler {
     @Nonnull
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
         if (this.side != null && !this.side.equals(Direction.UP)) {
-            // 8
             return slot == 5 ? this.itemHandler.extractItem(slot, amount, simulate) : ItemStack.EMPTY;
         } else {
-            // 6
             return slot < 3 ? this.itemHandler.extractItem(slot, amount, simulate) : ItemStack.EMPTY;
         }
     }

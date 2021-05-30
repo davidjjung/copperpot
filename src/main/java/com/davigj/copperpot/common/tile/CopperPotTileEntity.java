@@ -20,13 +20,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -465,7 +463,6 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     }
 
     private ItemStackHandler createHandler() {
-        // originally 9 and slot < 6
         return new ItemStackHandler(6) {
             protected void onContentsChanged(int slot) {
                 if (slot >= 0 && slot < 3) {
