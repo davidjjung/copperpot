@@ -295,10 +295,10 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
                     return true;
                 } else if (!currentOutput.isItemEqual(recipeOutput)) {
                     return false;
-                } else if (currentOutput.getCount() + recipeOutput.getCount() <= this.itemHandler.getSlotLimit(3)) {
+                } else if (currentOutput.getCount() + recipeOutput.getCount() <= Math.min(16, this.itemHandler.getSlotLimit(3))) {
                     return true;
                 } else {
-                    return currentOutput.getCount() + recipeOutput.getCount() <= recipeOutput.getMaxStackSize();
+                    return currentOutput.getCount() + recipeOutput.getCount() <= Math.min(16, recipeOutput.getMaxStackSize());
                 }
             }
         } else {
@@ -391,7 +391,6 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
         ItemStack finalOutput = this.itemHandler.getStackInSlot(5);
         int mealCount = Math.min(mealDisplay.getCount(), mealDisplay.getMaxStackSize() - finalOutput.getCount());
         if (finalOutput.isEmpty()) {
-            // originally 8,
             this.itemHandler.setStackInSlot(5, mealDisplay.split(mealCount));
         } else if (finalOutput.getItem() == mealDisplay.getItem()) {
             mealDisplay.shrink(mealCount);
@@ -401,7 +400,6 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     }
 
     private void useStoredContainersOnMeal() {
-        // originally 6 7 8
         ItemStack mealDisplay = this.itemHandler.getStackInSlot(3);
         ItemStack containerInput = this.itemHandler.getStackInSlot(4);
         ItemStack finalOutput = this.itemHandler.getStackInSlot(5);
@@ -410,7 +408,6 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
             int mealCount = Math.min(smallerStack, mealDisplay.getMaxStackSize() - finalOutput.getCount());
             if (finalOutput.isEmpty()) {
                 containerInput.shrink(mealCount);
-                // originally 8
                 this.itemHandler.setStackInSlot(5, mealDisplay.split(mealCount));
             } else if (finalOutput.getItem() == mealDisplay.getItem()) {
                 mealDisplay.shrink(mealCount);
