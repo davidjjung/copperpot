@@ -1,0 +1,28 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:honey_bottle"
+    },
+    {
+      "item": "buzzier_bees:buttercup"
+    }
+  ],
+  "result": {
+    "item": "copperpot:raw_meringue",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "buzzier_bees"
+    }
+  ],
+  "cookingtime": 600,
+  "effecttrue": true,
+  "effect": "minecraft:poison",
+  "effectamplifier": 1
+}

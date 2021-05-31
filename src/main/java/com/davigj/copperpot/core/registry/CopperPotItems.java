@@ -19,6 +19,7 @@ import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = CopperPotMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CopperPotItems {
+    // TODO: Find a way to generalize these items to "single additive, double additive, single bottled additive", etc
     public static final ItemSubRegistryHelper HELPER = CopperPotMod.REGISTRY_HELPER.getItemSubHelper();
 
     public static final RegistryObject<Item> COPPER_POT = HELPER.createItem("copper_pot_block", () -> new BlockItem(
@@ -68,8 +69,11 @@ public class CopperPotItems {
     public static final RegistryObject<Item> PORK_SANDWICH = HELPER.createItem("pork_sandwich", () -> new PorkSandwich(
             new Item.Properties().food(Foods.PORK_SANDWICH).group(ItemGroup.FOOD)));
 
-//    public static final RegistryObject<Item> CREEPING_YOGURT = HELPER.createItem("creeping_yogurt", () -> new Item(
-//            new Item.Properties().food(Foods.VERNAL_AGAR).group(ItemGroup.FOOD)));
+    public static final RegistryObject<Item> CREEPING_YOGURT = HELPER.createItem("creeping_yogurt", () -> new Item(
+            new Item.Properties().food(Foods.CREEPING_YOGURT).group(ItemGroup.FOOD)));
+
+    public static final RegistryObject<Item> ROYAL_JELLY = HELPER.createItem("royal_jelly", () -> new RoyalJelly(
+            new Item.Properties().food(Foods.ROYAL_JELLY).group(ItemGroup.FOOD)));
 
     static class Foods {
         public static final Food RAW_MERINGUE = (new Food.Builder()).hunger(1).saturation(1.0F).fastToEat().effect(() -> new EffectInstance(Effects.HUNGER, 300), 0.6F).build();
@@ -89,5 +93,7 @@ public class CopperPotItems {
                 ModEffects.COMFORT.get(), 100), 0.2F).build();
         public static final Food VERNAL_AGAR = (new Food.Builder()).hunger(4).saturation(0.6F).effect(() -> new EffectInstance(
                 Effects.REGENERATION, 100), 0.2F).build();
+        public static final Food ROYAL_JELLY = (new Food.Builder()).hunger(6).saturation(0.6F).effect(() -> new EffectInstance(
+                Effects.POISON, 300), 0.3F).build();
     }
 }
