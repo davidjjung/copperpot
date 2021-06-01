@@ -42,13 +42,10 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.lang.reflect.Array;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -82,7 +79,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
         });
         this.copperPotData = new IIntArray() {
             public int get(int index) {
-                switch(index) {
+                switch (index) {
                     case 0:
                         return CopperPotTileEntity.this.cookTime;
                     case 1:
@@ -93,7 +90,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
             }
 
             public void set(int index, int value) {
-                switch(index) {
+                switch (index) {
                     case 0:
                         CopperPotTileEntity.this.cookTime = value;
                         break;
@@ -101,6 +98,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
                         CopperPotTileEntity.this.cookTimeTotal = value;
                 }
             }
+
             public int size() {
                 return 2;
             }
@@ -170,7 +168,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
             return compound;
         } else {
             ItemStackHandler drops = new ItemStackHandler(6);
-            for(int i = 0; i < 6; ++i) {
+            for (int i = 0; i < 6; ++i) {
                 drops.setStackInSlot(i, i == 3 ? this.itemHandler.getStackInSlot(i) : ItemStack.EMPTY);
             }
             if (this.customName != null) {
@@ -188,18 +186,18 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
 
     private void effectCloud(World worldIn, BlockPos pos) {
         AreaEffectCloudEntity steam = new AreaEffectCloudEntity(worldIn, pos.getX() + 0.5D, pos.getY() + 0.25D, pos.getZ() + 0.5D);
-            steam.setDuration(15);
-            steam.setRadius(0.1F);
-            String effect = this.getEffect();
-            int effectDuration = this.getEffectDuration();
-            int effectAmplifier = this.getEffectAmplifier();
-            String[] effectName = effect.split(":", 2);
-            EffectInstance effectInstance = new EffectInstance(getCookEffect(effectName[0], new ResourceLocation(effectName[0], effectName[1])).get(), effectDuration, effectAmplifier, true, true);
+        steam.setDuration(15);
+        steam.setRadius(0.1F);
+        String effect = this.getEffect();
+        int effectDuration = this.getEffectDuration();
+        int effectAmplifier = this.getEffectAmplifier();
+        String[] effectName = effect.split(":", 2);
+        EffectInstance effectInstance = new EffectInstance(getCookEffect(effectName[0], new ResourceLocation(effectName[0], effectName[1])).get(), effectDuration, effectAmplifier, false, true);
         for (LivingEntity living : steam.world.getEntitiesWithinAABB(LivingEntity.class, steam.getBoundingBox().grow(4.0D, 3.0D, 4.0D))) {
             living.addPotionEffect(effectInstance);
         }
-            steam.addEffect(effectInstance);
-            worldIn.addEntity(steam);
+        steam.addEffect(effectInstance);
+        worldIn.addEntity(steam);
     }
 
     public void tick() {
@@ -208,11 +206,13 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
         World worldIn = this.world;
         BlockPos pos = this.pos;
         if (!this.world.isRemote) {
-            if (isHeated && this.hasInput() && this.getBlockState().get(HopperBlock.ENABLED)) {
-                CopperPotRecipe irecipe = (CopperPotRecipe)this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).orElse(null);
+            if (isHeated && this.hasInput() && this.getBlockState().get(CopperPotBlock.ENABLED)) {
+                CopperPotRecipe irecipe = (CopperPotRecipe) this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).orElse(null);
                 if (this.canCook(irecipe)) {
                     ++this.cookTime;
-                    if ((this.cookTime % 30 == 0) && this.isEffectTrue()) {this.effectCloud(worldIn, pos);}
+                    if ((this.cookTime % 30 == 0) && this.isEffectTrue()) {
+                        this.effectCloud(worldIn, pos);
+                    }
                     if (this.cookTime == this.cookTimeTotal) {
                         this.cookTime = 0;
                         this.cookTimeTotal = this.getCookTime();
@@ -244,11 +244,11 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     }
 
     protected int getCookTime() {
-        return (Integer)this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).map(CopperPotRecipe::getCookTime).orElse(100);
+        return (Integer) this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).map(CopperPotRecipe::getCookTime).orElse(100);
     }
 
     protected ItemStack getRecipeContainer() {
-        return (ItemStack)this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).map(CopperPotRecipe::getOutputContainer).orElse(ItemStack.EMPTY);
+        return (ItemStack) this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).map(CopperPotRecipe::getOutputContainer).orElse(ItemStack.EMPTY);
     }
 
     public ItemStack getContainer() {
@@ -273,7 +273,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
 
     private boolean hasInput() {
         // originally i < 6
-        for(int i = 0; i < 3; ++i) {
+        for (int i = 0; i < 3; ++i) {
             if (!this.itemHandler.getStackInSlot(i).isEmpty()) {
                 return true;
             }
@@ -316,14 +316,14 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
             }
         }
 
-        for(int i = 0; i < 3; ++i) {
+        for (int i = 0; i < 3; ++i) {
             if (this.itemHandler.getStackInSlot(i).hasContainerItem()) {
-                Direction direction = ((Direction)this.getBlockState().get(CopperPotBlock.HORIZONTAL_FACING)).rotateYCCW();
-                double dropX = (double)this.pos.getX() + 0.5D + (double)direction.getXOffset() * 0.25D;
-                double dropY = (double)this.pos.getY() + 0.7D;
-                double dropZ = (double)this.pos.getZ() + 0.5D + (double)direction.getZOffset() * 0.25D;
+                Direction direction = ((Direction) this.getBlockState().get(CopperPotBlock.HORIZONTAL_FACING)).rotateYCCW();
+                double dropX = (double) this.pos.getX() + 0.5D + (double) direction.getXOffset() * 0.25D;
+                double dropY = (double) this.pos.getY() + 0.7D;
+                double dropZ = (double) this.pos.getZ() + 0.5D + (double) direction.getZOffset() * 0.25D;
                 ItemEntity entity = new ItemEntity(this.world, dropX, dropY, dropZ, this.itemHandler.getStackInSlot(i).getContainerItem());
-                entity.setMotion((double)((float)direction.getXOffset() * 0.08F), 0.25D, (double)((float)direction.getZOffset() * 0.08F));
+                entity.setMotion((double) ((float) direction.getXOffset() * 0.08F), 0.25D, (double) ((float) direction.getZOffset() * 0.08F));
                 this.world.addEntity(entity);
             }
 
@@ -342,17 +342,17 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
             double baseY;
             double baseZ;
             if (random.nextFloat() < 0.07F) {
-                baseX = (double)blockpos.getX() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
-                baseY = (double)blockpos.getY() + 0.4D;
-                baseZ = (double)blockpos.getZ() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
+                baseX = (double) blockpos.getX() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
+                baseY = (double) blockpos.getY() + 0.4D;
+                baseZ = (double) blockpos.getZ() + 0.5D + (random.nextDouble() * 0.6D - 0.3D);
                 // pick your particles, come pick yourself some particles
                 world.addParticle(ParticleTypes.CRIT, baseX, baseY, baseZ, 0.0D, 0.0D, 0.0D);
             }
 
             if (random.nextFloat() < 0.03F) {
-                baseX = (double)blockpos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-                baseY = (double)blockpos.getY() + 0.4D;
-                baseZ = (double)blockpos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
+                baseX = (double) blockpos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
+                baseY = (double) blockpos.getY() + 0.4D;
+                baseZ = (double) blockpos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
                 world.addParticle(ParticleTypes.EFFECT, baseX, baseY, baseZ, 0.0D, 0.0D, 0.0D);
             }
         }
@@ -369,7 +369,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
         } else {
             BlockState checkState = this.world.getBlockState(this.pos.down());
             if (ModTags.HEAT_SOURCES.contains(checkState.getBlock())) {
-                return checkState.hasProperty(BlockStateProperties.LIT) ? (Boolean)checkState.get(BlockStateProperties.LIT) : true;
+                return checkState.hasProperty(BlockStateProperties.LIT) ? (Boolean) checkState.get(BlockStateProperties.LIT) : true;
             } else {
                 return false;
             }
@@ -378,7 +378,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
 
     public NonNullList<ItemStack> getDroppableInventory() {
         NonNullList<ItemStack> drops = NonNullList.create();
-        for(int i = 0; i < 6; ++i) {
+        for (int i = 0; i < 6; ++i) {
             drops.add(i == 3 ? ItemStack.EMPTY : this.itemHandler.getStackInSlot(i));
         }
         return drops;
@@ -446,7 +446,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     }
 
     public ITextComponent getName() {
-        return (ITextComponent)(this.customName != null ? this.customName : TextUtils.getTranslation("container.copper_pot", new Object[0]));
+        return (ITextComponent) (this.customName != null ? this.customName : TextUtils.getTranslation("container.copper_pot", new Object[0]));
     }
 
     public ITextComponent getDisplayName() {

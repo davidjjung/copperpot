@@ -30,6 +30,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CopperPotRecipe> {
     public static final ResourceLocation UID = new ResourceLocation("copperpot", "cooking");
     protected final IDrawable heatIndicator;
     protected final IDrawableAnimated arrow;
+    protected final IDrawableAnimated bubbles;
     private final String title = I18n.format("copperpot.jei.cooking", new Object[0]);
     private final IDrawable background;
     private final IDrawable icon;
@@ -39,7 +40,8 @@ public class CookingRecipeCategory implements IRecipeCategory<CopperPotRecipe> {
         this.background = helper.createDrawable(backgroundImage, 29, 16, 117, 57);
         this.icon = helper.createDrawableIngredient(new ItemStack((IItemProvider) CopperPotBlocks.COPPER_POT.get().asItem()));
         this.heatIndicator = helper.createDrawable(backgroundImage, 176, 0, 17, 15);
-        this.arrow = helper.drawableBuilder(backgroundImage, 176, 15, 24, 17).buildAnimated(200, StartDirection.LEFT, false);
+        this.arrow = helper.drawableBuilder(backgroundImage, 176, 15, 24, 17).buildAnimated(100, StartDirection.LEFT, false);
+        this.bubbles = helper.drawableBuilder(backgroundImage, 176, 42, 17, 11).buildAnimated(20, StartDirection.BOTTOM, false);
     }
 
     public ResourceLocation getUid() {
@@ -101,8 +103,9 @@ public class CookingRecipeCategory implements IRecipeCategory<CopperPotRecipe> {
 
     public void draw(CopperPotRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         this.arrow.draw(matrixStack, 60, 9);
-//        this.heatIndicator.draw(matrixStack, 18, 39);
+        if (recipe.getEffectTrue()) {
+            this.bubbles.draw(matrixStack, 95, 1);
+        }
         this.heatIndicator.draw(matrixStack, 19, 32);
-
     }
 }

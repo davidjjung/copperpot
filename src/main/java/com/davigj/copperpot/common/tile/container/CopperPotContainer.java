@@ -43,7 +43,6 @@ public class CopperPotContainer extends Container {
         int startY = 18;
 
         int inputStartX = 30;
-//        original int inputStartY = 17;
         int inputStartY = 26;
         int borderSlotSize = 18;
 
@@ -153,4 +152,7 @@ public class CopperPotContainer extends Container {
     public boolean isHeated() {
         return this.tileEntity.isAboveLitHeatSource();
     }
+
+    @OnlyIn(Dist.CLIENT)
+    public boolean hasEffect() { return this.tileEntity.isEffectTrue(); }
 }

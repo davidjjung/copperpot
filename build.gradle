@@ -70,7 +70,7 @@ dependencies {
 
 //    implementation fg.deobf("curse.maven:buzzier_bees-382016:3221772")
 
-//    implementation fg.deobf("curse.maven:neapolitan-382016:3221772")
+    implementation fg.deobf("curse.maven:neapolitan-382016:3221772")
 //    implementation fg.deobf("curse.maven:autumnity-365045:3295700")
 //    implementation fg.deobf("curse.maven:environmental-388992:3221635")
 //    implementation fg.deobf("curse.maven:abundance-452345:3250108")

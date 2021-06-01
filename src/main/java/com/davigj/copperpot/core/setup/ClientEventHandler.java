@@ -1,8 +1,12 @@
 package com.davigj.copperpot.core.setup;
 
 import com.davigj.copperpot.client.gui.CopperPotScreen;
+import com.davigj.copperpot.core.registry.CopperPotBlocks;
 import com.davigj.copperpot.core.registry.CopperPotContainerTypes;
+import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.ResourceLocation;
@@ -13,6 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import vectorwing.farmersdelight.registry.ModBlocks;
 
 @Mod.EventBusSubscriber(
         modid = "copperpot",
@@ -33,5 +38,6 @@ public class ClientEventHandler {
 
     public static void init (FMLClientSetupEvent event) {
         ScreenManager.registerFactory((ContainerType) CopperPotContainerTypes.COPPER_POT.get(), CopperPotScreen::new);
+        RenderTypeLookup.setRenderLayer((Block) CopperPotBlocks.COPPER_POT.get(), RenderType.getCutout());
     }
 }
