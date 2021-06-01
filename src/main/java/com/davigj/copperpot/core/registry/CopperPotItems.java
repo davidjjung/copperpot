@@ -75,6 +75,9 @@ public class CopperPotItems {
     public static final RegistryObject<Item> ROYAL_JELLY = HELPER.createItem("royal_jelly", () -> new RoyalJelly(
             new Item.Properties().food(Foods.ROYAL_JELLY).group(ItemGroup.FOOD)));
 
+    public static final RegistryObject<Item> MOONCAKE = HELPER.createItem("mooncake", () -> new Mooncake(
+            new Item.Properties().food(Foods.MOONCAKE).group(ItemGroup.FOOD)));
+
     static class Foods {
         public static final Food RAW_MERINGUE = (new Food.Builder()).hunger(1).saturation(1.0F).fastToEat().effect(() -> new EffectInstance(Effects.HUNGER, 300), 0.6F).build();
         public static final Food MERINGUE = (new Food.Builder()).hunger(2).saturation(0.8F).fastToEat().build();
@@ -95,5 +98,6 @@ public class CopperPotItems {
                 Effects.REGENERATION, 100), 0.2F).build();
         public static final Food ROYAL_JELLY = (new Food.Builder()).hunger(6).saturation(0.6F).effect(() -> new EffectInstance(
                 Effects.POISON, 300), 0.3F).build();
+        public static final Food MOONCAKE = (new Food.Builder()).hunger(5).saturation(0.6F).build();
     }
 }
