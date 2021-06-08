@@ -22,5 +22,7 @@
   ],
   "container": {
     "item": "minecraft:glass_bottle"
-  }
+  },
+  "effecttrue": true,
+  "effect": "minecraft:slowness"
 }

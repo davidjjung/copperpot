@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "neapolitan:adzuki_bun"
+    },
+    {
+      "tag": "forge:eggs"
+    },
+    [
+      {
+        "item": "bayou_blues:light_gray_lily"
+      },
+      {
+        "item": "bayou_blues:white_lily"
+      },
+      {
+        "item": "bayou_blues:blue_lily"
+      },
+      {
+        "item": "bayou_blues:cyan_lily"
+      },
+      {
+        "item": "bayou_blues:light_blue_lily"
+      },
+      {
+        "item": "bayou_blues:magenta_lily"
+      },
+      {
+        "item": "bayou_blues:pink_lily"
+      },
+      {
+        "item": "bayou_blues:purple_lily"
+      }
+    ]
+  ],
+  "result": {
+    "item": "copperpot:mooncake",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "neapolitan"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bayou_blues"
+    }
+  ]
+}

@@ -2,13 +2,10 @@
     "type": "copperpot:cooking",
     "ingredients": [
         {
-            "item": "bayou_blues:gooseberry_juice"
+            "item": "bayou_blues:gooseberries"
         },
         {
-            "item": "bayou_blues:gooseberry_juice"
-        },
-        {
-            "item": "minecraft:honey_bottle"
+            "item": "minecraft:honeycomb"
         }
     ],
     "container": {

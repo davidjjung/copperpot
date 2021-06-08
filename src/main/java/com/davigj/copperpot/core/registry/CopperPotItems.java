@@ -69,7 +69,7 @@ public class CopperPotItems {
     public static final RegistryObject<Item> PORK_SANDWICH = HELPER.createItem("pork_sandwich", () -> new PorkSandwich(
             new Item.Properties().food(Foods.PORK_SANDWICH).group(ItemGroup.FOOD)));
 
-    public static final RegistryObject<Item> CREEPING_YOGURT = HELPER.createItem("creeping_yogurt", () -> new Item(
+    public static final RegistryObject<Item> CREEPING_YOGURT = HELPER.createItem("creeping_yogurt", () -> new CreepingYogurt(
             new Item.Properties().food(Foods.CREEPING_YOGURT).group(ItemGroup.FOOD)));
 
     public static final RegistryObject<Item> ROYAL_JELLY = HELPER.createItem("royal_jelly", () -> new RoyalJelly(
@@ -97,7 +97,8 @@ public class CopperPotItems {
         public static final Food VERNAL_AGAR = (new Food.Builder()).hunger(4).saturation(0.6F).effect(() -> new EffectInstance(
                 Effects.REGENERATION, 100), 0.2F).build();
         public static final Food ROYAL_JELLY = (new Food.Builder()).hunger(6).saturation(0.6F).effect(() -> new EffectInstance(
-                Effects.POISON, 300), 0.3F).build();
-        public static final Food MOONCAKE = (new Food.Builder()).hunger(5).saturation(0.6F).build();
+                Effects.POISON, 300), 0.1F).build();
+        public static final Food MOONCAKE = (new Food.Builder()).hunger(5).saturation(0.6F).effect(() -> new EffectInstance(
+                Effects.POISON, 100, 1), 0.3F).build();
     }
 }
