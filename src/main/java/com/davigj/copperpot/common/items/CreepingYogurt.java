@@ -7,21 +7,22 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
-import net.minecraft.world.ExplosionContext;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.ModList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+// import com.minecraftabnormals.savageandravage.core.registry.SRAttributes;
 
 public class CreepingYogurt extends Item{
 
@@ -36,6 +37,15 @@ public class CreepingYogurt extends Item{
         super.onItemUseFinish(stack, worldIn, entityLiving);
         if (!worldIn.isRemote) {
             pewpew(entityLiving, worldIn);
+        }
+        if (stack.isEmpty()) {
+            return new ItemStack(Items.BOWL);
+        } else {
+            ItemStack itemstack = new ItemStack(Items.BOWL);
+            PlayerEntity playerentity = (PlayerEntity)entityLiving;
+            if (!playerentity.inventory.addItemStackToInventory(itemstack)) {
+                playerentity.dropItem(itemstack, false);
+            }
         }
         return stack;
     }
@@ -56,7 +66,7 @@ public class CreepingYogurt extends Item{
         for(int kablooie = 0; kablooie < storedEffects.size(); kablooie++) {
             AreaEffectCloudEntity steam = new AreaEffectCloudEntity(worldIn, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 
-            steam.setDuration(100);
+            steam.setDuration(200);
             steam.setRadius(0.2F);
             steam.addEffect(new EffectInstance(storedEffects.get(kablooie).getPotion(), (int) ((storedEffects.get(kablooie).getDuration()) * 0.6), storedEffects.get(kablooie).getAmplifier()));
             for (LivingEntity living : steam.world.getEntitiesWithinAABB(LivingEntity.class, steam.getBoundingBox().grow(2.0D, 1.0D, 2.0D))) {
@@ -65,9 +75,17 @@ public class CreepingYogurt extends Item{
             worldIn.addEntity(steam);
             xpMult++;
         }
-        player.addVelocity(1.8 * direction.getXOffset() + (0.2 * xpMult)* (1.0D - player.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE)),
-                0.8, 1.8 * direction.getZOffset() + (0.2 * xpMult)* (1.0D - player.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE)));
-        worldIn.createExplosion(dummy, (DamageSource) null, (ExplosionContext) null, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.5F, false, Explosion.Mode.NONE);
+        double resist = 0;
+//         TODO: Find out how to implement SR explosive damage reduction
+        if (ModList.get().isLoaded("savageandravage")) {
+//            xpDub = (double)player.getAttributeValue(SRAttributes.EXPLOSIVE_DAMAGE_REDUCTION.get());
+//            LOGGER.debug(resist);
+        } else {
+            resist = Math.max(resist, player.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+        }
+        player.addVelocity(((1.8 * (1.0D - resist)) * direction.getXOffset() + (0.2 * xpMult)),
+                0.8, (1.8 * (1.0D - resist)) * direction.getZOffset() + (0.2 * xpMult));
+        worldIn.createExplosion(dummy, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.3F, false, Explosion.Mode.NONE);
         player.clearActivePotions();
     }
 

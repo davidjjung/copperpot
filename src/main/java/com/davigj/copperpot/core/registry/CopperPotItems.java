@@ -70,13 +70,16 @@ public class CopperPotItems {
             new Item.Properties().food(Foods.PORK_SANDWICH).group(ItemGroup.FOOD)));
 
     public static final RegistryObject<Item> CREEPING_YOGURT = HELPER.createItem("creeping_yogurt", () -> new CreepingYogurt(
-            new Item.Properties().food(Foods.CREEPING_YOGURT).containerItem(Items.BOWL).group(ItemGroup.FOOD)));
+            new Item.Properties().food(Foods.CREEPING_YOGURT).maxStackSize(16).containerItem(Items.BOWL).group(ItemGroup.FOOD)));
 
     public static final RegistryObject<Item> ROYAL_JELLY = HELPER.createItem("royal_jelly", () -> new RoyalJelly(
             new Item.Properties().food(Foods.ROYAL_JELLY).group(ItemGroup.FOOD)));
 
     public static final RegistryObject<Item> MOONCAKE = HELPER.createItem("mooncake", () -> new Mooncake(
             new Item.Properties().food(Foods.MOONCAKE).group(ItemGroup.FOOD)));
+
+    public static final RegistryObject<Item> SOURDOUGH = HELPER.createItem("sourdough", () -> new Sourdough(
+            new Item.Properties().food(Foods.SOURDOUGH).group(ItemGroup.FOOD)));
 
     static class Foods {
         public static final Food RAW_MERINGUE = (new Food.Builder()).hunger(1).saturation(1.0F).fastToEat().effect(() -> new EffectInstance(Effects.HUNGER, 300), 0.6F).build();
@@ -88,6 +91,7 @@ public class CopperPotItems {
         public static final Food PORK_SANDWICH = (new Food.Builder()).hunger(9).saturation(0.8F).build();
         public static final Food PEPPERMINT_BARK_MERINGUE = (new Food.Builder()).hunger(3).saturation(0.5F).fastToEat().build();
         public static final Food CREEPING_YOGURT = (new Food.Builder()).hunger(5).saturation(0.6F).build();
+        public static final Food SOURDOUGH = (new Food.Builder()).hunger(5).saturation(0.7F).build();
         public static final Food AUTUMNAL_AGAR = (new Food.Builder()).hunger(4).saturation(0.6F).effect(() -> new EffectInstance(
                 Effects.ABSORPTION, 100), 0.2F).build();
         public static final Food AESTIVAL_AGAR = (new Food.Builder()).hunger(5).saturation(0.5F).effect(() -> new EffectInstance(
