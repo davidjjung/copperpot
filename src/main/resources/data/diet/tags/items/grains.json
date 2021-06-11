@@ -2,8 +2,8 @@
   "replace": false,
   "values": [  ],
   "optional": [
-    "copperpot:baked_alaska_slice",
-    "copperpot:baked_alaska_block",
-    "copperpot:pork_sandwich"
+    "copperpot:pork_sandwich",
+    "copperpot:sourdough",
+    "copperpot:carrot_cupcake"
   ]
 }

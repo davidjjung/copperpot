@@ -8,30 +8,30 @@ import net.minecraft.world.World;
 
 import java.util.Iterator;
 
-public class SingleVanillaAdd extends Item {
+public class CarrotCupcake extends Item {
     String effectName;
 
-    public SingleVanillaAdd(Item.Properties properties, String effect) {
+    public CarrotCupcake(Properties properties, String effectName) {
         super(properties);
-        this.effectName = effect;
+        this.effectName = effectName;
     }
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         super.onItemUseFinish(stack, worldIn, entityLiving);
         if (!worldIn.isRemote) {
-            extendEffect(entityLiving);
+            intensify(entityLiving);
         }
         return stack;
     }
 
-    public void extendEffect(LivingEntity player) {
+    public void intensify (LivingEntity player) {
         Iterator effects = player.getActivePotionEffects().iterator();
         while(effects.hasNext()) {
             EffectInstance effect = (EffectInstance)effects.next();
-            if (effect.getDuration() > 10 && effect.getEffectName().equals(effectName)) {
-                player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 200,
-                        effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+            if (effect.getDuration() > 10 && effect.getEffectName().equals(effectName) && Math.random() > Math.min(0.8, 0.1 + (1 / (effect.getAmplifier() + 1)))) {
+                player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration(),
+                        effect.getAmplifier() + 1, effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
             }
         }
     }

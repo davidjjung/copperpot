@@ -9,6 +9,7 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -81,17 +82,20 @@ public class CopperPotItems {
     public static final RegistryObject<Item> SOURDOUGH = HELPER.createItem("sourdough", () -> new Sourdough(
             new Item.Properties().food(Foods.SOURDOUGH).group(ItemGroup.FOOD)));
 
+    public static final RegistryObject<Item> CARROT_CUPCAKE = HELPER.createItem("carrot_cupcake", () -> new CarrotCupcake(
+            new Item.Properties().food(Foods.CARROT_CUPCAKE).group(ItemGroup.FOOD), "effect.minecraft.jump_boost"));
+
     static class Foods {
-        public static final Food RAW_MERINGUE = (new Food.Builder()).hunger(1).saturation(1.0F).fastToEat().effect(() -> new EffectInstance(Effects.HUNGER, 300), 0.6F).build();
-        public static final Food MERINGUE = (new Food.Builder()).hunger(2).saturation(0.8F).fastToEat().build();
+        public static final Food RAW_MERINGUE = (new Food.Builder()).hunger(1).saturation(0.6F).fastToEat().effect(() -> new EffectInstance(Effects.HUNGER, 300), 0.6F).build();
+        public static final Food MERINGUE = (new Food.Builder()).hunger(1).saturation(0.8F).fastToEat().build();
         public static final Food BAKED_ALASKA_SLICE = (new Food.Builder()).hunger(3).saturation(0.8F).fastToEat().build();
         public static final Food ADZUKI_PASTE = (new Food.Builder()).hunger(4).saturation(0.5F).setAlwaysEdible().build();
         public static final Food MAPLE_BACON_FUDGE = (new Food.Builder()).hunger(5).saturation(0.5F).effect(() -> new EffectInstance(Effects.RESISTANCE, 100, 1), 0.8F).build();
         public static final Food SPICED_APPLE_JAM = (new Food.Builder()).hunger(5).saturation(0.8F).setAlwaysEdible().build();
         public static final Food PORK_SANDWICH = (new Food.Builder()).hunger(9).saturation(0.8F).build();
-        public static final Food PEPPERMINT_BARK_MERINGUE = (new Food.Builder()).hunger(3).saturation(0.5F).fastToEat().build();
+        public static final Food PEPPERMINT_BARK_MERINGUE = (new Food.Builder()).hunger(2).saturation(0.5F).fastToEat().build();
         public static final Food CREEPING_YOGURT = (new Food.Builder()).hunger(5).saturation(0.6F).build();
-        public static final Food SOURDOUGH = (new Food.Builder()).hunger(5).saturation(0.7F).build();
+        public static final Food SOURDOUGH = (new Food.Builder()).hunger(6).saturation(0.7F).build();
         public static final Food AUTUMNAL_AGAR = (new Food.Builder()).hunger(4).saturation(0.6F).effect(() -> new EffectInstance(
                 Effects.ABSORPTION, 100), 0.2F).build();
         public static final Food AESTIVAL_AGAR = (new Food.Builder()).hunger(5).saturation(0.5F).effect(() -> new EffectInstance(
@@ -104,5 +108,7 @@ public class CopperPotItems {
                 Effects.POISON, 300), 0.1F).build();
         public static final Food MOONCAKE = (new Food.Builder()).hunger(4).saturation(0.5F).effect(() -> new EffectInstance(
                 Effects.POISON, 200, 1), 0.6F).build();
+        public static final Food CARROT_CUPCAKE = (new Food.Builder()).hunger(4).saturation(0.6F).effect(() -> new EffectInstance(
+                Effects.JUMP_BOOST, 200), 0.2F).build();
     }
 }

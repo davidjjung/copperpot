@@ -1,15 +1,14 @@
 package com.davigj.copperpot.common.items;
 
 import com.minecraftabnormals.savageandravage.common.entity.CreepieEntity;
-import com.minecraftabnormals.savageandravage.common.entity.goals.FollowMobOwnerGoal;
 import com.minecraftabnormals.savageandravage.core.registry.SREntities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.ModList;
 
@@ -48,6 +47,10 @@ public class Sourdough extends Item {
             }
         }
         player.clearActivePotions();
+    }
+
+    public SoundEvent getEatSound() {
+        return SoundEvents.ENTITY_CREEPER_PRIMED;
     }
 
 }

@@ -21,6 +21,7 @@ public class MintMeringue extends Item {
     Logger LOGGER = LogManager.getLogger(CopperPotMod.MOD_ID);
     String effect2;
 
+    //TODO: Make the likelihood of effect intensification scale with the level of effect--the higher the easier
     public MintMeringue(Item.Properties properties, String effect1, String effect2) {
         super(properties);
         this.effect1 = effect1;
@@ -42,8 +43,6 @@ public class MintMeringue extends Item {
                     entityLiving.addPotionEffect(new EffectInstance(new EffectInstance(
                             getCompatEffect("neapolitan", new ResourceLocation(
                                     "neapolitan", "sugar_rush")).get(), 140, 0)));
-                }
-                if (rand > 0.3) {
                     extendEffect(entityLiving);
                 }
             }
@@ -61,9 +60,9 @@ public class MintMeringue extends Item {
             EffectInstance effect = (EffectInstance) effects.next();
             double rand = Math.random();
             if (effect != null && effect.getDuration() > 10 && effect.getEffectName().equals(effect1) || effect.getEffectName().equals(effect2)) {
-                if (rand > 0.4) {
+                if (rand < 0.4) {
                     player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 240, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
-                } else {
+                } else if (rand > Math.min(0.7, 1 / (effect.getAmplifier() + 1))) {
                     player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration(), effect.getAmplifier() + 1, effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
                 }
             }

@@ -5,7 +5,9 @@
     "#forge:salad_ingredients"
   ],
   "optional": [
+    "#forge:fruits/strawberries",
     "neapolitan:strawberries",
+    "#forge:fruits/cherries",
     "environmental:cherries"
   ]
 }

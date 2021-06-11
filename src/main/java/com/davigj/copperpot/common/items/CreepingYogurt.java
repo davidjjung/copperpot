@@ -24,7 +24,7 @@ import java.util.Iterator;
 
 // import com.minecraftabnormals.savageandravage.core.registry.SRAttributes;
 
-public class CreepingYogurt extends Item{
+public class CreepingYogurt extends Item {
 
     public CreepingYogurt(Item.Properties properties) {
         super(properties);
@@ -42,7 +42,7 @@ public class CreepingYogurt extends Item{
             return new ItemStack(Items.BOWL);
         } else {
             ItemStack itemstack = new ItemStack(Items.BOWL);
-            PlayerEntity playerentity = (PlayerEntity)entityLiving;
+            PlayerEntity playerentity = (PlayerEntity) entityLiving;
             if (!playerentity.inventory.addItemStackToInventory(itemstack)) {
                 playerentity.dropItem(itemstack, false);
             }
@@ -55,15 +55,15 @@ public class CreepingYogurt extends Item{
         Iterator effects = player.getActivePotionEffects().iterator();
         Direction direction = player.getHorizontalFacing();
         ArrayList<EffectInstance> storedEffects = new ArrayList<>();
-        while(effects.hasNext()) {
-            EffectInstance effect = (EffectInstance)effects.next();
+        while (effects.hasNext()) {
+            EffectInstance effect = (EffectInstance) effects.next();
             if (effect.getDuration() > 10) {
                 storedEffects.add(effect);
             }
         }
         int xpMult = 0;
         AreaEffectCloudEntity dummy = new AreaEffectCloudEntity(worldIn, pos.getX(), pos.getY(), pos.getZ());
-        for(int kablooie = 0; kablooie < storedEffects.size(); kablooie++) {
+        for (int kablooie = 0; kablooie < storedEffects.size(); kablooie++) {
             AreaEffectCloudEntity steam = new AreaEffectCloudEntity(worldIn, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 
             steam.setDuration(200);
@@ -78,14 +78,14 @@ public class CreepingYogurt extends Item{
         double resist = 0;
 //         TODO: Find out how to implement SR explosive damage reduction
         if (ModList.get().isLoaded("savageandravage")) {
-//            xpDub = (double)player.getAttributeValue(SRAttributes.EXPLOSIVE_DAMAGE_REDUCTION.get());
+//            resist = (double)player.getAttributeValue(SRAttributes.EXPLOSIVE_DAMAGE_REDUCTION.get());
 //            LOGGER.debug(resist);
-        } else {
-            resist = Math.max(resist, player.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
         }
-        player.addVelocity(((1.8 * (1.0D - resist)) * direction.getXOffset() + (0.2 * xpMult)),
+        resist = Math.max(resist, player.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+
+        player.addVelocity((1.8 * (1.0D - resist)) * direction.getXOffset() + (0.2 * xpMult),
                 0.8, (1.8 * (1.0D - resist)) * direction.getZOffset() + (0.2 * xpMult));
-        worldIn.createExplosion(dummy, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.3F, false, Explosion.Mode.NONE);
+        worldIn.createExplosion(dummy, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.6F, false, Explosion.Mode.NONE);
         player.clearActivePotions();
     }
 

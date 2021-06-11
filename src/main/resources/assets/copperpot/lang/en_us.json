@@ -18,6 +18,8 @@
   "item.copperpot.royal_jelly": "Royal Jelly",
   "item.copperpot.mooncake": "Mooncake",
   "item.copperpot.sourdough": "Sourdough Bread",
+  "item.copperpot.carrot_cupcake": "Carrot Cupcake",
+
 
   "copperpot.container.copper_pot": "Copper Pot",
   "copperpot.container.copper_pot.served_on": "Served on: %s",
