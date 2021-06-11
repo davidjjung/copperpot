@@ -5,7 +5,7 @@ license = "MIT License"
 
 [[mods]]
     modId = "copperpot"
-    version = "1.16.5-1.0.0"
+    version = "1.16.5-1.1.0"
     logoFile = "logo.png"
     itemIcon = "copperpot:baked_alaska_block"
     authors = "DavigJ"
@@ -16,92 +16,106 @@ license = "MIT License"
 An unofficial add-on for Farmer's Delight! Adds a copper pot for those stuck waiting on the iron age.
     '''
 
-[[dependencies.template_mod]]
+[[dependencies.copperpot]]
     modId = "minecraft"
     mandatory = true
     versionRange = "[1.16.5,1.17)"
     ordering = "NONE"
     side = "BOTH"
 
-[[dependencies.template_mod]]
+[[dependencies.copperpot]]
     modId = "forge"
     mandatory = true
     versionRange = "[36.1.0,)"
     ordering = "NONE"
     side = "BOTH"
 
-[[dependencies.template_mod]]
+[[dependencies.copperpot]]
     modId = "abnormals_core"
     mandatory = true
     versionRange = "[3.1.1,)"
     ordering = "AFTER"
     side = "BOTH"
 
-[[dependencies.irregularchef]]
+[[dependencies.copperpot]]
     modId = "farmersdelight"
     mandatory = true
     versionRange = "[0.4.2,)"
     ordering = "AFTER"
     side = "BOTH"
 
-[[dependencies.irregularchef]]
+[[dependencies.copperpot]]
     modId = "abnormals_delight"
     mandatory = false
     versionRange = "[1.1.1,)"
     ordering = "AFTER"
     side = "BOTH"
 
-[[dependencies.irregularchef]]
+[[dependencies.copperpot]]
     modId = "atmospheric"
     mandatory = false
     versionRange = "[3.1.0,)"
     ordering = "AFTER"
     side = "BOTH"
 
-[[dependencies.irregularchef]]
+[[dependencies.copperpot]]
     modId = "autumnity"
     mandatory = false
     versionRange = "[2.1.1,)"
     ordering = "AFTER"
     side = "BOTH"
 
-[[dependencies.irregularchef]]
+[[dependencies.copperpot]]
     modId = "bayou_blues"
     mandatory = false
     versionRange = "[1.0.4,)"
     ordering = "AFTER"
     side = "BOTH"
 
-[[dependencies.irregularchef]]
+[[dependencies.copperpot]]
     modId = "diet"
     mandatory = false
     versionRange = "[0.28,)"
     ordering = "AFTER"
     side = "BOTH"
 
-[[dependencies.irregularchef]]
+[[dependencies.copperpot]]
     modId = "environmental"
     mandatory = false
     versionRange = "[1.0.0,)"
     ordering = "AFTER"
     side = "BOTH"
 
-[[dependencies.irregularchef]]
+[[dependencies.copperpot]]
     modId = "fruitful"
     mandatory = false
     versionRange = "[2.0.0,)"
     ordering = "AFTER"
     side = "BOTH"
 
-[[dependencies.irregularchef]]
+[[dependencies.copperpot]]
     modId = "neapolitan"
     mandatory = false
     versionRange = "[2.1.0,)"
     ordering = "AFTER"
     side = "BOTH"
 
-[[dependencies.irregularchef]]
+[[dependencies.copperpot]]
     modId = "upgrade_aquatic"
+    mandatory = false
+    versionRange = "[3.1.0,)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.copperpot]]
+    modId = "buzzier_bees"
+    mandatory = false
+    versionRange = "[3.0.1,)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.copperpot]]
+    modId = "savageandravage"
     mandatory = false
     versionRange = "[3.1.0,)"
     ordering = "AFTER"

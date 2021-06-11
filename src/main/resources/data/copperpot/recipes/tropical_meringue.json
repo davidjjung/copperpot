@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "copperpot:meringue"
+    },
+    {
+      "item": "copperpot:meringue"
+    },
+    {
+      "item": "copperpot:meringue"
+    },
+    {
+      "tag": "forge:fruits/banana"
+    },
+    {
+      "item": "atmospheric:passionfruit"
+    }
+  ],
+  "result": {
+    "item": "copperpot:tropical_meringue",
+    "count": 3
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "neapolitan"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "atmospheric"
+    }
+  ]
+}

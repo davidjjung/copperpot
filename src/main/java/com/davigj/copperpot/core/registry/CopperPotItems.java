@@ -3,20 +3,12 @@ package com.davigj.copperpot.core.registry;
 import com.davigj.copperpot.common.items.*;
 import com.davigj.copperpot.core.CopperPotMod;
 import com.minecraftabnormals.abnormals_core.core.util.registry.ItemSubRegistryHelper;
-import net.minecraft.client.renderer.model.multipart.ICondition;
 import net.minecraft.item.*;
-import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.registry.ModEffects;
-
-import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = CopperPotMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CopperPotItems {
@@ -85,6 +77,9 @@ public class CopperPotItems {
     public static final RegistryObject<Item> CARROT_CUPCAKE = HELPER.createItem("carrot_cupcake", () -> new CarrotCupcake(
             new Item.Properties().food(Foods.CARROT_CUPCAKE).group(ItemGroup.FOOD), "effect.minecraft.jump_boost"));
 
+    public static final RegistryObject<Item> TROPICAL_MERINGUE = HELPER.createItem("tropical_meringue", () -> new TropicalMeringue(
+            new Item.Properties().food(Foods.TROPICAL_MERINGUE).group(ItemGroup.FOOD), "effect.atmospheric.spitting", "effect.neapolitan.agility"));
+
     static class Foods {
         public static final Food RAW_MERINGUE = (new Food.Builder()).hunger(1).saturation(0.6F).fastToEat().effect(() -> new EffectInstance(Effects.HUNGER, 300), 0.6F).build();
         public static final Food MERINGUE = (new Food.Builder()).hunger(1).saturation(0.8F).fastToEat().build();
@@ -106,9 +101,10 @@ public class CopperPotItems {
                 Effects.REGENERATION, 100), 0.2F).build();
         public static final Food ROYAL_JELLY = (new Food.Builder()).hunger(6).saturation(0.6F).effect(() -> new EffectInstance(
                 Effects.POISON, 300), 0.1F).build();
-        public static final Food MOONCAKE = (new Food.Builder()).hunger(4).saturation(0.5F).effect(() -> new EffectInstance(
+        public static final Food MOONCAKE = (new Food.Builder()).hunger(4).saturation(0.7F).effect(() -> new EffectInstance(
                 Effects.POISON, 200, 1), 0.6F).build();
         public static final Food CARROT_CUPCAKE = (new Food.Builder()).hunger(4).saturation(0.6F).effect(() -> new EffectInstance(
                 Effects.JUMP_BOOST, 200), 0.2F).build();
+        public static final Food TROPICAL_MERINGUE = (new Food.Builder()).hunger(3).saturation(0.3F).fastToEat().build();
     }
 }

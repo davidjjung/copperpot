@@ -6,7 +6,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -25,8 +28,11 @@ public class Mooncake extends Item {
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         super.onItemUseFinish(stack, worldIn, entityLiving);
-        if (!worldIn.isRemote) {
+        if (!worldIn.isRemote && worldIn.getDimensionType().doesBedWork()) {
             moonlight(entityLiving, worldIn);
+        } else if (!worldIn.getDimensionType().doesBedWork()) {
+            entityLiving.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 1.0F, 1.0F);
+            entityLiving.addPotionEffect(new EffectInstance(Effects.POISON, 480));
         }
         return stack;
     }
