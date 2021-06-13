@@ -1,6 +1,5 @@
 package com.davigj.copperpot.common.items;
 
-import com.davigj.copperpot.core.CopperPotMod;
 import net.minecraft.entity.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,8 +13,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 
 import java.util.Iterator;
 
@@ -45,6 +43,9 @@ public class Sourdough extends Item {
                 ServerWorld server = worldIn.getServer().getWorld(worldIn.getDimensionKey());
                 CompoundNBT nbt = new CompoundNBT();
                 Entity effectcreepie = summonEntity(creepieType, pos, nbt, server, player);
+                if (stack.hasDisplayName()) {
+                    effectcreepie.setCustomName(stack.getDisplayName());
+                }
                 worldIn.addEntity(effectcreepie);
                 ((LivingEntity) effectcreepie).addPotionEffect(new EffectInstance(effect.getPotion(), (int) (effect.getDuration() * 0.6)));
             }

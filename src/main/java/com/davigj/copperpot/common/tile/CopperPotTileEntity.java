@@ -193,7 +193,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
         int effectAmplifier = this.getEffectAmplifier();
         String[] effectName = effect.split(":", 2);
         EffectInstance effectInstance = new EffectInstance(getCookEffect(effectName[0], new ResourceLocation(effectName[0], effectName[1])).get(), effectDuration, effectAmplifier, false, true);
-        for (LivingEntity living : steam.world.getEntitiesWithinAABB(LivingEntity.class, steam.getBoundingBox().grow(4.0D, 3.0D, 4.0D))) {
+        for (LivingEntity living : steam.world.getEntitiesWithinAABB(LivingEntity.class, steam.getBoundingBox().grow(3.0D, 2.0D, 3.0D))) {
             living.addPotionEffect(effectInstance);
         }
         steam.addEffect(effectInstance);

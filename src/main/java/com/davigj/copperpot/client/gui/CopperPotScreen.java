@@ -16,8 +16,6 @@ import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
@@ -103,8 +101,7 @@ public class CopperPotScreen extends ContainerScreen<CopperPotContainer> {
             int l = ((CopperPotContainer) this.container).getCookProgressionScaled();
             this.blit(ms, this.guiLeft + 89, this.guiTop + 25, 176, 15, l + 1, 17);
             if (((CopperPotContainer) this.container).hasEffect()) {
-                //TODO: figure out how the heck the brewing stand container gui bubbly works
-                this.blat(ms, this.guiLeft + 124, this.guiTop + 7, 176, 32, 17, (int) (0.9 * l));
+                this.blat(ms, this.guiLeft + 124, this.guiTop + 3 + (23 - l), 176, 55 - l, 17, (int) (1 * l));
             }
         }
     }
