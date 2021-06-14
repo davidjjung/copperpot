@@ -1,0 +1,30 @@
+{
+  "block.copperpot.copper_pot_block": "Panela de cobre",
+  "block.copperpot.baked_alaska_block": "Bolo alasca",
+  "block.copperpot.meringue_block": "Bloco de suspiro",
+  "item.copperpot.raw_meringue": "Suspiro cru",
+  "item.copperpot.meringue": "Suspiro",
+  "item.copperpot.mint_meringue": "Suspiro com casca de hortelã",
+  "item.copperpot.baked_alaska_slice": "Fatia de bolo alasca",
+  "item.copperpot.adzuki_paste": "Pasta de feijão azuki",
+  "item.copperpot.maple_bacon_fudge": "Doce de bacon caramelado",
+  "item.copperpot.spiced_apple_jam": "Geleia de maçã com especiarias",
+  "item.copperpot.pork_sandwich": "Sanduíche aromático de porco",
+  "item.copperpot.autumnal_agar": "Ágar outonal",
+  "item.copperpot.aestival_agar": "Ágar estival",
+  "item.copperpot.brumal_agar": "Ágar brumal",
+  "item.copperpot.vernal_agar": "Ágar vernal",
+  "item.copperpot.creeping_yogurt": "Iogurte efervescente",
+  "item.copperpot.royal_jelly": "Geleia real",
+  "item.copperpot.mooncake": "Bolo lunar",
+  "item.copperpot.sourdough": "Pão de fermento",
+  "item.copperpot.carrot_cupcake": "Bolinho de cenoura",
+  "item.copperpot.tropical_meringue": "Suspiro tropical",
+
+
+
+  "copperpot.container.copper_pot": "Panela de cobre",
+  "copperpot.container.copper_pot.served_on": "Servido em: %s",
+
+  "copperpot.jei.cooking": "Panela de cobre"
+}
