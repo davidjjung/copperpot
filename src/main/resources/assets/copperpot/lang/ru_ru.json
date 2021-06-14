@@ -1,0 +1,30 @@
+{
+  "block.copperpot.copper_pot_block": "Медный котел",
+  "block.copperpot.baked_alaska_block": "запеченной аляски",
+  "block.copperpot.meringue_block": "Блок безе",
+  "item.copperpot.raw_meringue": "Сырое безе",
+  "item.copperpot.meringue": "Безе",
+  "item.copperpot.mint_meringue": "Безе с мятной корой",
+  "item.copperpot.baked_alaska_slice": "Долька запечённой Аляски",
+  "item.copperpot.adzuki_paste": "Паста Адзуки",
+  "item.copperpot.maple_bacon_fudge": "Карамелизованный бекон в кленовом сиропе",
+  "item.copperpot.spiced_apple_jam": "Яблочный джем с пряностями",
+  "item.copperpot.pork_sandwich": "Сэндвич с ароматной свининой",
+  "item.copperpot.autumnal_agar": "Осенний Агар-агар",
+  "item.copperpot.aestival_agar": "Летний Агар-агар",
+  "item.copperpot.brumal_agar": "Зимний Агар-агар",
+  "item.copperpot.vernal_agar": "Весенний Агар-агар",
+  "item.copperpot.creeping_yogurt": "Шипучий йогурт",
+  "item.copperpot.royal_jelly": "Королевское желе",
+  "item.copperpot.mooncake": "Лунный торт",
+  "item.copperpot.sourdough": "Хлебная закваска",
+  "item.copperpot.carrot_cupcake": "Морковный кекс",
+  "item.copperpot.tropical_meringue": "Тропическое безе",
+
+
+
+  "copperpot.container.copper_pot": "Медный котел",
+  "copperpot.container.copper_pot.served_on": "Подано на: %s",
+
+  "copperpot.jei.cooking": "Приготовление"
+}
