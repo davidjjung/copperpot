@@ -34,9 +34,7 @@ public class Sourdough extends Item {
     }
 
     public void hissss(LivingEntity player, World worldIn, ItemStack stack) {
-        Iterator effects = player.getActivePotionEffects().iterator();
-        while (effects.hasNext()) {
-            EffectInstance effect = (EffectInstance) effects.next();
+        for (EffectInstance effect : player.getActivePotionEffects()) {
             if (effect.getDuration() > 10 && ModList.get().isLoaded("savageandravage")) {
                 ResourceLocation creepieType = ForgeRegistries.ENTITIES.getValue(CREEPIE).getRegistryName();
                 BlockPos pos = player.getPosition();

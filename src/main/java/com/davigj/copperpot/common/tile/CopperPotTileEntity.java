@@ -8,7 +8,6 @@ import com.davigj.copperpot.core.registry.CopperPotTileEntityTypes;
 import com.davigj.copperpot.core.utils.TextUtils;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HopperBlock;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
