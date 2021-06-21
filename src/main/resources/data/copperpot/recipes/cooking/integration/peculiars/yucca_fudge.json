@@ -1,0 +1,32 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "atmospheric:yucca_fruit"
+    },
+    {
+      "item": "atmospheric:yucca_fruit"
+    },
+    {
+      "item": "neapolitan:chocolate_bar"
+    }
+  ],
+  "result": {
+    "item": "peculiars:yucca_fudge",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "seasonals"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "atmospheric"
+    }
+  ],
+
+  "effecttrue": true,
+  "effect": "minecraft:persistence",
+  "effectduration": 100
+}
