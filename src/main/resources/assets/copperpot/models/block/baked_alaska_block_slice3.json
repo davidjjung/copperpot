@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "copperpot:block/baked_alaska_block",
+		"particle": "copperpot:block/baked_alaska_block"
+	},
+	"elements": [
+		{
+			"from": [8, 0, 4],
+			"to": [12, 5, 8],
+			"faces": {
+				"north": {"uv": [4.5, 1.5, 6.5, 4], "texture": "#0"},
+				"east": {"uv": [11, 1.5, 13, 4], "texture": "#0"},
+				"south": {"uv": [6.5, 4.5, 8.5, 7], "texture": "#0"},
+				"west": {"uv": [4.5, 4.5, 6.5, 7], "texture": "#0"},
+				"up": {"uv": [0, 0, 2, 2], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [2, 6.5, 4, 8.5], "texture": "#0"}
+			}
+		}
+	]
+}

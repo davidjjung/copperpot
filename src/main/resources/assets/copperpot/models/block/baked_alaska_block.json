@@ -1,10 +1,22 @@
 {
-  "parent": "block/cake",
-  "textures": {
-    "particle": "copperpot:block/baked_alaska_block_side",
-    "bottom": "copperpot:block/baked_alaska_block_bottom",
-    "top": "copperpot:block/baked_alaska_block_top",
-    "side": "copperpot:block/baked_alaska_block_side",
-    "inside": "copperpot:block/baked_alaska_block_inner"
-  }
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "copperpot:block/baked_alaska_block",
+		"particle": "copperpot:block/baked_alaska_block"
+	},
+	"elements": [
+		{
+			"from": [4, 0, 4],
+			"to": [12, 5, 12],
+			"faces": {
+				"north": {"uv": [4.5, 1.5, 8.5, 4], "texture": "#0"},
+				"east": {"uv": [9, 1.5, 13, 4], "texture": "#0"},
+				"south": {"uv": [4.5, 1.5, 8.5, 4], "texture": "#0"},
+				"west": {"uv": [9, 1.5, 13, 4], "texture": "#0"},
+				"up": {"uv": [0, 0, 4, 4], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [0, 4.5, 4, 8.5], "texture": "#0"}
+			}
+		}
+	]
 }

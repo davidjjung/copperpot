@@ -33,7 +33,7 @@ public class CopperPotEvents {
         ItemStack tool = event.getPlayer().getHeldItem(event.getHand());
         if (state.getBlock() == CopperPotBlocks.BAKED_ALASKA_BLOCK.get() && ModTags.KNIVES.contains(tool.getItem())) {
             int bites = (Integer)state.get(BakedAlaskaBlock.BITES);
-            if (bites < 6) {
+            if (bites < 3) {
                 world.setBlockState(pos, (BlockState)state.with(BakedAlaskaBlock.BITES, bites + 1), 3);
             } else {
                 world.removeBlock(pos, false);

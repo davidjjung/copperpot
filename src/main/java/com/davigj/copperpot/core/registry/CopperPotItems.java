@@ -83,7 +83,7 @@ public class CopperPotItems {
     static class Foods {
         public static final Food RAW_MERINGUE = (new Food.Builder()).hunger(1).saturation(0.6F).fastToEat().effect(() -> new EffectInstance(Effects.HUNGER, 300), 0.6F).build();
         public static final Food MERINGUE = (new Food.Builder()).hunger(1).saturation(0.8F).fastToEat().build();
-        public static final Food BAKED_ALASKA_SLICE = (new Food.Builder()).hunger(3).saturation(0.8F).fastToEat().build();
+        public static final Food BAKED_ALASKA_SLICE = (new Food.Builder()).hunger(2).saturation(0.7F).fastToEat().build();
         public static final Food ADZUKI_PASTE = (new Food.Builder()).hunger(4).saturation(0.5F).setAlwaysEdible().build();
         public static final Food MAPLE_BACON_FUDGE = (new Food.Builder()).hunger(5).saturation(0.5F).effect(() -> new EffectInstance(Effects.RESISTANCE, 100, 1), 0.8F).build();
         public static final Food SPICED_APPLE_JAM = (new Food.Builder()).hunger(5).saturation(0.8F).setAlwaysEdible().build();
