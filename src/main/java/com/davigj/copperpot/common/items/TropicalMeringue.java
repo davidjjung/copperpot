@@ -36,7 +36,8 @@ public class TropicalMeringue extends Item {
                     entityLiving.addPotionEffect(new EffectInstance(
                             getCompatEffect("neapolitan", new ResourceLocation(
                                     "neapolitan", "agility")).get(), 100, 0));
-                } else if (rand > 0.3) {
+                }
+                if (rand > 0.15) {
                     intensify(entityLiving);
                 }
             }
@@ -56,7 +57,7 @@ public class TropicalMeringue extends Item {
             double rand = Math.random();
             if (effect != null && effect.getDuration() > 10 && effect.getEffectName().equals(effect1) || effect.getEffectName().equals(effect2)) {
                 if (rand < 0.8) {
-                    player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 120, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+                    player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 100, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
                         if (effect.getEffectName().equals(effect1)) {
 
                         }

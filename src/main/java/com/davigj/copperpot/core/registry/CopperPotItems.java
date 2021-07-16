@@ -80,10 +80,13 @@ public class CopperPotItems {
     public static final RegistryObject<Item> TROPICAL_MERINGUE = HELPER.createItem("tropical_meringue", () -> new TropicalMeringue(
             new Item.Properties().food(Foods.TROPICAL_MERINGUE).group(ItemGroup.FOOD), "effect.atmospheric.spitting", "effect.neapolitan.agility"));
 
+//    public static final RegistryObject<Item> INCENDIARY_MERINGUE = HELPER.createItem("incendiary_meringue", () -> new IncendiaryMeringue(
+//            new Item.Properties().food(Foods.INCENDIARY_MERINGUE).group(ItemGroup.FOOD)));
+
     static class Foods {
         public static final Food RAW_MERINGUE = (new Food.Builder()).hunger(1).saturation(0.6F).fastToEat().effect(() -> new EffectInstance(Effects.HUNGER, 300), 0.6F).build();
         public static final Food MERINGUE = (new Food.Builder()).hunger(1).saturation(0.8F).fastToEat().build();
-        public static final Food BAKED_ALASKA_SLICE = (new Food.Builder()).hunger(2).saturation(0.7F).fastToEat().build();
+        public static final Food BAKED_ALASKA_SLICE = (new Food.Builder()).hunger(3).saturation(0.7F).fastToEat().build();
         public static final Food ADZUKI_PASTE = (new Food.Builder()).hunger(4).saturation(0.5F).setAlwaysEdible().build();
         public static final Food MAPLE_BACON_FUDGE = (new Food.Builder()).hunger(5).saturation(0.5F).effect(() -> new EffectInstance(Effects.RESISTANCE, 100, 1), 0.8F).build();
         public static final Food SPICED_APPLE_JAM = (new Food.Builder()).hunger(5).saturation(0.8F).setAlwaysEdible().build();
@@ -106,5 +109,6 @@ public class CopperPotItems {
         public static final Food CARROT_CUPCAKE = (new Food.Builder()).hunger(4).saturation(0.6F).effect(() -> new EffectInstance(
                 Effects.JUMP_BOOST, 200), 0.2F).build();
         public static final Food TROPICAL_MERINGUE = (new Food.Builder()).hunger(3).saturation(0.3F).fastToEat().build();
+        public static final Food INCENDIARY_MERINGUE = (new Food.Builder()).hunger(2).saturation(0.5F).fastToEat().build();
     }
 }
