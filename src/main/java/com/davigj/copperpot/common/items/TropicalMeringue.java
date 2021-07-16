@@ -56,12 +56,10 @@ public class TropicalMeringue extends Item {
             EffectInstance effect = (EffectInstance) effects.next();
             double rand = Math.random();
             if (effect != null && effect.getDuration() > 10 && effect.getEffectName().equals(effect1) || effect.getEffectName().equals(effect2)) {
-                if (rand < 0.8) {
-                    player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 100, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
-                        if (effect.getEffectName().equals(effect1)) {
-
-                        }
-                } else if (rand > Math.min(0.5, 1 / (effect.getAmplifier() + 1))) {
+                if (rand < 0.7) {
+                    player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 80, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+                }
+                if (effect.getEffectName().equals(effect1) && rand > Math.min(0.5, (float)1 / (effect.getAmplifier() + 1))) {
                     player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration(), effect.getAmplifier() + 1, effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
                 }
             }

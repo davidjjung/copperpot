@@ -2,8 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "mmm",
-    "wNw",
-    "www"
+    "wNw"
   ],
   "key": {
     "m": {
@@ -17,8 +16,7 @@
     }
   },
   "result": {
-    "item": "copperpot:baked_alaska_block",
-    "count": 2
+    "item": "copperpot:baked_alaska_block"
   },
   "conditions": [
     {
