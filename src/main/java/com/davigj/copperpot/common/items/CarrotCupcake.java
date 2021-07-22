@@ -29,7 +29,7 @@ public class CarrotCupcake extends Item {
         Iterator effects = player.getActivePotionEffects().iterator();
         while(effects.hasNext()) {
             EffectInstance effect = (EffectInstance)effects.next();
-            if (effect.getDuration() > 10 && effect.getEffectName().equals(effectName) && Math.random() > Math.min(0.8, 0.1 + (1 / (effect.getAmplifier() + 1)))) {
+            if (effect.getDuration() > 10 && effect.getEffectName().equals(effectName) && Math.random() > 0.2 * (effect.getAmplifier() + 1)) {
                 player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration(),
                         effect.getAmplifier() + 1, effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
             }
