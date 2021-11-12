@@ -1,0 +1,30 @@
+{
+  "block.copperpot.copper_pot_block": "Pentola di rame",
+  "block.copperpot.baked_alaska_block": "Alaska al forno",
+  "block.copperpot.meringue_block": "Blocco di meringa",
+  "item.copperpot.raw_meringue": "Meringa cruda",
+  "item.copperpot.meringue": "Meringa",
+  "item.copperpot.mint_meringue": "Meringa alla menta piperita e corteccia d'albero",
+  "item.copperpot.baked_alaska_slice": "Fetta di alaska al forno",
+  "item.copperpot.adzuki_paste": "Anko",
+  "item.copperpot.maple_bacon_fudge": "Pancetta d'acero fondente",
+  "item.copperpot.spiced_apple_jam": "Marmellata di mele speziate",
+  "item.copperpot.pork_sandwich": "Sandwich con maiale fragrante",
+  "item.copperpot.autumnal_agar": "Agar-agar autunnale",
+  "item.copperpot.aestival_agar": "Agar-agar estivo",
+  "item.copperpot.brumal_agar": "Agar-agar invernale",
+  "item.copperpot.vernal_agar": "Agar-agar primaverile",
+  "item.copperpot.creeping_yogurt": "Yogurt frizzante",
+  "item.copperpot.royal_jelly": "Pappa reale",
+  "item.copperpot.mooncake": "Torta lunare",
+  "item.copperpot.sourdough": "Pane a lievitazione naturale",
+  "item.copperpot.carrot_cupcake": "Cupcake alle carote",
+  "item.copperpot.tropical_meringue": "Meringa tropicale",
+
+
+
+  "copperpot.container.copper_pot": "Pentola di rame",
+  "copperpot.container.copper_pot.served_on": "Servito su: %s",
+
+  "copperpot.jei.cooking": "Cucina"
+}
