@@ -47,13 +47,9 @@ public class RoyalJelly extends Item {
         while (effects.hasNext()) {
             EffectInstance effect = (EffectInstance) effects.next();
             if (effect.getDuration() > 10 && effect.getEffectName().equals("effect.minecraft.poison")) {
-                double rand = Math.random();
-                if (rand < 0.5) {
-                    player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 200,
-                            effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
-                } else {
-                    player.addPotionEffect(new EffectInstance(Effects.REGENERATION, effect.getDuration(),
-                            effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+                if (Math.random() < 0.6) {
+                    player.addPotionEffect(new EffectInstance(Effects.REGENERATION, effect.getDuration() / 2,
+                            0, effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
                 }
             }
         }
@@ -82,8 +78,8 @@ public class RoyalJelly extends Item {
             modid = "copperpot",
             bus = Mod.EventBusSubscriber.Bus.FORGE
     )
-    public static class BeeFeedEvent {
-        public BeeFeedEvent() {
+    public static class beeFeedEvent {
+        public beeFeedEvent() {
         }
 
         @SubscribeEvent
