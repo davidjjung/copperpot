@@ -13,12 +13,16 @@
   ],
   "result": {
     "item": "peculiars:yucca_fudge",
-    "count": 2
+    "count": 3
   },
   "conditions": [
     {
       "type": "forge:mod_loaded",
-      "modid": "seasonals"
+      "modid": "peculiars"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "neapolitan"
     },
     {
       "type": "forge:mod_loaded",
@@ -27,6 +31,6 @@
   ],
 
   "effecttrue": true,
-  "effect": "minecraft:persistence",
+  "effect": "atmospheric:persistence",
   "effectduration": 100
 }
