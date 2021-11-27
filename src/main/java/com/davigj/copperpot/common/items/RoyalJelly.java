@@ -67,7 +67,7 @@ public class RoyalJelly extends Item {
     }
 
     static {
-        EFFECTS = Lists.newArrayList(new EffectInstance[]{new EffectInstance(Effects.ABSORPTION, 6000, 0), new EffectInstance(Effects.STRENGTH, 6000, 1), new EffectInstance(Effects.RESISTANCE, 6000, 2)});
+        EFFECTS = Lists.newArrayList(new EffectInstance[]{new EffectInstance(Effects.ABSORPTION, 1200, 1), new EffectInstance(Effects.RESISTANCE, 1200, 1)});
     }
 
     private static Supplier<Effect> getCompatEffect(String modid, ResourceLocation effect) {
@@ -95,19 +95,12 @@ public class RoyalJelly extends Item {
                     if (entity.isChild()) {
                         entity.ageUp(120, true);
                     }
-                    Iterator var6 = RoyalJelly.EFFECTS.iterator();
 
-                    while (var6.hasNext()) {
-                        EffectInstance effect = (EffectInstance) var6.next();
-                        entity.addPotionEffect(new EffectInstance(effect));
-                    }
-                    if (ModList.get().isLoaded("buzzier_bees")) {
-                        entity.addPotionEffect(new EffectInstance(new EffectInstance(getCompatEffect("buzzier_bees", new ResourceLocation(
-                                "buzzier_bees", "sunny")).get(), 28800, 0)));
-                    }
+                    beeFx(ModList.get().isLoaded("buzzier_bees"), entity);
+
                     entity.setAngerTime(0);
 
-                    entity.world.playSound((PlayerEntity) null, target.getPosition(), SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS, 0.5F, 1.2F);
+                    entity.world.playSound((PlayerEntity) null, target.getPosition(), SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS, 0.5F, 1.3F);
 
                     for (int i = 0; i < 5; ++i) {
                         double d0 = MathUtils.RAND.nextGaussian() * 0.02D;
@@ -123,6 +116,19 @@ public class RoyalJelly extends Item {
                     event.setCancellationResult(ActionResultType.SUCCESS);
                     event.setCanceled(true);
                 }
+            }
+        }
+
+        private static void beeFx(boolean buzzLoaded, BeeEntity entity) {
+            List<EffectInstance> list = RoyalJelly.EFFECTS;
+            if (buzzLoaded) {
+                list.add(new EffectInstance(new EffectInstance(getCompatEffect("buzzier_bees", new ResourceLocation(
+                        "buzzier_bees", "sunny")).get(), 12000, 0)));
+            }
+            Iterator<EffectInstance> var7 = list.iterator();
+            while (var7.hasNext()) {
+                EffectInstance effect = (EffectInstance) var7.next();
+                entity.addPotionEffect(new EffectInstance(effect));
             }
         }
     }
