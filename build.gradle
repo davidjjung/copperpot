@@ -66,11 +66,23 @@ sourceSets.main.resources {
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
     implementation fg.deobf("com.minecraftabnormals:abnormals-core:${project.minecraft}-${project.abnormalsCore}")
-    implementation fg.deobf("curse.maven:farmersdelight-398521:3310983")
+    implementation fg.deobf("curse.maven:farmersdelight-398521:3503844")
 
-//    implementation fg.deobf("curse.maven:neapolitan-382016:3221772")
-//    implementation fg.deobf("curse.maven:appleskin-248787:3035787")
-//    implementation fg.deobf("curse.maven:atmospheric-362393:3249309")
+    implementation fg.deobf("curse.maven:neapolitan-382016:3221772")
+    implementation fg.deobf("curse.maven:autumnity-365045:3295700")
+    implementation fg.deobf("curse.maven:environmental-388992:3221635")
+    // implementation fg.deobf("curse.maven:environmental-388992:3416597")
+    implementation fg.deobf("curse.maven:abundance-452345:3250108")
+    implementation fg.deobf("curse.maven:fruitful-395502:3342857")
+    implementation fg.deobf("curse.maven:atmospheric-362393:3249309")
+    implementation fg.deobf("curse.maven:abnormals_delight-442719:3442748")
+    implementation fg.deobf("curse.maven:endergetic-291509:3154938")
+    implementation fg.deobf("curse.maven:better_badlands-421763:3195284")
+    implementation fg.deobf("curse.maven:buzzier_bees-355458:3226433")
+    implementation fg.deobf("curse.maven:upgrade_aquatic-326895:3249419")
+    implementation fg.deobf("curse.maven:savageandravage-381736:3226442")
+    implementation fg.deobf("curse.maven:diet-443570:3300992")
+    implementation fg.deobf("curse.maven:peculiars-418551:3392001")
 
     compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}")
