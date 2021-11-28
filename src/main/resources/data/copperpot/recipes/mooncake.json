@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "copperpot:adzuki_paste"
+      "item": "neapolitan:roasted_adzuki_beans"
     },
     {
       "item": "minecraft:wheat"
@@ -10,32 +10,9 @@
     {
       "tag": "forge:eggs"
     },
-    [
-      {
-        "item": "bayou_blues:light_gray_lily"
-      },
-      {
-        "item": "bayou_blues:white_lily"
-      },
-      {
-        "item": "bayou_blues:blue_lily"
-      },
-      {
-        "item": "bayou_blues:cyan_lily"
-      },
-      {
-        "item": "bayou_blues:light_blue_lily"
-      },
-      {
-        "item": "bayou_blues:magenta_lily"
-      },
-      {
-        "item": "bayou_blues:pink_lily"
-      },
-      {
-        "item": "bayou_blues:purple_lily"
-      }
-    ]
+    {
+      "tag": "copperpot:mooncake_toppings"
+    }
   ],
   "result": {
     "item": "copperpot:mooncake",
@@ -45,12 +22,6 @@
     {
       "type": "forge:mod_loaded",
       "modid": "neapolitan"
-    }
-  ],
-  "conditions": [
-    {
-      "type": "forge:mod_loaded",
-      "modid": "bayou_blues"
     }
   ]
 }
