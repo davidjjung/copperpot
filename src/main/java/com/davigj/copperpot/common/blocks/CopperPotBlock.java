@@ -3,6 +3,7 @@ package com.davigj.copperpot.common.blocks;
 import com.davigj.copperpot.common.tile.CopperPotTileEntity;
 import com.davigj.copperpot.core.CopperPotMod;
 import com.davigj.copperpot.core.registry.CopperPotTileEntityTypes;
+import com.davigj.copperpot.core.utils.TextUtils;
 import net.minecraft.block.*;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -40,7 +41,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vectorwing.farmersdelight.registry.ModSounds;
 import vectorwing.farmersdelight.utils.MathUtils;
-import vectorwing.farmersdelight.utils.TextUtils;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
@@ -155,22 +155,22 @@ public class CopperPotBlock extends HorizontalBlock implements IWaterLoggable {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         CompoundNBT compoundnbt = stack.getChildTag("BlockEntityTag");
         if (compoundnbt != null) {
-            LOGGER.debug("compoundnbt ain't null");
+//            LOGGER.debug("compoundnbt ain't null");
             CompoundNBT inventoryTag = compoundnbt.getCompound("Inventory");
             if (inventoryTag.contains("Items", 9)) {
-                LOGGER.debug("there are contain items type 9 yes good very");
+//                LOGGER.debug("there are contain items type 9 yes good very");
                 ItemStackHandler handler = new ItemStackHandler();
                 handler.deserializeNBT(inventoryTag);
                 ItemStack meal = handler.getStackInSlot(3);
                 if (!meal.isEmpty()) {
-                    IFormattableTextComponent servingsOf = meal.getCount() == 1 ? vectorwing.farmersdelight.utils.TextUtils.getTranslation("tooltip.cooking_pot.single_serving", new Object[0]) : vectorwing.farmersdelight.utils.TextUtils.getTranslation("tooltip.cooking_pot.many_servings", new Object[]{meal.getCount()});
+                    IFormattableTextComponent servingsOf = meal.getCount() == 1 ? TextUtils.getTranslation("tooltip.copper_pot.single_serving", new Object[0]) : TextUtils.getTranslation("tooltip.copper_pot.many_servings", new Object[]{meal.getCount()});
                     tooltip.add(servingsOf.mergeStyle(TextFormatting.GRAY));
                     IFormattableTextComponent mealName = meal.getDisplayName().deepCopy();
                     tooltip.add(mealName.mergeStyle(meal.getRarity().color));
                 }
             }
         } else {
-            IFormattableTextComponent empty = TextUtils.getTranslation("tooltip.cooking_pot.empty", new Object[0]);
+            IFormattableTextComponent empty = TextUtils.getTranslation("tooltip.copper_pot.empty", new Object[0]);
             tooltip.add(empty.mergeStyle(TextFormatting.GRAY));
         }
 
