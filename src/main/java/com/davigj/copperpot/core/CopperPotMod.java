@@ -11,7 +11,9 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
@@ -36,6 +38,7 @@ public class CopperPotMod {
 		CopperPotRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
 
 		MinecraftForge.EVENT_BUS.register(this);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CopperPotConfig.COMMON_SPEC);
 
 		bus.addListener(this::commonSetup);
 		bus.addListener(this::clientSetup);
