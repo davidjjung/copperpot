@@ -1,6 +1,7 @@
 package com.davigj.copperpot.core.registry;
 
 import com.davigj.copperpot.common.items.*;
+import com.davigj.copperpot.core.CopperPotConfig;
 import com.davigj.copperpot.core.CopperPotMod;
 import com.minecraftabnormals.abnormals_core.core.util.registry.ItemSubRegistryHelper;
 import net.minecraft.item.*;
@@ -10,6 +11,9 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import vectorwing.farmersdelight.registry.ModEffects;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Mod.EventBusSubscriber(modid = CopperPotMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CopperPotItems {
@@ -30,33 +34,29 @@ public class CopperPotItems {
             new Item.Properties().food(Foods.MERINGUE).group(ItemGroup.FOOD)));
 
     public static final RegistryObject<Item> AUTUMNAL_AGAR = HELPER.createItem("autumnal_agar", () -> new SeasonalAgar(
-            new Item.Properties().food(Foods.AUTUMNAL_AGAR).group(ItemGroup.FOOD), "effect.minecraft.resistance",
-            "effect.farmersdelight.nourished", "effect.minecraft.absorption", "effect.atmospheric.persistence"));
+            new Item.Properties().food(Foods.AUTUMNAL_AGAR).group(ItemGroup.FOOD), new ArrayList<>(CopperPotConfig.COMMON.autumnalExtensionFx.get())));
 
     public static final RegistryObject<Item> AESTIVAL_AGAR = HELPER.createItem("aestival_agar", () -> new SeasonalAgar(
-            new Item.Properties().food(Foods.AESTIVAL_AGAR).group(ItemGroup.FOOD), "effect.minecraft.night_vision",
-            "effect.atmospheric.gelled", "effect.minecraft.water_breathing", "effect.minecraft.strength"));
+            new Item.Properties().food(Foods.AESTIVAL_AGAR).group(ItemGroup.FOOD), new ArrayList<>(CopperPotConfig.COMMON.aestivalExtensionFx.get())));
 
     public static final RegistryObject<Item> BRUMAL_AGAR = HELPER.createItem("brumal_agar", () -> new SeasonalAgar(
-            new Item.Properties().food(Foods.BRUMAL_AGAR).group(ItemGroup.FOOD), "effect.farmersdelight.comfort",
-            "effect.minecraft.invisibility", "effect.minecraft.fire_resistance", "effect.minecraft.slow_falling"));
+            new Item.Properties().food(Foods.BRUMAL_AGAR).group(ItemGroup.FOOD), new ArrayList<>(CopperPotConfig.COMMON.brumalExtensionFx.get())));
 
     public static final RegistryObject<Item> VERNAL_AGAR = HELPER.createItem("vernal_agar", () -> new SeasonalAgar(
-            new Item.Properties().food(Foods.VERNAL_AGAR).group(ItemGroup.FOOD), "effect.minecraft.regeneration",
-            "effect.minecraft.jump_boost", "effect.minecraft.haste", "effect.upgrade_aquatic.vibing"));
+            new Item.Properties().food(Foods.VERNAL_AGAR).group(ItemGroup.FOOD), new ArrayList<>(CopperPotConfig.COMMON.vernalExtensionFx.get())));
 
     public static final RegistryObject<Item> BAKED_ALASKA_BLOCK = HELPER.createItem("baked_alaska_block", () -> new BlockItem(
-            CopperPotBlocks.BAKED_ALASKA_BLOCK.get(), new Item.Properties().maxStackSize(16).group(isModLoaded("neapolitan") ? ItemGroup.FOOD : null)));
+            CopperPotBlocks.BAKED_ALASKA_BLOCK.get(), new Item.Properties().maxStackSize(1).group(isModLoaded("neapolitan") ? ItemGroup.FOOD : null)));
 
     public static final RegistryObject<Item> BAKED_ALASKA_SLICE = HELPER.createItem("baked_alaska_slice", () -> new BakedAlaskaSlice(
             new Item.Properties().food(Foods.BAKED_ALASKA_SLICE).group(isModLoaded("neapolitan") ? ItemGroup.FOOD : null)));
-
+/*
     public static final RegistryObject<Item> ADZUKI_PASTE = HELPER.createItem("adzuki_paste", () -> new AdzukiPaste(
             new Item.Properties().food(Foods.ADZUKI_PASTE).containerItem(Items.GLASS_BOTTLE).maxStackSize(16).group(isModLoaded("neapolitan") ? ItemGroup.FOOD : null), "effect.neapolitan.harmony"));
 
     public static final RegistryObject<Item> MAPLE_BACON_FUDGE = HELPER.createItem("maple_bacon_fudge", () -> new SingleVanillaAdd(
             new Item.Properties().food(Foods.MAPLE_BACON_FUDGE).group(isModLoaded("autumnity") ? ItemGroup.FOOD : null), "effect.minecraft.resistance"));
-
+*/
     public static final RegistryObject<Item> PEPPERMINT_BARK_MERINGUE = HELPER.createItem("mint_meringue", () -> new MintMeringue(
             new Item.Properties().food(Foods.PEPPERMINT_BARK_MERINGUE).group(isModLoaded("neapolitan") ? ItemGroup.FOOD : null), "effect.neapolitan.berserking", "effect.neapolitan.sugar_rush"));
 
@@ -74,7 +74,7 @@ public class CopperPotItems {
             new Item.Properties().food(Foods.ROYAL_JELLY).group(isModLoaded("buzzier_bees") ? ItemGroup.FOOD : null)));
 
     public static final RegistryObject<Item> MOONCAKE = HELPER.createItem("mooncake", () -> new Mooncake(
-            new Item.Properties().food(Foods.MOONCAKE).group((isModLoaded("neapolitan") && isModLoaded("bayou_blues")) ? ItemGroup.FOOD : null)));
+            new Item.Properties().food(Foods.MOONCAKE).group((isModLoaded("neapolitan") && (isModLoaded("bayou_blues") || isModLoaded("environmental"))) ? ItemGroup.FOOD : null)));
 
     public static final RegistryObject<Item> SOURDOUGH = HELPER.createItem("sourdough", () -> new Sourdough(
             new Item.Properties().food(Foods.SOURDOUGH).group(isModLoaded("savageandravage") ? ItemGroup.FOOD : null)));
