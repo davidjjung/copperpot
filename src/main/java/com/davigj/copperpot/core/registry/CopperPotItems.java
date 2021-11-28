@@ -98,7 +98,7 @@ public class CopperPotItems {
         public static final Food VERNAL_AGAR = (new Food.Builder()).hunger(4).saturation(0.6F).effect(() -> new EffectInstance(
                 Effects.REGENERATION, 100), 0.2F).build();
         public static final Food ROYAL_JELLY = (new Food.Builder()).hunger(6).saturation(0.6F).effect(() -> new EffectInstance(
-                Effects.POISON, 300), 0.1F).build();
+                Effects.HUNGER, 300), 0.5F).build();
         public static final Food MOONCAKE = (new Food.Builder()).hunger(4).saturation(0.7F).effect(() -> new EffectInstance(
                 Effects.POISON, 200, 1), 0.6F).build();
         public static final Food CARROT_CUPCAKE = (new Food.Builder()).hunger(4).saturation(0.6F).effect(() -> new EffectInstance(

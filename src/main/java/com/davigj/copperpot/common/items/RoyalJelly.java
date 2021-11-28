@@ -42,18 +42,16 @@ public class RoyalJelly extends Item {
         return stack;
     }
 
-    public void fliparoo(LivingEntity player) {
-        Iterator effects = player.getActivePotionEffects().iterator();
-        while (effects.hasNext()) {
-            EffectInstance effect = (EffectInstance) effects.next();
+    public void fliparoo(LivingEntity entity) {
+        Iterator<EffectInstance> it = entity.getActivePotionEffects().iterator();
+        while (it.hasNext()) {
+            EffectInstance effect = it.next();
             if (effect.getDuration() > 10 && effect.getEffectName().equals("effect.minecraft.poison")) {
-                if (Math.random() < 0.6) {
-                    player.addPotionEffect(new EffectInstance(Effects.REGENERATION, effect.getDuration() / 2,
-                            0, effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
-                }
+                entity.addPotionEffect(new EffectInstance(Effects.REGENERATION, (int) (effect.getDuration() * 0.33),
+                        effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
             }
         }
-        player.removePotionEffect(Effects.POISON);
+        entity.removePotionEffect(Effects.POISON);
     }
 
     public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
