@@ -1,5 +1,6 @@
 package com.davigj.copperpot.common.items;
 
+import com.davigj.copperpot.core.CopperPotConfig;
 import com.davigj.copperpot.core.CopperPotMod;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
@@ -28,11 +29,13 @@ public class Mooncake extends Item {
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         super.onItemUseFinish(stack, worldIn, entityLiving);
-        if (!worldIn.isRemote && worldIn.getDimensionType().doesBedWork()) {
-            moonlight(entityLiving, worldIn);
-        } else if (!worldIn.getDimensionType().doesBedWork()) {
-            entityLiving.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 1.0F, 1.0F);
-            entityLiving.addPotionEffect(new EffectInstance(Effects.POISON, 480));
+        for (String i : CopperPotConfig.COMMON.mooncakeBadReactDims.get()) {
+            if (entityLiving.getEntityWorld().getDimensionType().getEffects().toString().equals(i)) {
+                entityLiving.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 1.0F, 1.0F);
+                entityLiving.addPotionEffect(new EffectInstance(Effects.POISON, 480));
+            } else {
+                moonlight(entityLiving, worldIn);
+            }
         }
         return stack;
     }
