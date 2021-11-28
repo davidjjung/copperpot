@@ -48,7 +48,7 @@ public class RoyalJelly extends Item {
             EffectInstance effect = it.next();
             if (effect.getDuration() > 10 && effect.getEffectName().equals("effect.minecraft.poison")) {
                 entity.addPotionEffect(new EffectInstance(Effects.REGENERATION, (int) (effect.getDuration() * 0.33),
-                        effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+                        Math.max(effect.getAmplifier() - 2, 0), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
             }
         }
         entity.removePotionEffect(Effects.POISON);
