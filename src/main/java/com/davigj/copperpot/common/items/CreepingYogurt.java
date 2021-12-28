@@ -36,6 +36,7 @@ public class CreepingYogurt extends Item {
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         super.onItemUseFinish(stack, worldIn, entityLiving);
         if (!worldIn.isRemote) {
+            // TODO: Check how slabfish_snacks works--does it emulate the slabfish actually *using* the item
             pewpew(entityLiving, worldIn);
         }
         if (stack.isEmpty()) {
@@ -77,10 +78,10 @@ public class CreepingYogurt extends Item {
         }
         double resist = 0;
 //         TODO: Find out how to implement SR explosive damage reduction
-        if (ModList.get().isLoaded("savageandravage")) {
+//        if (ModList.get().isLoaded("savageandravage")) {
 //            resist = (double)player.getAttributeValue(SRAttributes.EXPLOSIVE_DAMAGE_REDUCTION.get());
 //            LOGGER.debug(resist);
-        }
+//        }
         resist = Math.max(resist, player.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
 
         player.addVelocity((1.8 * (1.0D - resist)) * direction.getXOffset() + (0.2 * xpMult),

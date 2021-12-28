@@ -5,6 +5,7 @@ import com.davigj.copperpot.common.crafting.CopperPotRecipe;
 import com.davigj.copperpot.common.tile.container.CopperPotContainer;
 import com.davigj.copperpot.common.tile.inventory.CopperPotItemHandler;
 import com.davigj.copperpot.common.utils.tags.CopperPotTags;
+import com.davigj.copperpot.core.CopperPotConfig;
 import com.davigj.copperpot.core.registry.CopperPotTileEntityTypes;
 import com.davigj.copperpot.core.utils.TextUtils;
 import mcp.MethodsReturnNonnullByDefault;
@@ -204,7 +205,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
 
     private double fumesRadius(World worldIn, BlockPos pos) {
         Iterator<BlockPos> var8 = BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 3, 1)).iterator();
-        double inhibited = 3.0D;
+        double inhibited = CopperPotConfig.COMMON.copperFumeRadius.get();
         while(var8.hasNext()) {
             BlockPos neighborPos = var8.next();
             BlockState neighborState = worldIn.getBlockState(neighborPos);

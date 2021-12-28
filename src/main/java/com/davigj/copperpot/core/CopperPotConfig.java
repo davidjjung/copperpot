@@ -26,6 +26,7 @@ public class CopperPotConfig {
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> aestivalExtensionFx;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> brumalExtensionFx;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> vernalExtensionFx;
+        public final ForgeConfigSpec.ConfigValue<Double> copperFumeRadius;
 
 
         // define
@@ -45,6 +46,8 @@ public class CopperPotConfig {
             vernalExtensionFx = builder.comment("A list of effects which will be extended upon consumption of vernal agar.")
                     .define("vernalExtensionFx", new ArrayList<>(Arrays.asList("effect.minecraft.regeneration",
                             "effect.minecraft.jump_boost", "effect.minecraft.haste", "effect.upgrade_aquatic.vibing")), s -> s instanceof String);
+            copperFumeRadius = builder.comment("The horizontal radius for which copper pots will grant effects with no fume inhibitors involved.")
+                    .define("copperFumeRadius", 3.0D);
         }
     }
 }
