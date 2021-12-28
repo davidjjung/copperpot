@@ -2,7 +2,6 @@
   "replace": false,
   "values": [  ],
   "optional": [
-    "copperpot:adzuki_paste",
     "copperpot:autumnal_agar",
     "copperpot:vernal_agar",
     "copperpot:brumal_agar",
