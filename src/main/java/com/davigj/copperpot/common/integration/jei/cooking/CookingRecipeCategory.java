@@ -2,9 +2,11 @@ package com.davigj.copperpot.common.integration.jei.cooking;
 
 import com.davigj.copperpot.common.crafting.CopperPotRecipe;
 import com.davigj.copperpot.core.registry.CopperPotBlocks;
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import javax.annotation.ParametersAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
@@ -23,6 +25,8 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -107,5 +111,26 @@ public class CookingRecipeCategory implements IRecipeCategory<CopperPotRecipe> {
             this.bubbles.draw(matrixStack, 95, 1);
         }
         this.heatIndicator.draw(matrixStack, 19, 32);
+    }
+
+    public List<ITextComponent> getTooltipStrings(CopperPotRecipe recipe, double mouseX, double mouseY) {
+        if (mouseX > 92 && mouseX < 110 && mouseY > -3 && mouseY < 10 && recipe.getEffectTrue()){
+            // need to convert one number to mins:seconds
+            return ImmutableList.of(new TranslationTextComponent(convertEffectName(recipe.getEffect())));
+        }
+        else {
+            return Collections.emptyList();
+        }
+    }
+
+    private String convertEffectName(String effect) {
+        // I cordially invite God to smite me down.
+        String[] effectName = effect.split(":", 2);
+        return ("effect." + effectName[0] + "." + effectName[1]);
+    }
+
+    private String convertEffectDuration(int duration) {
+        int seconds = duration / 20;
+        return Integer.toString(Math.floorDiv(seconds, 60)) + ":" + Integer.toString(seconds % 60);
     }
 }
