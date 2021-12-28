@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:coal_block",
+    "minecraft:dried_kelp_block",
+    "minecraft:warped_nylium",
+    "minecraft:crimson_nylium"
+  ],
+  "optional": [
+    "architects_palette:charcoal_block"
+  ]
+}

@@ -4,6 +4,7 @@ import com.davigj.copperpot.common.blocks.CopperPotBlock;
 import com.davigj.copperpot.common.crafting.CopperPotRecipe;
 import com.davigj.copperpot.common.tile.container.CopperPotContainer;
 import com.davigj.copperpot.common.tile.inventory.CopperPotItemHandler;
+import com.davigj.copperpot.common.utils.tags.CopperPotTags;
 import com.davigj.copperpot.core.registry.CopperPotTileEntityTypes;
 import com.davigj.copperpot.core.utils.TextUtils;
 import mcp.MethodsReturnNonnullByDefault;
@@ -45,6 +46,7 @@ import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -192,11 +194,28 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
         int effectAmplifier = this.getEffectAmplifier();
         String[] effectName = effect.split(":", 2);
         EffectInstance effectInstance = new EffectInstance(getCookEffect(effectName[0], new ResourceLocation(effectName[0], effectName[1])).get(), effectDuration, effectAmplifier, false, true);
-        for (LivingEntity living : steam.world.getEntitiesWithinAABB(LivingEntity.class, steam.getBoundingBox().grow(3.0D, 3.0D, 3.0D))) {
-            living.addPotionEffect(effectInstance);
+        double radius = fumesRadius(worldIn, pos);
+        for (LivingEntity living : steam.world.getEntitiesWithinAABB(LivingEntity.class, steam.getBoundingBox().grow(radius, 2.0D, radius))) {
+                living.addPotionEffect(effectInstance);
         }
         steam.addEffect(effectInstance);
         worldIn.addEntity(steam);
+    }
+
+    private double fumesRadius(World worldIn, BlockPos pos) {
+        Iterator<BlockPos> var8 = BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 3, 1)).iterator();
+        double inhibited = 3.0D;
+        while(var8.hasNext()) {
+            BlockPos neighborPos = var8.next();
+            BlockState neighborState = worldIn.getBlockState(neighborPos);
+            if (neighborState.isIn(CopperPotTags.PARTIAL_FUME_INHIBITORS)) {
+                inhibited = 1.0D;
+            }
+            if (neighborState.isIn(CopperPotTags.FUME_INHIBITORS)) {
+                return 0.0D;
+            }
+        }
+        return inhibited;
     }
 
     public void tick() {
