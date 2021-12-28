@@ -1,0 +1,27 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "tag": "forge:milk"
+    },
+    {
+      "item": "upgrade_aquatic:guardian_spine"
+    }
+  ],
+  "result": {
+    "item": "copperpot:guardian_souffle"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "upgrade_aquatic"
+    }
+  ],
+  "effecttrue": true,
+  "effect": "minecraft:mining_fatigue",
+  "effectduration": 100,
+  "effectamplifier": 2
+}

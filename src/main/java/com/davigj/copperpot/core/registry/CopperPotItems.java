@@ -77,12 +77,15 @@ public class CopperPotItems {
     public static final RegistryObject<Item> TROPICAL_MERINGUE = HELPER.createItem("tropical_meringue", () -> new TropicalMeringue(
             new Item.Properties().food(Foods.TROPICAL_MERINGUE).group((isModLoaded("neapolitan") && isModLoaded("atmospheric")) ? ItemGroup.FOOD : null), "effect.atmospheric.spitting", "effect.neapolitan.agility"));
 
+    public static final RegistryObject<Item> GUARDIAN_SOUFFLE = HELPER.createItem("guardian_souffle", () -> new GuardianSouffle(
+            new Item.Properties().food(Foods.GUARDIAN_SOUFFLE).group(isModLoaded("upgrade_aquatic") ? ItemGroup.FOOD : null)));
+
 //    public static final RegistryObject<Item> INCENDIARY_MERINGUE = HELPER.createItem("incendiary_meringue", () -> new IncendiaryMeringue(
 //            new Item.Properties().food(Foods.INCENDIARY_MERINGUE).group(ItemGroup.FOOD)));
 
     static class Foods {
-        public static final Food RAW_MERINGUE = (new Food.Builder()).hunger(1).saturation(0.6F).fastToEat().effect(() -> new EffectInstance(Effects.HUNGER, 300), 0.6F).build();
-        public static final Food MERINGUE = (new Food.Builder()).hunger(1).saturation(0.8F).fastToEat().build();
+        public static final Food RAW_MERINGUE = (new Food.Builder()).hunger(1).saturation(0.4F).fastToEat().effect(() -> new EffectInstance(Effects.HUNGER, 300), 0.6F).build();
+        public static final Food MERINGUE = (new Food.Builder()).hunger(1).saturation(0.6F).fastToEat().build();
         public static final Food BAKED_ALASKA_SLICE = (new Food.Builder()).hunger(3).saturation(0.7F).fastToEat().build();
         public static final Food SPICED_APPLE_JAM = (new Food.Builder()).hunger(5).saturation(0.8F).setAlwaysEdible().build();
         public static final Food PORK_SANDWICH = (new Food.Builder()).hunger(9).saturation(0.8F).build();
@@ -104,6 +107,7 @@ public class CopperPotItems {
         public static final Food CARROT_CUPCAKE = (new Food.Builder()).hunger(4).saturation(0.6F).effect(() -> new EffectInstance(
                 Effects.JUMP_BOOST, 200), 0.2F).build();
         public static final Food TROPICAL_MERINGUE = (new Food.Builder()).hunger(3).saturation(0.3F).fastToEat().build();
+        public static final Food GUARDIAN_SOUFFLE = (new Food.Builder()).hunger(4).saturation(0.3F).build();
         public static final Food INCENDIARY_MERINGUE = (new Food.Builder()).hunger(2).saturation(0.5F).fastToEat().build();
     }
 }
