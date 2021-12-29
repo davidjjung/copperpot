@@ -28,5 +28,18 @@
   "copperpot.tooltip.copper_pot.single_serving": "Holds 1 serving of:",
   "copperpot.tooltip.copper_pot.many_servings": "Holds %s servings of:",
 
-  "copperpot.jei.cooking": "Cooking"
+  "copperpot.jei.cooking": "Cooking",
+
+  "copperpot.tooltip.carrot_cupcake.tip": "May Intensify Jump Boost",
+  "copperpot.tooltip.creeping_yogurt.tip": "Explosive Getaway",
+  "copperpot.tooltip.sourdough.tip": "Summons Effective Creepies",
+  "copperpot.tooltip.seasonal_agar.prefix": "Extends:",
+  "copperpot.tooltip.royal_jelly.when_feeding": "When fed to a Bee:",
+  "copperpot.tooltip.royal_jelly.when_eating": "Reverses Poison",
+  "copperpot.tooltip.royal_jelly.fix_bee": " Restores Stinger",
+  "copperpot.tooltip.mooncake.tip": "Lunar Peace of Mind",
+  "copperpot.tooltip.tropical_meringue.tip": "May Extend Agility or Intensify Spitting",
+  "copperpot.tooltip.mint_meringue.tip": "May Intensify Berserking or Sugar Rush",
+  "copperpot.tooltip.spiced_apple_jam.tip": "May Extend Sustaining or Supportive",
+  "copperpot.tooltip.spiced_apple_jam.tip": "May Extend Sustaining or Supportive"
 }

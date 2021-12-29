@@ -2,6 +2,8 @@ package com.davigj.copperpot.common.items;
 
 import com.davigj.copperpot.core.CopperPotConfig;
 import com.davigj.copperpot.core.CopperPotMod;
+import com.davigj.copperpot.core.utils.TextUtils;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,13 +12,20 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class Mooncake extends Item {
@@ -62,5 +71,12 @@ public class Mooncake extends Item {
                     getCompatEffect("neapolitan", new ResourceLocation(
                             "neapolitan", "harmony")).get(), (int) ((0.11 * moonProxTime) * moon))));
         }
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        IFormattableTextComponent tip = TextUtils.getTranslation("tooltip.mooncake.tip");
+        tooltip.add(tip.mergeStyle(TextFormatting.BLUE));
     }
 }

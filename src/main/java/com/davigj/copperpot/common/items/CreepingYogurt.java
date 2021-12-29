@@ -1,6 +1,8 @@
 package com.davigj.copperpot.common.items;
 
 import com.davigj.copperpot.core.CopperPotMod;
+import com.davigj.copperpot.core.utils.TextUtils;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -13,14 +15,21 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.ModList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 // import com.minecraftabnormals.savageandravage.core.registry.SRAttributes;
 
@@ -64,14 +73,14 @@ public class CreepingYogurt extends Item {
         }
         int xpMult = 0;
         AreaEffectCloudEntity dummy = new AreaEffectCloudEntity(worldIn, pos.getX(), pos.getY(), pos.getZ());
-        for (int kablooie = 0; kablooie < storedEffects.size(); kablooie++) {
+        for (EffectInstance storedEffect : storedEffects) {
             AreaEffectCloudEntity steam = new AreaEffectCloudEntity(worldIn, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 
             steam.setDuration(200);
             steam.setRadius(0.2F);
-            steam.addEffect(new EffectInstance(storedEffects.get(kablooie).getPotion(), (int) ((storedEffects.get(kablooie).getDuration()) * 0.6), storedEffects.get(kablooie).getAmplifier()));
+            steam.addEffect(new EffectInstance(storedEffect.getPotion(), (int) ((storedEffect.getDuration()) * 0.6), storedEffect.getAmplifier()));
             for (LivingEntity living : steam.world.getEntitiesWithinAABB(LivingEntity.class, steam.getBoundingBox().grow(2.0D, 1.0D, 2.0D))) {
-                living.addPotionEffect(new EffectInstance(storedEffects.get(kablooie).getPotion(), (int) ((storedEffects.get(kablooie).getDuration()) * 0.6), storedEffects.get(kablooie).getAmplifier()));
+                living.addPotionEffect(new EffectInstance(storedEffect.getPotion(), (int) ((storedEffect.getDuration()) * 0.6), storedEffect.getAmplifier()));
             }
             worldIn.addEntity(steam);
             xpMult++;
@@ -92,5 +101,12 @@ public class CreepingYogurt extends Item {
 
     public SoundEvent getEatSound() {
         return SoundEvents.ENTITY_CREEPER_PRIMED;
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        IFormattableTextComponent tip = TextUtils.getTranslation("tooltip.creeping_yogurt.tip");
+        tooltip.add(tip.mergeStyle(TextFormatting.GREEN));
     }
 }

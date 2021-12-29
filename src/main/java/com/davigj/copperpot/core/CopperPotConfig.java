@@ -35,11 +35,11 @@ public class CopperPotConfig {
                     "to the player when consumed, usually due to the lack of a moon.").define("mooncakeBadReactDims",
                     new ArrayList<>(Arrays.asList("minecraft:the_nether", "minecraft:the_end")), s -> s instanceof String);
             autumnalExtensionFx = builder.comment("A list of effects which will be extended upon consumption of autumnal agar.")
-                    .define("autumnalExtensionFx", new ArrayList<>(Arrays.asList("effect.minecraft:resistance",
+                    .define("autumnalExtensionFx", new ArrayList<>(Arrays.asList("effect.minecraft.resistance",
                             "effect.farmersdelight.nourished", "effect.minecraft.absorption", "effect.atmospheric.persistence")), s -> s instanceof String);
             aestivalExtensionFx = builder.comment("A list of effects which will be extended upon consumption of aestival agar.")
                     .define("aestivalExtensionFx", new ArrayList<>(Arrays.asList("effect.minecraft.night_vision",
-                            "effect.atmospheric.gelled", "effect.minecraft.water_breathing", "effect.minecraft.strength")), s -> s instanceof String);
+                            "effect.atmospheric.relief", "effect.minecraft.water_breathing", "effect.minecraft.strength")), s -> s instanceof String);
             brumalExtensionFx = builder.comment("A list of effects which will be extended upon consumption of brumal agar.")
                     .define("brumalExtensionFx", new ArrayList<>(Arrays.asList("effect.farmersdelight.comfort",
                             "effect.minecraft.invisibility", "effect.minecraft.fire_resistance", "effect.minecraft.slow_falling")), s -> s instanceof String);

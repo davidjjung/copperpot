@@ -1,16 +1,25 @@
 package com.davigj.copperpot.common.items;
 
+import com.davigj.copperpot.core.utils.TextUtils;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nullable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class TropicalMeringue extends Item {
@@ -64,6 +73,13 @@ public class TropicalMeringue extends Item {
                 }
             }
         }
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        IFormattableTextComponent tip = TextUtils.getTranslation("tooltip.tropical_meringue.tip");
+        tooltip.add(tip.mergeStyle(TextFormatting.BLUE));
     }
 
 }

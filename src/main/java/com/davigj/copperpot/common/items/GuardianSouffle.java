@@ -1,13 +1,23 @@
 package com.davigj.copperpot.common.items;
 
+import com.davigj.copperpot.core.utils.TextUtils;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.Iterator;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class GuardianSouffle extends Item {
 
@@ -28,5 +38,16 @@ public class GuardianSouffle extends Item {
             entityLiving.heal(negatives * 2F);
         }
         return stack;
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        IFormattableTextComponent tip = TextUtils.getTranslation("tooltip.guardian_souffle.tip");
+        tooltip.add(tip.mergeStyle(TextFormatting.BLUE));
+    }
+
+    public SoundEvent getEatSound() {
+        return SoundEvents.ENTITY_GUARDIAN_AMBIENT;
     }
 }
