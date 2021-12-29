@@ -23,6 +23,5 @@
   ],
   "cookingtime": 600,
   "effecttrue": true,
-  "effect": "minecraft:poison",
-  "effectamplifier": 1
+  "effect": "buzzier_bees:sunny"
 }
