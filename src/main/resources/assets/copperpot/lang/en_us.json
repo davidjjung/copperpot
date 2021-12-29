@@ -38,8 +38,12 @@
   "copperpot.tooltip.royal_jelly.when_eating": "Reverses Poison",
   "copperpot.tooltip.royal_jelly.fix_bee": " Restores Stinger",
   "copperpot.tooltip.mooncake.tip": "Lunar Peace of Mind",
-  "copperpot.tooltip.tropical_meringue.tip": "May Extend Agility or Intensify Spitting",
-  "copperpot.tooltip.mint_meringue.tip": "May Intensify Berserking or Sugar Rush",
-  "copperpot.tooltip.spiced_apple_jam.tip": "May Extend Sustaining or Supportive",
-  "copperpot.tooltip.spiced_apple_jam.tip": "May Extend Sustaining or Supportive"
+  "copperpot.tooltip.tropical_meringue.tip": "May Extend Agility",
+  "copperpot.tooltip.tropical_meringue.tip2": "or Intensify Spitting",
+  "copperpot.tooltip.mint_meringue.tip": "May Intensify Berserking",
+  "copperpot.tooltip.mint_meringue.tip2": "or Sugar Rush",
+  "copperpot.tooltip.spiced_apple_jam.tip": "May Extend Sustaining",
+  "copperpot.tooltip.spiced_apple_jam.tip2": "or Supportive",
+  "copperpot.tooltip.guardian_souffle.tip": "Turns Negative Effects to",
+  "copperpot.tooltip.guardian_souffle.tip2": "Instant Health Underwater"
 }

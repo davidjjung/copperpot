@@ -130,6 +130,8 @@ public class SpicedAppleJam extends Item {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         IFormattableTextComponent tip = TextUtils.getTranslation("tooltip.spiced_apple_jam.tip");
+        IFormattableTextComponent tip2 = TextUtils.getTranslation("tooltip.spiced_apple_jam.tip2");
         tooltip.add(tip.mergeStyle(TextFormatting.BLUE));
+        tooltip.add(tip2.mergeStyle(TextFormatting.BLUE));
     }
 }

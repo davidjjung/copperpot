@@ -80,6 +80,8 @@ public class MintMeringue extends Item {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         IFormattableTextComponent tip = TextUtils.getTranslation("tooltip.mint_meringue.tip");
+        IFormattableTextComponent tip2 = TextUtils.getTranslation("tooltip.mint_meringue.tip2");
         tooltip.add(tip.mergeStyle(TextFormatting.BLUE));
+        tooltip.add(tip2.mergeStyle(TextFormatting.BLUE));
     }
 }
