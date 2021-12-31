@@ -48,8 +48,4 @@ public class GuardianSouffle extends Item {
         tooltip.add(tip.mergeStyle(TextFormatting.BLUE));
         tooltip.add(tip2.mergeStyle(TextFormatting.BLUE));
     }
-
-    public SoundEvent getEatSound() {
-        return SoundEvents.ENTITY_GUARDIAN_AMBIENT;
-    }
 }
