@@ -43,6 +43,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistries;
+import vectorwing.farmersdelight.utils.ItemUtils;
 import vectorwing.farmersdelight.utils.tags.ModTags;
 
 import javax.annotation.Nullable;
@@ -263,11 +264,11 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     }
 
     protected int getCookTime() {
-        return (Integer) this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).map(CopperPotRecipe::getCookTime).orElse(100);
+        return (Integer) this.level.getRecipeManager().getRecipeFor(this.recipeType, new RecipeWrapper(this.itemHandler), this.level).map(CopperPotRecipe::getCookTime).orElse(100);
     }
 
     protected ItemStack getRecipeContainer() {
-        return (ItemStack) this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).map(CopperPotRecipe::getOutputContainer).orElse(ItemStack.EMPTY);
+        return (ItemStack) this.level.getRecipeManager().getRecipeFor(this.recipeType, new RecipeWrapper(this.itemHandler), this.level).map(CopperPotRecipe::getOutputContainer).orElse(ItemStack.EMPTY);
     }
 
     public ItemStack getContainer() {
@@ -275,19 +276,19 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     }
 
     public boolean isEffectTrue() {
-        return this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).map(CopperPotRecipe::getEffectTrue).orElse(false);
+        return this.level.getRecipeManager().getRecipeFor(this.recipeType, new RecipeWrapper(this.itemHandler), this.level).map(CopperPotRecipe::getEffectTrue).orElse(false);
     }
 
     public String getEffect() {
-        return this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).map(CopperPotRecipe::getEffect).orElse("");
+        return this.level.getRecipeManager().getRecipeFor(this.recipeType, new RecipeWrapper(this.itemHandler), this.level).map(CopperPotRecipe::getEffect).orElse("");
     }
 
     public int getEffectDuration() {
-        return this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).map(CopperPotRecipe::getEffectDuration).orElse(100);
+        return this.level.getRecipeManager().getRecipeFor(this.recipeType, new RecipeWrapper(this.itemHandler), this.level).map(CopperPotRecipe::getEffectDuration).orElse(100);
     }
 
     public int getEffectAmplifier() {
-        return this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).map(CopperPotRecipe::getEffectAmplifier).orElse(0);
+        return this.level.getRecipeManager().getRecipeFor(this.recipeType, new RecipeWrapper(this.itemHandler), this.level).map(CopperPotRecipe::getEffectAmplifier).orElse(0);
     }
 
     private boolean hasInput() {
@@ -303,14 +304,14 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
 
     protected boolean canCook(@Nullable IRecipe<?> recipeIn) {
         if (this.hasInput() && recipeIn != null) {
-            ItemStack recipeOutput = recipeIn.getRecipeOutput();
+            ItemStack recipeOutput = recipeIn.getResultItem();
             if (recipeOutput.isEmpty()) {
                 return false;
             } else {
                 ItemStack currentOutput = this.itemHandler.getStackInSlot(3);
                 if (currentOutput.isEmpty()) {
                     return true;
-                } else if (!currentOutput.isItemEqual(recipeOutput)) {
+                } else if (!currentOutput.sameItem(recipeOutput)) {
                     return false;
                 } else if (currentOutput.getCount() + recipeOutput.getCount() <= Math.min(16, this.itemHandler.getSlotLimit(3))) {
                     return true;
@@ -326,7 +327,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     private void cook(@Nullable IRecipe<?> recipe) {
         if (recipe != null && this.canCook(recipe)) {
             this.container = this.getRecipeContainer();
-            ItemStack recipeOutput = recipe.getRecipeOutput();
+            ItemStack recipeOutput = recipe.getResultItem();
             ItemStack currentOutput = this.itemHandler.getStackInSlot(3);
             if (currentOutput.isEmpty()) {
                 this.itemHandler.setStackInSlot(3, recipeOutput.copy());
@@ -337,13 +338,13 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
 
         for (int i = 0; i < 3; ++i) {
             if (this.itemHandler.getStackInSlot(i).hasContainerItem()) {
-                Direction direction = ((Direction) this.getBlockState().get(CopperPotBlock.HORIZONTAL_FACING)).rotateYCCW();
-                double dropX = (double) this.pos.getX() + 0.5D + (double) direction.getXOffset() * 0.25D;
-                double dropY = (double) this.pos.getY() + 0.7D;
-                double dropZ = (double) this.pos.getZ() + 0.5D + (double) direction.getZOffset() * 0.25D;
-                ItemEntity entity = new ItemEntity(this.world, dropX, dropY, dropZ, this.itemHandler.getStackInSlot(i).getContainerItem());
-                entity.setMotion((double) ((float) direction.getXOffset() * 0.08F), 0.25D, (double) ((float) direction.getZOffset() * 0.08F));
-                this.world.addEntity(entity);
+                Direction direction = ((Direction) this.getBlockState().getValue(CopperPotBlock.FACING)).getCounterClockWise();
+                double dropX = (double) this.worldPosition.getX() + 0.5D + (double) direction.getStepX() * 0.25D;
+                double dropY = (double) this.worldPosition.getY() + 0.7D;
+                double dropZ = (double) this.worldPosition.getZ() + 0.5D + (double) direction.getStepZ() * 0.25D;
+                ItemEntity entity = new ItemEntity(this.level, dropX, dropY, dropZ, this.itemHandler.getStackInSlot(i).getContainerItem());
+                ItemUtils.spawnItemEntity(level, itemHandler.getStackInSlot(i).getContainerItem(), dropX, dropY, dropZ,
+                        direction.getStepX() * 0.08F, 0.25F, direction.getStepZ() * 0.08F);
             }
 
             if (!this.itemHandler.getStackInSlot(i).isEmpty()) {
@@ -353,10 +354,10 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     }
 
     private void animate() {
-        World world = this.getWorld();
+        World world = this.getLevel();
         if (world != null) {
-            BlockPos blockpos = this.getPos();
-            Random random = world.rand;
+            BlockPos blockpos = this.getBlockPos();
+            Random random = world.random;
             double baseX;
             double baseY;
             double baseZ;
@@ -383,12 +384,12 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     }
 
     public boolean isAboveLitHeatSource() {
-        if (this.world == null) {
+        if (this.level == null) {
             return false;
         } else {
-            BlockState checkState = this.world.getBlockState(this.pos.down());
+            BlockState checkState = this.level.getBlockState(this.worldPosition.below());
             if (ModTags.HEAT_SOURCES.contains(checkState.getBlock())) {
-                return checkState.hasProperty(BlockStateProperties.LIT) ? (Boolean) checkState.get(BlockStateProperties.LIT) : true;
+                return checkState.hasProperty(BlockStateProperties.LIT) ? (Boolean) checkState.getValue(BlockStateProperties.LIT) : true;
             } else {
                 return false;
             }
@@ -452,7 +453,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
         if (containerItem.isEmpty()) {
             return false;
         } else {
-            return !this.container.isEmpty() ? this.container.isItemEqual(containerItem) : this.getMeal().getContainerItem().isItemEqual(containerItem);
+            return !this.container.isEmpty() ? this.container.sameItem(containerItem) : this.getMeal().getContainerItem().sameItem(containerItem);
         }
     }
 
@@ -501,7 +502,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     }
 
     public void remove() {
-        super.remove();
+        super.setRemoved();
         this.handlerInput.invalidate();
         this.handlerOutput.invalidate();
     }

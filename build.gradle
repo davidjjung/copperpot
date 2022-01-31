@@ -1,7 +1,6 @@
 buildscript {
     repositories {
         maven { url = "https://files.minecraftforge.net/maven" }
-        mavenCentral()
     }
     dependencies {
         classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "4.1.+", changing: true
@@ -19,14 +18,15 @@ archivesBaseName = project.modId
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = "1.8"
 
 minecraft {
-    mappings channel:"official", version:"1.16.5"
+    mappings channel: "official", version: "1.16.5"
     accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
     runs {
         client {
             workingDirectory project.file("run")
             property "forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP"
             property "forge.logging.console.level", "debug"
-            property "mixin.env.disableRefMap", "true"
+            property "mixin.env.remapRefMap", "true"
+            property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 copperpot {
                     source sourceSets.main
@@ -37,7 +37,8 @@ minecraft {
             workingDirectory project.file("run")
             property "forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP"
             property "forge.logging.console.level", "debug"
-            property "mixin.env.disableRefMap", "true"
+            property "mixin.env.remapRefMap", "true"
+            property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 copperpot {
                     source sourceSets.main
@@ -48,7 +49,8 @@ minecraft {
             workingDirectory project.file("run")
             property "forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP"
             property "forge.logging.console.level", "debug"
-            property "mixin.env.disableRefMap", "true"
+            property "mixin.env.remapRefMap", "true"
+            property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
             args "--mod", project.modId, "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources")
             mods {
                 copperpot {
@@ -60,7 +62,7 @@ minecraft {
 }
 
 sourceSets.main.resources {
-    srcDir 'src/generated/resources'
+    srcDir "src/generated/resources"
 }
 
 dependencies {
@@ -68,16 +70,13 @@ dependencies {
     implementation fg.deobf("com.minecraftabnormals:abnormals-core:${project.minecraft}-${project.abnormalsCore}")
     implementation fg.deobf("curse.maven:farmersdelight-398521:3503844")
 
-    implementation fg.deobf("curse.maven:neapolitan-382016:3221772")
-//    implementation fg.deobf("curse.maven:neapolitan-382016:3567243")
+    implementation fg.deobf("curse.maven:neapolitan-382016:3567243")
     implementation fg.deobf("curse.maven:autumnity-365045:3295700")
-    implementation fg.deobf("curse.maven:environmental-388992:3221635")
-    // implementation fg.deobf("curse.maven:environmental-388992:3416597")
+    implementation fg.deobf("curse.maven:environmental-388992:3416597")
     implementation fg.deobf("curse.maven:abundance-452345:3250108")
     implementation fg.deobf("curse.maven:fruitful-395502:3342857")
     implementation fg.deobf("curse.maven:atmospheric-362393:3553332")
     implementation fg.deobf("curse.maven:abnormals_delight-442719:3442748")
-    implementation fg.deobf("curse.maven:endergetic-291509:3154938")
     implementation fg.deobf("curse.maven:buzzier_bees-355458:3226433")
     implementation fg.deobf("curse.maven:upgrade_aquatic-326895:3249419")
     implementation fg.deobf("curse.maven:savageandravage-381736:3226442")
@@ -89,18 +88,10 @@ dependencies {
 }
 
 repositories {
-    maven {
-        url "https://maven.jaackson.me"
-    }
-    maven {
-        url "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        url "https://www.cursemaven.com"
-    }
-    maven {
-        url "https://modmaven.k-4u.nl"
-    }
+    maven { url "https://maven.jaackson.me" }
+    maven { url "https://dvs1.progwml6.com/files/maven/" }
+    maven { url "https://modmaven.k-4u.nl" }
+    maven { url "https://www.cursemaven.com" }
 }
 
 jar {
@@ -112,7 +103,7 @@ jar {
                 "Implementation-Title"    : project.modName,
                 "Implementation-Version"  : project.modVersion,
                 "Implementation-Vendor"   : "DavigJ",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
