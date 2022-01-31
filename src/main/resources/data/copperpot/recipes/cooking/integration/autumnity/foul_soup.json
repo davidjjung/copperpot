@@ -1,0 +1,29 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "autumnity:foul_berries"
+    },
+    {
+      "item": "autumnity:foul_berries"
+    },
+    {
+      "item": "minecraft:spider_eye"
+    }
+  ],
+  "result": {
+    "item": "autumnity:foul_soup"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "autumnity"
+    }
+  ],
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "effecttrue": true,
+  "effect": "minecraft:hunger",
+  "effectamplifier": 1
+}
