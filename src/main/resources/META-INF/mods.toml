@@ -32,7 +32,7 @@ An unofficial add-on for Farmer's Delight! Adds a copper pot for those stuck wai
 [[dependencies.copperpot]]
     modId = "abnormals_core"
     mandatory = true
-    versionRange = "[3.2.0,)"
+    versionRange = "[3.3.0,)"
     ordering = "AFTER"
     side = "BOTH"
 
