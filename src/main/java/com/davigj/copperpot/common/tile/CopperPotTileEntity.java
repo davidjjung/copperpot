@@ -101,7 +101,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
                 }
             }
 
-            public int size() {
+            public int getCount() {
                 return 2;
             }
         };
@@ -116,7 +116,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
 
     @Nullable
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.worldPosition, 1, this.getUpdateTag());
     }
 
     public CompoundNBT getUpdateTag() {
@@ -124,29 +124,29 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     }
 
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        this.read(this.getBlockState(), pkt.getNbtCompound());
+        this.load(this.getBlockState(), pkt.getTag());
     }
 
     private void inventoryChanged() {
-        super.markDirty();
-        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
+        super.setChanged();
+        this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
     }
 
-    public void read(BlockState state, CompoundNBT compound) {
-        super.read(state, compound);
+    public void load(BlockState state, CompoundNBT compound) {
+        super.load(state, compound);
         this.itemHandler.deserializeNBT(compound.getCompound("Inventory"));
         this.cookTime = compound.getInt("CookTime");
         this.cookTimeTotal = compound.getInt("CookTimeTotal");
-        this.container = ItemStack.read(compound.getCompound("Container"));
+        this.container = ItemStack.of(compound.getCompound("Container"));
         this.effectTrue = compound.getBoolean("EffectTrue");
         if (compound.contains("CustomName", 8)) {
-            this.customName = ITextComponent.Serializer.getComponentFromJson(compound.getString("CustomName"));
+            this.customName = ITextComponent.Serializer.fromJson(compound.getString("CustomName"));
         }
 
     }
 
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
+    public CompoundNBT save(CompoundNBT compound) {
+        super.save(compound);
         compound.putInt("CookTime", this.cookTime);
         compound.putInt("CookTimeTotal", this.cookTimeTotal);
         compound.put("Container", this.container.serializeNBT());
@@ -159,7 +159,7 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     }
 
     private CompoundNBT writeItems(CompoundNBT compound) {
-        super.write(compound);
+        super.save(compound);
         compound.put("Container", this.container.serializeNBT());
         compound.put("Inventory", this.itemHandler.serializeNBT());
         return compound;
@@ -196,23 +196,23 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
         String[] effectName = effect.split(":", 2);
         EffectInstance effectInstance = new EffectInstance(getCookEffect(effectName[0], new ResourceLocation(effectName[0], effectName[1])).get(), effectDuration, effectAmplifier, false, true);
         double radius = fumesRadius(worldIn, pos);
-        for (LivingEntity living : steam.world.getEntitiesWithinAABB(LivingEntity.class, steam.getBoundingBox().grow(radius, 2.0D, radius))) {
-                living.addPotionEffect(effectInstance);
+        for (LivingEntity living : steam.level.getEntitiesOfClass(LivingEntity.class, steam.getBoundingBox().inflate(radius, 2.0D, radius))) {
+                living.addEffect(effectInstance);
         }
         steam.addEffect(effectInstance);
-        worldIn.addEntity(steam);
+        worldIn.addFreshEntity(steam);
     }
 
     private double fumesRadius(World worldIn, BlockPos pos) {
-        Iterator<BlockPos> var8 = BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 3, 1)).iterator();
+        Iterator<BlockPos> var8 = BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 3, 1)).iterator();
         double inhibited = CopperPotConfig.COMMON.copperFumeRadius.get();
         while(var8.hasNext()) {
             BlockPos neighborPos = var8.next();
             BlockState neighborState = worldIn.getBlockState(neighborPos);
-            if (neighborState.isIn(CopperPotTags.PARTIAL_FUME_INHIBITORS)) {
+            if (neighborState.is(CopperPotTags.PARTIAL_FUME_INHIBITORS)) {
                 inhibited = 1.0D;
             }
-            if (neighborState.isIn(CopperPotTags.FUME_INHIBITORS)) {
+            if (neighborState.is(CopperPotTags.FUME_INHIBITORS)) {
                 return 0.0D;
             }
         }
@@ -222,11 +222,11 @@ public class CopperPotTileEntity extends TileEntity implements INamedContainerPr
     public void tick() {
         boolean isHeated = this.isAboveLitHeatSource();
         boolean dirty = false;
-        World worldIn = this.world;
-        BlockPos pos = this.pos;
-        if (!this.world.isRemote) {
-            if (isHeated && this.hasInput() && this.getBlockState().get(CopperPotBlock.ENABLED)) {
-                CopperPotRecipe irecipe = (CopperPotRecipe) this.world.getRecipeManager().getRecipe(this.recipeType, new RecipeWrapper(this.itemHandler), this.world).orElse(null);
+        World worldIn = this.level;
+        BlockPos pos = this.worldPosition;
+        if (!this.level.isClientSide) {
+            if (isHeated && this.hasInput() && this.getBlockState().getValue(CopperPotBlock.ENABLED)) {
+                CopperPotRecipe irecipe = (CopperPotRecipe) this.level.getRecipeManager().getRecipeFor(this.recipeType, new RecipeWrapper(this.itemHandler), this.level).orElse(null);
                 if (this.canCook(irecipe)) {
                     ++this.cookTime;
                     if ((this.cookTime % 30 == 0) && this.isEffectTrue()) {

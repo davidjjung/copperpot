@@ -22,20 +22,20 @@ public class BakedAlaskaSlice extends Item {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity livingEntity) {
-        if (!worldIn.isRemote && ModList.get().isLoaded("neapolitan")) {
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity livingEntity) {
+        if (!worldIn.isClientSide && ModList.get().isLoaded("neapolitan")) {
             double random = Math.random();
             if (random < 0.25) {
-                livingEntity.addPotionEffect(new EffectInstance(getCompatEffect("neapolitan", new ResourceLocation("neapolitan", "sugar_rush")).get(), 200, 2));
+                livingEntity.addEffect(new EffectInstance(getCompatEffect("neapolitan", new ResourceLocation("neapolitan", "sugar_rush")).get(), 200, 2));
             } else if (random < 0.5 && random > 0.25) {
-                livingEntity.addPotionEffect(new EffectInstance(getCompatEffect("neapolitan", new ResourceLocation("neapolitan", "vanilla_scent")).get(), 100));
+                livingEntity.addEffect(new EffectInstance(getCompatEffect("neapolitan", new ResourceLocation("neapolitan", "vanilla_scent")).get(), 100));
             } else if (random > 0.5 && random < 0.8) {
-                livingEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 200));
+                livingEntity.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 200));
             } else {
                 livingEntity.heal(4.0F);
             }
         }
-        return super.onItemUseFinish(stack, worldIn, livingEntity);
+        return super.finishUsingItem(stack, worldIn, livingEntity);
     }
 
     private static Supplier<Effect> getCompatEffect(String modid, ResourceLocation effect) {

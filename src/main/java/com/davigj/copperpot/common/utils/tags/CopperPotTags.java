@@ -13,6 +13,6 @@ public class CopperPotTags {
     }
 
     private static ITag.INamedTag<Block> modBlockTag(String path) {
-        return BlockTags.makeWrapperTag(CopperPotMod.MOD_ID + ":" + path);
+        return BlockTags.bind(CopperPotMod.MOD_ID + ":" + path);
     }
 }

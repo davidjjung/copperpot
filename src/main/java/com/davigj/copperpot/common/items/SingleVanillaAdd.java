@@ -17,21 +17,21 @@ public class SingleVanillaAdd extends Item {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        super.onItemUseFinish(stack, worldIn, entityLiving);
-        if (!worldIn.isRemote) {
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        super.finishUsingItem(stack, worldIn, entityLiving);
+        if (!worldIn.isClientSide) {
             extendEffect(entityLiving);
         }
         return stack;
     }
 
     public void extendEffect(LivingEntity player) {
-        Iterator effects = player.getActivePotionEffects().iterator();
+        Iterator effects = player.getActiveEffects().iterator();
         while(effects.hasNext()) {
             EffectInstance effect = (EffectInstance)effects.next();
-            if (effect.getDuration() > 10 && effect.getEffectName().equals(effectName)) {
-                player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 200,
-                        effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+            if (effect.getDuration() > 10 && effect.getDescriptionId().equals(effectName)) {
+                player.addEffect(new EffectInstance(effect.getEffect(), effect.getDuration() + 200,
+                        effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon()));
             }
         }
     }

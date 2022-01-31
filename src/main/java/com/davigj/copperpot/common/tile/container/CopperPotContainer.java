@@ -38,7 +38,7 @@ public class CopperPotContainer extends Container {
         this.tileEntity = tileEntity;
         this.inventoryHandler = tileEntity.getInventory();
         this.copperPotData = copperPotDataIn;
-        this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
+        this.canInteractWithCallable = IWorldPosCallable.create(tileEntity.getLevel(), tileEntity.getBlockPos());
         int startX = 8;
         int startY = 18;
 
@@ -58,8 +58,8 @@ public class CopperPotContainer extends Container {
         this.addSlot(new CopperPotMealSlot(this.inventoryHandler, 3, 124, 26));
         this.addSlot(new SlotItemHandler(this.inventoryHandler, 4, 92, 55) {
             @OnlyIn(Dist.CLIENT)
-            public Pair<ResourceLocation, ResourceLocation> getBackground() {
-                return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE, CopperPotContainer.EMPTY_CONTAINER_SLOT_BOWL);
+            public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
+                return Pair.of(PlayerContainer.BLOCK_ATLAS, CopperPotContainer.EMPTY_CONTAINER_SLOT_BOWL);
             }
         });
         this.addSlot(new CopperPotResultSlot(this.inventoryHandler, 5, 124, 55));
@@ -77,13 +77,13 @@ public class CopperPotContainer extends Container {
         for (int column = 0; column < 9; ++column) {
             this.addSlot(new Slot(playerInventory, column, startX + (column * borderSlotSize), 142));
         }
-        this.trackIntArray(copperPotDataIn);
+        this.addDataSlots(copperPotDataIn);
     }
 
     private static CopperPotTileEntity getTileEntity(PlayerInventory playerInventory, PacketBuffer data) {
         Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
         Objects.requireNonNull(data, "data cannot be null");
-        TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
+        TileEntity tileAtPos = playerInventory.player.level.getBlockEntity(data.readBlockPos());
         if (tileAtPos instanceof CopperPotTileEntity) {
             return (CopperPotTileEntity)tileAtPos;
         } else {
@@ -95,43 +95,43 @@ public class CopperPotContainer extends Container {
         this(windowId, playerInventory, getTileEntity(playerInventory, data), new IntArray(4));
     }
 
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(this.canInteractWithCallable, playerIn, (Block) CopperPotBlocks.COPPER_POT.get());
+    public boolean stillValid(PlayerEntity playerIn) {
+        return stillValid(this.canInteractWithCallable, playerIn, (Block) CopperPotBlocks.COPPER_POT.get());
     }
 
     // determines how the player inventory looks, at least, I think
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
         int indexMealDisplay = 3;
         int indexContainerInput = 4;
         int indexOutput = 5;
         int startPlayerInv = indexOutput + 1;
         int endPlayerInv = startPlayerInv + 36;
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = (Slot)this.inventorySlots.get(index);
-        if (slot != null && slot.getHasStack()) {
-            ItemStack itemstack1 = slot.getStack();
+        Slot slot = (Slot)this.slots.get(index);
+        if (slot != null && slot.hasItem()) {
+            ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
             if (index == indexOutput) {
-                if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, true)) {
+                if (!this.moveItemStackTo(itemstack1, startPlayerInv, endPlayerInv, true)) {
                     return ItemStack.EMPTY;
                 }
             } else if (index > indexOutput) {
-                if (itemstack1.getItem() == Items.BOWL && !this.mergeItemStack(itemstack1, indexContainerInput, indexContainerInput + 1, false)) {
+                if (itemstack1.getItem() == Items.BOWL && !this.moveItemStackTo(itemstack1, indexContainerInput, indexContainerInput + 1, false)) {
                     return ItemStack.EMPTY;
                 }
-                if (!this.mergeItemStack(itemstack1, 0, indexMealDisplay, false)) {
+                if (!this.moveItemStackTo(itemstack1, 0, indexMealDisplay, false)) {
                     return ItemStack.EMPTY;
                 }
-                if (!this.mergeItemStack(itemstack1, indexContainerInput, indexOutput, false)) {
+                if (!this.moveItemStackTo(itemstack1, indexContainerInput, indexOutput, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemstack1, startPlayerInv, endPlayerInv, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, startPlayerInv, endPlayerInv, false)) {
                 return ItemStack.EMPTY;
             }
             if (itemstack1.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.onSlotChanged();
+                slot.setChanged();
             }
             if (itemstack1.getCount() == itemstack.getCount()) {
                 return ItemStack.EMPTY;

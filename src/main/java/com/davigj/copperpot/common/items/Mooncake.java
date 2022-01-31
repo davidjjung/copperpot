@@ -28,6 +28,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Supplier;
 
+import net.minecraft.item.Item.Properties;
+
 public class Mooncake extends Item {
     public Mooncake(Properties properties) {
         super(properties);
@@ -36,12 +38,12 @@ public class Mooncake extends Item {
     Logger LOGGER = LogManager.getLogger(CopperPotMod.MOD_ID);
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        super.onItemUseFinish(stack, worldIn, entityLiving);
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        super.finishUsingItem(stack, worldIn, entityLiving);
         for (String i : CopperPotConfig.COMMON.mooncakeBadReactDims.get()) {
-            if (entityLiving.getEntityWorld().getDimensionType().getEffects().toString().equals(i)) {
-                entityLiving.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 1.0F, 1.0F);
-                entityLiving.addPotionEffect(new EffectInstance(Effects.POISON, 480));
+            if (entityLiving.getCommandSenderWorld().dimensionType().effectsLocation().toString().equals(i)) {
+                entityLiving.playSound(SoundEvents.GENERIC_EXPLODE, 1.0F, 1.0F);
+                entityLiving.addEffect(new EffectInstance(Effects.POISON, 480));
             } else {
                 moonlight(entityLiving, worldIn);
             }
@@ -60,14 +62,14 @@ public class Mooncake extends Item {
         if (moonProxTime > 12000) {
             moonProxTime = Math.abs(24000 - moonProxTime);
         }
-        if (worldIn.isDaytime()) {
+        if (worldIn.isDay()) {
             moon = 0.7;
         } else {
             moon = 1 + (0.1 * moon);
         }
 //        LOGGER.debug("daytime: " + daytime + " moon multiplier: " + moon + " moon prox time: " + moonProxTime);
         if (ModList.get().isLoaded("neapolitan")) {
-            entity.addPotionEffect(new EffectInstance(new EffectInstance(
+            entity.addEffect(new EffectInstance(new EffectInstance(
                     getCompatEffect("neapolitan", new ResourceLocation(
                             "neapolitan", "harmony")).get(), (int) ((0.11 * moonProxTime) * moon))));
         }
@@ -75,8 +77,8 @@ public class Mooncake extends Item {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         IFormattableTextComponent tip = TextUtils.getTranslation("tooltip.mooncake.tip");
-        tooltip.add(tip.mergeStyle(TextFormatting.BLUE));
+        tooltip.add(tip.withStyle(TextFormatting.BLUE));
     }
 }

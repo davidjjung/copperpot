@@ -35,7 +35,7 @@ public class CookingRecipeCategory implements IRecipeCategory<CopperPotRecipe> {
     protected final IDrawable heatIndicator;
     protected final IDrawableAnimated arrow;
     protected final IDrawableAnimated bubbles;
-    private final String title = I18n.format("copperpot.jei.cooking", new Object[0]);
+    private final String title = I18n.get("copperpot.jei.cooking", new Object[0]);
     private final IDrawable background;
     private final IDrawable icon;
 
@@ -70,9 +70,9 @@ public class CookingRecipeCategory implements IRecipeCategory<CopperPotRecipe> {
 
     public void setIngredients(CopperPotRecipe copperPotRecipe, IIngredients ingredients) {
         List<Ingredient> inputAndContainer = new ArrayList(copperPotRecipe.getIngredients());
-        inputAndContainer.add(Ingredient.fromStacks(new ItemStack[]{copperPotRecipe.getOutputContainer()}));
+        inputAndContainer.add(Ingredient.of(new ItemStack[]{copperPotRecipe.getOutputContainer()}));
         ingredients.setInputIngredients(inputAndContainer);
-        ingredients.setOutput(VanillaTypes.ITEM, copperPotRecipe.getRecipeOutput());
+        ingredients.setOutput(VanillaTypes.ITEM, copperPotRecipe.getResultItem());
     }
 
     public void setRecipe(IRecipeLayout recipeLayout, CopperPotRecipe recipe, IIngredients ingredients) {
@@ -89,20 +89,20 @@ public class CookingRecipeCategory implements IRecipeCategory<CopperPotRecipe> {
                 if (inputIndex < recipeIngredients.size()) {
 //                    itemStacks.init(inputIndex, true, column * borderSlotSize, row * borderSlotSize);
                     itemStacks.init(inputIndex, true, column * borderSlotSize, (row * borderSlotSize)+9);
-                    itemStacks.set(inputIndex, Arrays.asList(((Ingredient)recipeIngredients.get(inputIndex)).getMatchingStacks()));
+                    itemStacks.set(inputIndex, Arrays.asList(((Ingredient)recipeIngredients.get(inputIndex)).getItems()));
                 }
             }
         }
 
         itemStacks.init(MEAL_DISPLAY, false, 94, 9);
-        itemStacks.set(MEAL_DISPLAY, recipe.getRecipeOutput().getStack());
+        itemStacks.set(MEAL_DISPLAY, recipe.getResultItem().getStack());
 
         if (!recipe.getOutputContainer().isEmpty()) {
             itemStacks.init(CONTAINER_INPUT, false, 62, 38);
             itemStacks.set(CONTAINER_INPUT, recipe.getOutputContainer());
         }
         itemStacks.init(OUTPUT, false, 94, 38);
-        itemStacks.set(OUTPUT, recipe.getRecipeOutput().getStack());
+        itemStacks.set(OUTPUT, recipe.getResultItem().getStack());
     }
 
     public void draw(CopperPotRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {

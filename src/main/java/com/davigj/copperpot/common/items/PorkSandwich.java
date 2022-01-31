@@ -21,10 +21,10 @@ public class PorkSandwich extends Item {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        super.onItemUseFinish(stack, worldIn, entityLiving);
-        if (!worldIn.isRemote && ModList.get().isLoaded("abundance")) {
-            entityLiving.addPotionEffect(new EffectInstance(new EffectInstance(
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        super.finishUsingItem(stack, worldIn, entityLiving);
+        if (!worldIn.isClientSide && ModList.get().isLoaded("abundance")) {
+            entityLiving.addEffect(new EffectInstance(new EffectInstance(
                     getCompatEffect("abundance", new ResourceLocation(
                             "abundance", "supportive")).get(), 400)));
         }

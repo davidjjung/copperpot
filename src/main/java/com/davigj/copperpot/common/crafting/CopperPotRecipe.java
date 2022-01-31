@@ -79,13 +79,13 @@ public class CopperPotRecipe implements IRecipe<IInventory> {
     public NonNullList<Ingredient> getIngredients() {
         return this.inputItems;
     }
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return this.output;
     }
     public ItemStack getOutputContainer() {
         return this.container;
     }
-    public ItemStack getCraftingResult(IInventory inv) {
+    public ItemStack assemble(IInventory inv) {
         return this.output.copy();
     }
     public float getExperience() {
@@ -103,7 +103,7 @@ public class CopperPotRecipe implements IRecipe<IInventory> {
         int i = 0;
         // originally j < 6
         for(int j = 0; j < 3; ++j) {
-            ItemStack itemstack = inv.getStackInSlot(j);
+            ItemStack itemstack = inv.getItem(j);
             if (!itemstack.isEmpty()) {
                 ++i;
                 inputs.add(itemstack);
@@ -112,7 +112,7 @@ public class CopperPotRecipe implements IRecipe<IInventory> {
         return i == this.inputItems.size() && RecipeMatcher.findMatches(inputs, this.inputItems) != null;
     }
 
-    public boolean canFit(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return width * height >= this.inputItems.size();
     }
 
@@ -129,22 +129,22 @@ public class CopperPotRecipe implements IRecipe<IInventory> {
             this.setRegistryName(new ResourceLocation("copperpot", "cooking"));
         }
 
-        public CopperPotRecipe read(ResourceLocation recipeId, JsonObject json) {
-            String groupIn = JSONUtils.getString(json, "group", "");
-            NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
+        public CopperPotRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+            String groupIn = JSONUtils.getAsString(json, "group", "");
+            NonNullList<Ingredient> inputItemsIn = readIngredients(JSONUtils.getAsJsonArray(json, "ingredients"));
             if (inputItemsIn.isEmpty()) {
                 throw new JsonParseException("No ingredients for cooking recipe");
             } else if (inputItemsIn.size() > 3) {
                 throw new JsonParseException("Too many ingredients for cooking recipe! The max is 3");
             } else {
-                ItemStack outputIn = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "result"), true);
-                ItemStack container = JSONUtils.hasField(json, "container") ? CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "container"), true) : ItemStack.EMPTY;
-                float experienceIn = JSONUtils.getFloat(json, "experience", 0.0F);
-                int cookTimeIn = JSONUtils.getInt(json, "cookingtime", 100);
-                boolean effecttrue = JSONUtils.getBoolean(json, "effecttrue", false);
-                String effect = JSONUtils.getString(json, "effect", "");
-                int effectduration = JSONUtils.getInt(json, "effectduration", 100);
-                int effectamplifier = JSONUtils.getInt(json, "effectamplifier", 0);
+                ItemStack outputIn = CraftingHelper.getItemStack(JSONUtils.getAsJsonObject(json, "result"), true);
+                ItemStack container = JSONUtils.isValidNode(json, "container") ? CraftingHelper.getItemStack(JSONUtils.getAsJsonObject(json, "container"), true) : ItemStack.EMPTY;
+                float experienceIn = JSONUtils.getAsFloat(json, "experience", 0.0F);
+                int cookTimeIn = JSONUtils.getAsInt(json, "cookingtime", 100);
+                boolean effecttrue = JSONUtils.getAsBoolean(json, "effecttrue", false);
+                String effect = JSONUtils.getAsString(json, "effect", "");
+                int effectduration = JSONUtils.getAsInt(json, "effectduration", 100);
+                int effectamplifier = JSONUtils.getAsInt(json, "effectamplifier", 0);
 
                 return new CopperPotRecipe(recipeId, groupIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn, effecttrue, effect, effectduration, effectamplifier);
             }
@@ -153,8 +153,8 @@ public class CopperPotRecipe implements IRecipe<IInventory> {
         private static NonNullList<Ingredient> readIngredients(JsonArray ingredientArray) {
             NonNullList<Ingredient> nonnulllist = NonNullList.create();
             for(int i = 0; i < ingredientArray.size(); ++i) {
-                Ingredient ingredient = Ingredient.deserialize(ingredientArray.get(i));
-                if (!ingredient.hasNoMatchingItems()) {
+                Ingredient ingredient = Ingredient.fromJson(ingredientArray.get(i));
+                if (!ingredient.isEmpty()) {
                     nonnulllist.add(ingredient);
                 }
             }
@@ -162,42 +162,42 @@ public class CopperPotRecipe implements IRecipe<IInventory> {
         }
 
         @Nullable
-        public CopperPotRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-            String groupIn = buffer.readString(32767);
+        public CopperPotRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+            String groupIn = buffer.readUtf(32767);
             int i = buffer.readVarInt();
             NonNullList<Ingredient> inputItemsIn = NonNullList.withSize(i, Ingredient.EMPTY);
 
             for(int j = 0; j < inputItemsIn.size(); ++j) {
-                inputItemsIn.set(j, Ingredient.read(buffer));
+                inputItemsIn.set(j, Ingredient.fromNetwork(buffer));
             }
 
-            ItemStack outputIn = buffer.readItemStack();
-            ItemStack container = buffer.readItemStack();
+            ItemStack outputIn = buffer.readItem();
+            ItemStack container = buffer.readItem();
             float experienceIn = buffer.readFloat();
             int cookTimeIn = buffer.readVarInt();
             boolean effecttrue = buffer.readBoolean();
-            String effect = buffer.readString();
+            String effect = buffer.readUtf();
             int effectduration = buffer.readVarInt();
             int effectamplifier = buffer.readVarInt();
             return new CopperPotRecipe(recipeId, groupIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn, effecttrue, effect, effectduration, effectamplifier);
         }
 
-        public void write(PacketBuffer buffer, CopperPotRecipe recipe) {
-            buffer.writeString(recipe.group);
+        public void toNetwork(PacketBuffer buffer, CopperPotRecipe recipe) {
+            buffer.writeUtf(recipe.group);
             buffer.writeVarInt(recipe.inputItems.size());
             Iterator var3 = recipe.inputItems.iterator();
 
             while(var3.hasNext()) {
                 Ingredient ingredient = (Ingredient)var3.next();
-                ingredient.write(buffer);
+                ingredient.toNetwork(buffer);
             }
 
-            buffer.writeItemStack(recipe.output);
-            buffer.writeItemStack(recipe.container);
+            buffer.writeItem(recipe.output);
+            buffer.writeItem(recipe.container);
             buffer.writeFloat(recipe.experience);
             buffer.writeVarInt(recipe.cookTime);
             buffer.writeBoolean(recipe.effecttrue);
-            buffer.writeString(recipe.effect);
+            buffer.writeUtf(recipe.effect);
             buffer.writeVarInt(recipe.effectDuration);
             buffer.writeVarInt(recipe.effectAmplifier);
         }

@@ -19,6 +19,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import net.minecraft.item.Item.Properties;
+
 public class GuardianSouffle extends Item {
 
     public GuardianSouffle(Properties properties) {
@@ -26,12 +28,12 @@ public class GuardianSouffle extends Item {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        super.onItemUseFinish(stack, worldIn, entityLiving);
-        if (!worldIn.isRemote && entityLiving.isInWaterRainOrBubbleColumn()) {
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        super.finishUsingItem(stack, worldIn, entityLiving);
+        if (!worldIn.isClientSide && entityLiving.isInWaterRainOrBubble()) {
             float negatives = 0.0F;
-            for (EffectInstance effect : entityLiving.getActivePotionEffects()) {
-                if (effect.getPotion().getEffectType() == EffectType.HARMFUL) {
+            for (EffectInstance effect : entityLiving.getActiveEffects()) {
+                if (effect.getEffect().getCategory() == EffectType.HARMFUL) {
                     negatives++;
                 }
             }
@@ -42,10 +44,10 @@ public class GuardianSouffle extends Item {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         IFormattableTextComponent tip = TextUtils.getTranslation("tooltip.guardian_souffle.tip");
         IFormattableTextComponent tip2 = TextUtils.getTranslation("tooltip.guardian_souffle.tip2");
-        tooltip.add(tip.mergeStyle(TextFormatting.BLUE));
-        tooltip.add(tip2.mergeStyle(TextFormatting.BLUE));
+        tooltip.add(tip.withStyle(TextFormatting.BLUE));
+        tooltip.add(tip2.withStyle(TextFormatting.BLUE));
     }
 }

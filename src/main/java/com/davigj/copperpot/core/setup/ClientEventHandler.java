@@ -30,14 +30,14 @@ public class ClientEventHandler {
 
     @SubscribeEvent
     public static void onStitchEvent(TextureStitchEvent.Pre event) {
-        ResourceLocation stitching = event.getMap().getTextureLocation();
-        if (stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
+        ResourceLocation stitching = event.getMap().location();
+        if (stitching.equals(AtlasTexture.LOCATION_BLOCKS)) {
             event.addSprite(EMPTY_CONTAINER_SLOT_BOWL);
         }
     }
 
     public static void init (FMLClientSetupEvent event) {
-        ScreenManager.registerFactory((ContainerType) CopperPotContainerTypes.COPPER_POT.get(), CopperPotScreen::new);
-        RenderTypeLookup.setRenderLayer((Block) CopperPotBlocks.COPPER_POT.get(), RenderType.getCutout());
+        ScreenManager.register((ContainerType) CopperPotContainerTypes.COPPER_POT.get(), CopperPotScreen::new);
+        RenderTypeLookup.setRenderLayer((Block) CopperPotBlocks.COPPER_POT.get(), RenderType.cutout());
     }
 }

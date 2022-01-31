@@ -13,11 +13,11 @@ public class CopperPotMealSlot extends SlotItemHandler {
         super(inventoryIn, index, xPosition, yPosition);
     }
 
-    public boolean isItemValid(ItemStack stack) {
+    public boolean mayPlace(ItemStack stack) {
         return false;
     }
 
-    public boolean canTakeStack(PlayerEntity playerIn) {
+    public boolean mayPickup(PlayerEntity playerIn) {
         return false;
     }
 }

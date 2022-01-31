@@ -30,17 +30,17 @@ public class CopperPotEvents {
         World world = event.getWorld();
         BlockPos pos = event.getPos();
         BlockState state = event.getWorld().getBlockState(pos);
-        ItemStack tool = event.getPlayer().getHeldItem(event.getHand());
+        ItemStack tool = event.getPlayer().getItemInHand(event.getHand());
         if (state.getBlock() == CopperPotBlocks.BAKED_ALASKA_BLOCK.get() && ModTags.KNIVES.contains(tool.getItem())) {
-            int bites = (Integer)state.get(BakedAlaskaBlock.BITES);
+            int bites = (Integer)state.getValue(BakedAlaskaBlock.BITES);
             if (bites < 3) {
-                world.setBlockState(pos, (BlockState)state.with(BakedAlaskaBlock.BITES, bites + 1), 3);
+                world.setBlock(pos, (BlockState)state.setValue(BakedAlaskaBlock.BITES, bites + 1), 3);
             } else {
                 world.removeBlock(pos, false);
             }
 
-            InventoryHelper.spawnItemStack(world, (double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), new ItemStack((IItemProvider) CopperPotItems.BAKED_ALASKA_SLICE.get()));
-            world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_WOOL_BREAK, SoundCategory.PLAYERS, 0.8F, 0.8F);
+            InventoryHelper.dropItemStack(world, (double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), new ItemStack((IItemProvider) CopperPotItems.BAKED_ALASKA_SLICE.get()));
+            world.playSound((PlayerEntity)null, pos, SoundEvents.WOOL_BREAK, SoundCategory.PLAYERS, 0.8F, 0.8F);
             event.setCancellationResult(ActionResultType.SUCCESS);
             event.setCanceled(true);
         }

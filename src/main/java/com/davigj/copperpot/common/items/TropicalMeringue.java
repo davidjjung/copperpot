@@ -22,6 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Supplier;
 
+import net.minecraft.item.Item.Properties;
+
 public class TropicalMeringue extends Item {
     String effect1;
     String effect2;
@@ -33,16 +35,16 @@ public class TropicalMeringue extends Item {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        super.onItemUseFinish(stack, worldIn, entityLiving);
-        if (!worldIn.isRemote) {
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        super.finishUsingItem(stack, worldIn, entityLiving);
+        if (!worldIn.isClientSide) {
             double rand = Math.random();
             if (ModList.get().isLoaded("atmospheric") && ModList.get().isLoaded("neapolitan")) {
                 if (rand < 0.7) {
-                    entityLiving.addPotionEffect(new EffectInstance(
+                    entityLiving.addEffect(new EffectInstance(
                             getCompatEffect("atmospheric", new ResourceLocation(
                                     "atmospheric", "spitting")).get(), 60, 0));
-                    entityLiving.addPotionEffect(new EffectInstance(
+                    entityLiving.addEffect(new EffectInstance(
                             getCompatEffect("neapolitan", new ResourceLocation(
                                     "neapolitan", "agility")).get(), 100, 0));
                 }
@@ -60,16 +62,16 @@ public class TropicalMeringue extends Item {
     }
 
     public void intensify(LivingEntity player) {
-        Iterator effects = player.getActivePotionEffects().iterator();
+        Iterator effects = player.getActiveEffects().iterator();
         while (effects.hasNext()) {
             EffectInstance effect = (EffectInstance) effects.next();
             double rand = Math.random();
-            if (effect != null && effect.getDuration() > 10 && effect.getEffectName().equals(effect1) || effect.getEffectName().equals(effect2)) {
+            if (effect != null && effect.getDuration() > 10 && effect.getDescriptionId().equals(effect1) || effect.getDescriptionId().equals(effect2)) {
                 if (rand < 0.7) {
-                    player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 80, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+                    player.addEffect(new EffectInstance(effect.getEffect(), effect.getDuration() + 80, effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon()));
                 }
-                if (effect.getEffectName().equals(effect1) && rand > Math.min(0.5, (float)1 / (effect.getAmplifier() + 1))) {
-                    player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration(), effect.getAmplifier() + 1, effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+                if (effect.getDescriptionId().equals(effect1) && rand > Math.min(0.5, (float)1 / (effect.getAmplifier() + 1))) {
+                    player.addEffect(new EffectInstance(effect.getEffect(), effect.getDuration(), effect.getAmplifier() + 1, effect.isAmbient(), effect.isVisible(), effect.showIcon()));
                 }
             }
         }
@@ -77,11 +79,11 @@ public class TropicalMeringue extends Item {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         IFormattableTextComponent tip = TextUtils.getTranslation("tooltip.tropical_meringue.tip");
         IFormattableTextComponent tip2 = TextUtils.getTranslation("tooltip.tropical_meringue.tip2");
-        tooltip.add(tip.mergeStyle(TextFormatting.BLUE));
-        tooltip.add(tip2.mergeStyle(TextFormatting.BLUE));
+        tooltip.add(tip.withStyle(TextFormatting.BLUE));
+        tooltip.add(tip2.withStyle(TextFormatting.BLUE));
     }
 
 }

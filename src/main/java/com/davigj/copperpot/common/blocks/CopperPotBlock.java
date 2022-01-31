@@ -47,19 +47,21 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class CopperPotBlock extends HorizontalBlock implements IWaterLoggable {
     public static final BooleanProperty SUPPORTED = BlockStateProperties.DOWN;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
-    protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 5.0D, 14.0D);
-    protected static final VoxelShape SHAPE_SUPPORTED = VoxelShapes.or(SHAPE, Block.makeCuboidShape(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
+    protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 5.0D, 14.0D);
+    protected static final VoxelShape SHAPE_SUPPORTED = VoxelShapes.or(SHAPE, Block.box(0.0D, -1.0D, 0.0D, 16.0D, 0.0D, 16.0D));
 
     Logger LOGGER = LogManager.getLogger(CopperPotMod.MOD_ID);
 
     public CopperPotBlock(Properties builder) {
         super(builder);
-        this.setDefaultState((BlockState)((BlockState)((BlockState)((BlockState)this.stateContainer.getBaseState()).with(
-                HORIZONTAL_FACING, Direction.NORTH)).with(SUPPORTED, false)).with(WATERLOGGED, false).with(ENABLED, Boolean.valueOf(true)));
+        this.registerDefaultState((BlockState)((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(
+                FACING, Direction.NORTH)).setValue(SUPPORTED, false)).setValue(WATERLOGGED, false).setValue(ENABLED, Boolean.valueOf(true)));
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -67,45 +69,45 @@ public class CopperPotBlock extends HorizontalBlock implements IWaterLoggable {
     }
 
     public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return (Boolean)state.get(SUPPORTED) ? SHAPE_SUPPORTED : SHAPE;
+        return (Boolean)state.getValue(SUPPORTED) ? SHAPE_SUPPORTED : SHAPE;
     }
 
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        BlockPos blockpos = context.getPos();
-        World world = context.getWorld();
-        FluidState ifluidstate = world.getFluidState(context.getPos());
-        return (BlockState)((BlockState)((BlockState)this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing()
-                .getOpposite())).with(SUPPORTED, this.needsTrayForHeatSource(world.getBlockState(blockpos.down())))).with(
-                        WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER).with(ENABLED, Boolean.valueOf(true));
+        BlockPos blockpos = context.getClickedPos();
+        World world = context.getLevel();
+        FluidState ifluidstate = world.getFluidState(context.getClickedPos());
+        return (BlockState)((BlockState)((BlockState)this.defaultBlockState().setValue(FACING, context.getHorizontalDirection()
+                .getOpposite())).setValue(SUPPORTED, this.needsTrayForHeatSource(world.getBlockState(blockpos.below())))).setValue(
+                        WATERLOGGED, ifluidstate.getType() == Fluids.WATER).setValue(ENABLED, Boolean.valueOf(true));
     }
 
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if ((Boolean)stateIn.get(WATERLOGGED)) {
-            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        if ((Boolean)stateIn.getValue(WATERLOGGED)) {
+            worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
-        return facing == Direction.DOWN ? (BlockState)stateIn.with(SUPPORTED, this.needsTrayForHeatSource(facingState)) : stateIn;
+        return facing == Direction.DOWN ? (BlockState)stateIn.setValue(SUPPORTED, this.needsTrayForHeatSource(facingState)) : stateIn;
     }
 
-    public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
-        if (!oldState.isIn(state.getBlock())) {
+    public void onPlace(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+        if (!oldState.is(state.getBlock())) {
             this.updateState(worldIn, pos, state);
         }
     }
 
     private boolean needsTrayForHeatSource(BlockState state) {
-        return state.getBlock().isIn(ModTags.TRAY_HEAT_SOURCES);
+        return state.getBlock().is(ModTags.TRAY_HEAT_SOURCES);
     }
 
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult result) {
-        if (!worldIn.isRemote) {
-            TileEntity tile = worldIn.getTileEntity(pos);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult result) {
+        if (!worldIn.isClientSide) {
+            TileEntity tile = worldIn.getBlockEntity(pos);
             if (tile instanceof CopperPotTileEntity) {
-                ItemStack serving = ((CopperPotTileEntity)tile).useHeldItemOnMeal(player.getHeldItem(handIn));
+                ItemStack serving = ((CopperPotTileEntity)tile).useHeldItemOnMeal(player.getItemInHand(handIn));
                 if (serving != ItemStack.EMPTY) {
-                    if (!player.inventory.addItemStackToInventory(serving)) {
-                        player.dropItem(serving, false);
+                    if (!player.inventory.add(serving)) {
+                        player.drop(serving, false);
                     }
-                    worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 } else {
                     NetworkHooks.openGui((ServerPlayerEntity)player, (CopperPotTileEntity)tile, pos);
                 }
@@ -116,15 +118,15 @@ public class CopperPotBlock extends HorizontalBlock implements IWaterLoggable {
         }
     }
 
-    public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
-        ItemStack itemstack = super.getItem(worldIn, pos, state);
-        CopperPotTileEntity tile = (CopperPotTileEntity)worldIn.getTileEntity(pos);
+    public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
+        ItemStack itemstack = super.getCloneItemStack(worldIn, pos, state);
+        CopperPotTileEntity tile = (CopperPotTileEntity)worldIn.getBlockEntity(pos);
         CompoundNBT compoundnbt = tile.writeMeal(new CompoundNBT());
         if (!compoundnbt.isEmpty()) {
-            itemstack.setTagInfo("BlockEntityTag", compoundnbt);
+            itemstack.addTagElement("BlockEntityTag", compoundnbt);
         }
         if (tile.hasCustomName()) {
-            itemstack.setDisplayName(tile.getCustomName());
+            itemstack.setHoverName(tile.getCustomName());
         }
         return itemstack;
     }
@@ -134,26 +136,26 @@ public class CopperPotBlock extends HorizontalBlock implements IWaterLoggable {
     }
 
     private void updateState(World worldIn, BlockPos pos, BlockState state) {
-        boolean flag = !worldIn.isBlockPowered(pos);
-        if (flag != state.get(ENABLED)) {
-            worldIn.setBlockState(pos, state.with(ENABLED, Boolean.valueOf(flag)), 4);
+        boolean flag = !worldIn.hasNeighborSignal(pos);
+        if (flag != state.getValue(ENABLED)) {
+            worldIn.setBlock(pos, state.setValue(ENABLED, Boolean.valueOf(flag)), 4);
         }
     }
 
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof CopperPotTileEntity) {
-                InventoryHelper.dropItems(worldIn, pos, ((CopperPotTileEntity)tileentity).getDroppableInventory());
+                InventoryHelper.dropContents(worldIn, pos, ((CopperPotTileEntity)tileentity).getDroppableInventory());
             }
-            super.onReplaced(state, worldIn, pos, newState, isMoving);
+            super.onRemove(state, worldIn, pos, newState, isMoving);
         }
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-        CompoundNBT compoundnbt = stack.getChildTag("BlockEntityTag");
+    public void appendHoverText(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        CompoundNBT compoundnbt = stack.getTagElement("BlockEntityTag");
         if (compoundnbt != null) {
 //            LOGGER.debug("compoundnbt ain't null");
             CompoundNBT inventoryTag = compoundnbt.getCompound("Inventory");
@@ -164,28 +166,28 @@ public class CopperPotBlock extends HorizontalBlock implements IWaterLoggable {
                 ItemStack meal = handler.getStackInSlot(3);
                 if (!meal.isEmpty()) {
                     IFormattableTextComponent servingsOf = meal.getCount() == 1 ? TextUtils.getTranslation("tooltip.copper_pot.single_serving", new Object[0]) : TextUtils.getTranslation("tooltip.copper_pot.many_servings", new Object[]{meal.getCount()});
-                    tooltip.add(servingsOf.mergeStyle(TextFormatting.GRAY));
-                    IFormattableTextComponent mealName = meal.getDisplayName().deepCopy();
-                    tooltip.add(mealName.mergeStyle(meal.getRarity().color));
+                    tooltip.add(servingsOf.withStyle(TextFormatting.GRAY));
+                    IFormattableTextComponent mealName = meal.getHoverName().copy();
+                    tooltip.add(mealName.withStyle(meal.getRarity().color));
                 }
             }
         } else {
             IFormattableTextComponent empty = TextUtils.getTranslation("tooltip.copper_pot.empty", new Object[0]);
-            tooltip.add(empty.mergeStyle(TextFormatting.GRAY));
+            tooltip.add(empty.withStyle(TextFormatting.GRAY));
         }
 
     }
 
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
-        builder.add(new Property[]{HORIZONTAL_FACING, SUPPORTED, WATERLOGGED, ENABLED});
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+        builder.add(new Property[]{FACING, SUPPORTED, WATERLOGGED, ENABLED});
     }
 
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        if (stack.hasDisplayName()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+    public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        if (stack.hasCustomHoverName()) {
+            TileEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof CopperPotTileEntity) {
-                ((CopperPotTileEntity)tileentity).setCustomName(stack.getDisplayName());
+                ((CopperPotTileEntity)tileentity).setCustomName(stack.getHoverName());
             }
         }
     }
@@ -193,23 +195,23 @@ public class CopperPotBlock extends HorizontalBlock implements IWaterLoggable {
     // controls the sound
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        TileEntity tileentity = worldIn.getBlockEntity(pos);
         if (tileentity instanceof CopperPotTileEntity && ((CopperPotTileEntity)tileentity).isAboveLitHeatSource()) {
             double d0 = (double)pos.getX() + 0.5D;
             double d1 = (double)pos.getY();
             double d2 = (double)pos.getZ() + 0.5D;
             if (rand.nextInt(10) == 0) {
-                worldIn.playSound(d0, d1, d2, (SoundEvent) ModSounds.BLOCK_COOKING_POT_BOIL.get(), SoundCategory.BLOCKS, 0.4F, rand.nextFloat() * 0.2F + 0.9F, false);
+                worldIn.playLocalSound(d0, d1, d2, (SoundEvent) ModSounds.BLOCK_COOKING_POT_BOIL.get(), SoundCategory.BLOCKS, 0.4F, rand.nextFloat() * 0.2F + 0.9F, false);
             }
         }
     }
 
-    public boolean hasComparatorInputOverride(BlockState state) {
+    public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
-    public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-        TileEntity tile = worldIn.getTileEntity(pos);
+    public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+        TileEntity tile = worldIn.getBlockEntity(pos);
         if (tile instanceof CopperPotTileEntity) {
             ItemStackHandler inventory = ((CopperPotTileEntity)tile).getInventory();
             return MathUtils.calcRedstoneFromItemHandler(inventory);
@@ -227,6 +229,6 @@ public class CopperPotBlock extends HorizontalBlock implements IWaterLoggable {
     }
 
     public FluidState getFluidState(BlockState state) {
-        return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+        return (Boolean)state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 }

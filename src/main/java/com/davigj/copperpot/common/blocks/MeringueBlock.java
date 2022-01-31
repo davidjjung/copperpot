@@ -20,8 +20,10 @@ import net.minecraft.world.World;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class MeringueBlock extends BreakableBlock {
-    protected static final VoxelShape SHAPES = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 15.0D, 14.0D);
+    protected static final VoxelShape SHAPES = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 15.0D, 14.0D);
 
     Logger LOGGER = LogManager.getLogger(CopperPotMod.MOD_ID);
 
@@ -33,15 +35,15 @@ public class MeringueBlock extends BreakableBlock {
         return SHAPES;
     }
 
-    public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+    public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
         if (this.isRiding(entityIn)) {
             this.Ride(entityIn);
         }
-        super.onEntityCollision(state, worldIn, pos, entityIn);
+        super.entityInside(state, worldIn, pos, entityIn);
     }
 
     private boolean isRiding(Entity entity) {
-        Vector3d vector3d = entity.getMotion();
+        Vector3d vector3d = entity.getDeltaMovement();
         if (Math.abs(vector3d.y) > 0.1) {
             return true;
         }
@@ -49,14 +51,14 @@ public class MeringueBlock extends BreakableBlock {
     }
 
     private void Ride(Entity entity) {
-        Vector3d vector3d = entity.getMotion();
+        Vector3d vector3d = entity.getDeltaMovement();
         double amp = 0;
         if (entity instanceof LivingEntity) {
             if (entity instanceof PlayerEntity) {
-                EffectInstance[] effects = {((PlayerEntity) entity).getActivePotionEffect(Effects.SPEED),
-                        ((PlayerEntity) entity).getActivePotionEffect(Effects.JUMP_BOOST),
-                        ((PlayerEntity) entity).getActivePotionEffect(Effects.SLOW_FALLING),
-                        ((PlayerEntity) entity).getActivePotionEffect(Effects.SLOWNESS)};
+                EffectInstance[] effects = {((PlayerEntity) entity).getEffect(Effects.MOVEMENT_SPEED),
+                        ((PlayerEntity) entity).getEffect(Effects.JUMP),
+                        ((PlayerEntity) entity).getEffect(Effects.SLOW_FALLING),
+                        ((PlayerEntity) entity).getEffect(Effects.MOVEMENT_SLOWDOWN)};
                 for (int currentEffect = 0; currentEffect < 4; currentEffect++) {
                     if (effects[currentEffect] != null) {
                         if (currentEffect < 2) {
@@ -67,7 +69,7 @@ public class MeringueBlock extends BreakableBlock {
                     }
                 }
             }
-            if (((LivingEntity) entity).isJumping && vector3d.y > 0) {
+            if (((LivingEntity) entity).jumping && vector3d.y > 0) {
 //                // we know you're ascending. you're ascending at a speed bounded by
 //                // 0.3 + (amp*0.1) or 0
 ////                entity.setMotion(vector3d.x, Math.max(0.3 + (amp * 0.1D), vector3d.y+ (amp * 0.1D)), vector3d.z);
@@ -97,32 +99,32 @@ public class MeringueBlock extends BreakableBlock {
 //                    }
 //                }
                 if (Math.abs(vector3d.y) < 0.3 + (amp * 0.1D)) {
-                    entity.setMotion(new Vector3d(vector3d.x, Math.max(vector3d.y, vector3d.y + ((amp + 1) * 0.1D)), vector3d.z));
+                    entity.setDeltaMovement(new Vector3d(vector3d.x, Math.max(vector3d.y, vector3d.y + ((amp + 1) * 0.1D)), vector3d.z));
                 } else {
-                    entity.setMotion(new Vector3d(vector3d.x, vector3d.y, vector3d.z));
+                    entity.setDeltaMovement(new Vector3d(vector3d.x, vector3d.y, vector3d.z));
                 }
                 if (Math.random() > 0.99) {
-                    entity.playSound(SoundEvents.BLOCK_HONEY_BLOCK_STEP, 0.4F, 1.1F);
+                    entity.playSound(SoundEvents.HONEY_BLOCK_STEP, 0.4F, 1.1F);
                 }
             } else if (vector3d.y < 0D) {
                 if(amp>=0) {
-                    entity.setMotion(new Vector3d(vector3d.x, -0.1D, vector3d.z));
+                    entity.setDeltaMovement(new Vector3d(vector3d.x, -0.1D, vector3d.z));
                 }
                 if (amp < 0) {
                     // Magic number is -0.03 so far
-                    entity.setMotion(new Vector3d(vector3d.x, Math.min(0.03D, -0.03D - (amp * 0.1)), vector3d.z));
+                    entity.setDeltaMovement(new Vector3d(vector3d.x, Math.min(0.03D, -0.03D - (amp * 0.1)), vector3d.z));
                 }
                 if (Math.random() > 0.99) {
-                    entity.playSound(SoundEvents.BLOCK_HONEY_BLOCK_STEP, 0.4F, 1.1F);
+                    entity.playSound(SoundEvents.HONEY_BLOCK_STEP, 0.4F, 1.1F);
                 }
             }
             entity.fallDistance = 0.0F;
         }
     }
 
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.playSound(SoundEvents.BLOCK_HONEY_BLOCK_FALL, 0.6F, 1.0F);
-        if (entityIn.onLivingFall(fallDistance, 0.3F)) {
+    public void fallOn(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.playSound(SoundEvents.HONEY_BLOCK_FALL, 0.6F, 1.0F);
+        if (entityIn.causeFallDamage(fallDistance, 0.3F)) {
             entityIn.playSound(this.soundType.getFallSound(), this.soundType.getVolume() * 0.6F, this.soundType.getPitch() * 0.75F);
         }
     }

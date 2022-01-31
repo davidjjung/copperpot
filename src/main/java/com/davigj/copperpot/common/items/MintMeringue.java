@@ -36,18 +36,18 @@ public class MintMeringue extends Item {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        super.onItemUseFinish(stack, worldIn, entityLiving);
-        if (!worldIn.isRemote) {
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        super.finishUsingItem(stack, worldIn, entityLiving);
+        if (!worldIn.isClientSide) {
             double rand = Math.random();
             if (ModList.get().isLoaded("neapolitan")) {
                 if (rand < 0.7) {
-                    entityLiving.addPotionEffect(new EffectInstance(
+                    entityLiving.addEffect(new EffectInstance(
                             getCompatEffect("neapolitan", new ResourceLocation(
                                     "neapolitan", "berserking")).get(), 100, 0));
                 }
                 if (rand > 0.3) {
-                    entityLiving.addPotionEffect(new EffectInstance(new EffectInstance(
+                    entityLiving.addEffect(new EffectInstance(new EffectInstance(
                             getCompatEffect("neapolitan", new ResourceLocation(
                                     "neapolitan", "sugar_rush")).get(), 140, 0)));
                     extendEffect(entityLiving);
@@ -62,15 +62,15 @@ public class MintMeringue extends Item {
     }
 
     public void extendEffect(LivingEntity player) {
-        Iterator effects = player.getActivePotionEffects().iterator();
+        Iterator effects = player.getActiveEffects().iterator();
         while (effects.hasNext()) {
             EffectInstance effect = (EffectInstance) effects.next();
             double rand = Math.random();
-            if (effect != null && effect.getDuration() > 10 && effect.getEffectName().equals(effect1) || effect.getEffectName().equals(effect2)) {
+            if (effect != null && effect.getDuration() > 10 && effect.getDescriptionId().equals(effect1) || effect.getDescriptionId().equals(effect2)) {
                 if (rand < 0.4) {
-                    player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + 240, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+                    player.addEffect(new EffectInstance(effect.getEffect(), effect.getDuration() + 240, effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon()));
                 } else if (rand > Math.min(0.7, 1 / (effect.getAmplifier() + 1))) {
-                    player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration(), effect.getAmplifier() + 1, effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+                    player.addEffect(new EffectInstance(effect.getEffect(), effect.getDuration(), effect.getAmplifier() + 1, effect.isAmbient(), effect.isVisible(), effect.showIcon()));
                 }
             }
         }
@@ -78,10 +78,10 @@ public class MintMeringue extends Item {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         IFormattableTextComponent tip = TextUtils.getTranslation("tooltip.mint_meringue.tip");
         IFormattableTextComponent tip2 = TextUtils.getTranslation("tooltip.mint_meringue.tip2");
-        tooltip.add(tip.mergeStyle(TextFormatting.BLUE));
-        tooltip.add(tip2.mergeStyle(TextFormatting.BLUE));
+        tooltip.add(tip.withStyle(TextFormatting.BLUE));
+        tooltip.add(tip2.withStyle(TextFormatting.BLUE));
     }
 }

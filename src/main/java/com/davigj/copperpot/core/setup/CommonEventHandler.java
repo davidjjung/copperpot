@@ -19,14 +19,14 @@ public class CommonEventHandler {
         {
             registerCompostables();
         });
-        LootFunctionManager.func_237451_a_(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
+        LootFunctionManager.register(CopyMealFunction.ID.toString(), new CopyMealFunction.Serializer());
     }
 
     public static void registerCompostables() {
-        ComposterBlock.CHANCES.put(CopperPotItems.AUTUMNAL_AGAR.get(), 0.65F);
-        ComposterBlock.CHANCES.put(CopperPotItems.AESTIVAL_AGAR.get(), 0.65F);
-        ComposterBlock.CHANCES.put(CopperPotItems.VERNAL_AGAR.get(), 0.65F);
-        ComposterBlock.CHANCES.put(CopperPotItems.BRUMAL_AGAR.get(), 0.65F);
+        ComposterBlock.COMPOSTABLES.put(CopperPotItems.AUTUMNAL_AGAR.get(), 0.65F);
+        ComposterBlock.COMPOSTABLES.put(CopperPotItems.AESTIVAL_AGAR.get(), 0.65F);
+        ComposterBlock.COMPOSTABLES.put(CopperPotItems.VERNAL_AGAR.get(), 0.65F);
+        ComposterBlock.COMPOSTABLES.put(CopperPotItems.BRUMAL_AGAR.get(), 0.65F);
     }
 
 }

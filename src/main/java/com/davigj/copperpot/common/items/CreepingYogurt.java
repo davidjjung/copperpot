@@ -42,9 +42,9 @@ public class CreepingYogurt extends Item {
     Logger LOGGER = LogManager.getLogger(CopperPotMod.MOD_ID);
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        super.onItemUseFinish(stack, worldIn, entityLiving);
-        if (!worldIn.isRemote) {
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        super.finishUsingItem(stack, worldIn, entityLiving);
+        if (!worldIn.isClientSide) {
             // TODO: Check how slabfish_snacks works--does it emulate the slabfish actually *using* the item
             pewpew(entityLiving, worldIn);
         }
@@ -53,17 +53,17 @@ public class CreepingYogurt extends Item {
         } else {
             ItemStack itemstack = new ItemStack(Items.BOWL);
             PlayerEntity playerentity = (PlayerEntity) entityLiving;
-            if (!playerentity.inventory.addItemStackToInventory(itemstack)) {
-                playerentity.dropItem(itemstack, false);
+            if (!playerentity.inventory.add(itemstack)) {
+                playerentity.drop(itemstack, false);
             }
         }
         return stack;
     }
 
     public void pewpew(LivingEntity player, World worldIn) {
-        BlockPos pos = player.getPosition();
-        Iterator effects = player.getActivePotionEffects().iterator();
-        Direction direction = player.getHorizontalFacing();
+        BlockPos pos = player.blockPosition();
+        Iterator effects = player.getActiveEffects().iterator();
+        Direction direction = player.getDirection();
         ArrayList<EffectInstance> storedEffects = new ArrayList<>();
         while (effects.hasNext()) {
             EffectInstance effect = (EffectInstance) effects.next();
@@ -78,11 +78,11 @@ public class CreepingYogurt extends Item {
 
             steam.setDuration(200);
             steam.setRadius(0.2F);
-            steam.addEffect(new EffectInstance(storedEffect.getPotion(), (int) ((storedEffect.getDuration()) * 0.6), storedEffect.getAmplifier()));
-            for (LivingEntity living : steam.world.getEntitiesWithinAABB(LivingEntity.class, steam.getBoundingBox().grow(2.0D, 1.0D, 2.0D))) {
-                living.addPotionEffect(new EffectInstance(storedEffect.getPotion(), (int) ((storedEffect.getDuration()) * 0.6), storedEffect.getAmplifier()));
+            steam.addEffect(new EffectInstance(storedEffect.getEffect(), (int) ((storedEffect.getDuration()) * 0.6), storedEffect.getAmplifier()));
+            for (LivingEntity living : steam.level.getEntitiesOfClass(LivingEntity.class, steam.getBoundingBox().inflate(2.0D, 1.0D, 2.0D))) {
+                living.addEffect(new EffectInstance(storedEffect.getEffect(), (int) ((storedEffect.getDuration()) * 0.6), storedEffect.getAmplifier()));
             }
-            worldIn.addEntity(steam);
+            worldIn.addFreshEntity(steam);
             xpMult++;
         }
         double resist = 0;
@@ -93,20 +93,20 @@ public class CreepingYogurt extends Item {
 //        }
         resist = Math.max(resist, player.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
 
-        player.addVelocity((1.8 * (1.0D - resist)) * direction.getXOffset() + (0.2 * xpMult),
-                0.8, (1.8 * (1.0D - resist)) * direction.getZOffset() + (0.2 * xpMult));
-        worldIn.createExplosion(dummy, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.6F, false, Explosion.Mode.NONE);
-        player.clearActivePotions();
+        player.push((1.8 * (1.0D - resist)) * direction.getStepX() + (0.2 * xpMult),
+                0.8, (1.8 * (1.0D - resist)) * direction.getStepZ() + (0.2 * xpMult));
+        worldIn.explode(dummy, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.6F, false, Explosion.Mode.NONE);
+        player.removeAllEffects();
     }
 
-    public SoundEvent getEatSound() {
-        return SoundEvents.ENTITY_CREEPER_PRIMED;
+    public SoundEvent getEatingSound() {
+        return SoundEvents.CREEPER_PRIMED;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         IFormattableTextComponent tip = TextUtils.getTranslation("tooltip.creeping_yogurt.tip");
-        tooltip.add(tip.mergeStyle(TextFormatting.GREEN));
+        tooltip.add(tip.withStyle(TextFormatting.GREEN));
     }
 }

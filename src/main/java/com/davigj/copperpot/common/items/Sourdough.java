@@ -26,6 +26,8 @@ import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.item.Item.Properties;
+
 public class Sourdough extends Item {
     public static final ResourceLocation CREEPIE = new ResourceLocation("savageandravage", "creepie");
 
@@ -34,53 +36,53 @@ public class Sourdough extends Item {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        super.onItemUseFinish(stack, worldIn, entityLiving);
-        if (!worldIn.isRemote) {
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        super.finishUsingItem(stack, worldIn, entityLiving);
+        if (!worldIn.isClientSide) {
             hissss(entityLiving, worldIn, stack);
         }
         return stack;
     }
 
     public void hissss(LivingEntity player, World worldIn, ItemStack stack) {
-        for (EffectInstance effect : player.getActivePotionEffects()) {
+        for (EffectInstance effect : player.getActiveEffects()) {
             if (effect.getDuration() > 10 && ModList.get().isLoaded("savageandravage")) {
                 ResourceLocation creepieType = ForgeRegistries.ENTITIES.getValue(CREEPIE).getRegistryName();
-                BlockPos pos = player.getPosition();
-                ServerWorld server = worldIn.getServer().getWorld(worldIn.getDimensionKey());
+                BlockPos pos = player.blockPosition();
+                ServerWorld server = worldIn.getServer().getLevel(worldIn.dimension());
                 CompoundNBT nbt = new CompoundNBT();
                 Entity effectcreepie = summonEntity(creepieType, pos, nbt, server, player);
-                if (stack.hasDisplayName()) {
-                    effectcreepie.setCustomName(stack.getDisplayName());
+                if (stack.hasCustomHoverName()) {
+                    effectcreepie.setCustomName(stack.getHoverName());
                 }
-                worldIn.addEntity(effectcreepie);
-                ((LivingEntity) effectcreepie).addPotionEffect(new EffectInstance(effect.getPotion(), (int) (effect.getDuration() * 0.6)));
+                worldIn.addFreshEntity(effectcreepie);
+                ((LivingEntity) effectcreepie).addEffect(new EffectInstance(effect.getEffect(), (int) (effect.getDuration() * 0.6)));
             }
         }
-        player.clearActivePotions();
+        player.removeAllEffects();
     }
 
     private static Entity summonEntity(ResourceLocation type, BlockPos pos, CompoundNBT nbt, ServerWorld server, LivingEntity owner) {
         CompoundNBT compoundnbt = nbt.copy();
         compoundnbt.putString("id", type.toString());
-        compoundnbt.putUniqueId("OwnerUUID", owner.getUniqueID());
+        compoundnbt.putUUID("OwnerUUID", owner.getUUID());
         compoundnbt.putByte("ExplosionRadius", (byte)((int)1.2F));
-        Entity entity = EntityType.loadEntityAndExecute(compoundnbt, server, (p_218914_1_) -> {
-            p_218914_1_.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), p_218914_1_.rotationYaw, p_218914_1_.rotationPitch);
+        Entity entity = EntityType.loadEntityRecursive(compoundnbt, server, (p_218914_1_) -> {
+            p_218914_1_.moveTo(pos.getX(), pos.getY(), pos.getZ(), p_218914_1_.yRot, p_218914_1_.xRot);
 
             return p_218914_1_;
         });
         return entity;
     }
 
-    public SoundEvent getEatSound() {
-        return SoundEvents.ENTITY_CREEPER_PRIMED;
+    public SoundEvent getEatingSound() {
+        return SoundEvents.CREEPER_PRIMED;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         IFormattableTextComponent tip = TextUtils.getTranslation("tooltip.sourdough.tip");
-        tooltip.add(tip.mergeStyle(TextFormatting.GREEN));
+        tooltip.add(tip.withStyle(TextFormatting.GREEN));
     }
 }

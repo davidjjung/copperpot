@@ -37,7 +37,7 @@ import java.util.function.Supplier;
 
 public class BakedAlaskaBlock extends Block {
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 3);
-    public static final VoxelShape SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 5.0D, 12.0D);
+    public static final VoxelShape SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 5.0D, 12.0D);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     ;
 
@@ -77,17 +77,17 @@ public class BakedAlaskaBlock extends Block {
 
     public BakedAlaskaBlock(AbstractBlock.Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(BITES, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(BITES, 0));
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return SHAPE;
     }
 
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (worldIn.isRemote) {
-            ItemStack itemstack = player.getHeldItem(handIn);
-            if (this.eatSlice(worldIn, pos, state, player).isSuccessOrConsume()) {
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (worldIn.isClientSide) {
+            ItemStack itemstack = player.getItemInHand(handIn);
+            if (this.eatSlice(worldIn, pos, state, player).consumesAction()) {
                 return ActionResultType.SUCCESS;
             }
             if (itemstack.isEmpty()) {
@@ -102,22 +102,22 @@ public class BakedAlaskaBlock extends Block {
         if (!player.canEat(false)) {
             return ActionResultType.PASS;
         } else {
-            player.addStat(Stats.EAT_CAKE_SLICE);
-            player.getFoodStats().addStats(3, 0.2F);
-            int i = state.get(BITES);
+            player.awardStat(Stats.EAT_CAKE_SLICE);
+            player.getFoodData().eat(3, 0.2F);
+            int i = state.getValue(BITES);
             if (i < 3) {
-                world.setBlockState(pos, state.with(BITES, Integer.valueOf(i + 1)), 3);
+                world.setBlock(pos, state.setValue(BITES, Integer.valueOf(i + 1)), 3);
             } else {
                 world.removeBlock(pos, false);
             }
-            if (!world.isRemote()) {
+            if (!world.isClientSide()) {
                 double random = Math.random();
                 if (random < 0.33) {
-                    player.addPotionEffect(new EffectInstance(getCompatEffect("neapolitan", new ResourceLocation("neapolitan", "sugar_rush")).get(), 200, 2));
+                    player.addEffect(new EffectInstance(getCompatEffect("neapolitan", new ResourceLocation("neapolitan", "sugar_rush")).get(), 200, 2));
                 } else if (random < 0.66 && random > 0.33) {
-                    player.addPotionEffect(new EffectInstance(getCompatEffect("neapolitan", new ResourceLocation("neapolitan", "vanilla_scent")).get(), 100));
+                    player.addEffect(new EffectInstance(getCompatEffect("neapolitan", new ResourceLocation("neapolitan", "vanilla_scent")).get(), 100));
                 } else if (random > 0.66 && random < 0.77) {
-                    player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 200, 1));
+                    player.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 200, 1));
                 } else {
                     player.heal(4.0F);
                 }
@@ -130,32 +130,32 @@ public class BakedAlaskaBlock extends Block {
         return (ModList.get().isLoaded(modid) ? () -> ForgeRegistries.POTIONS.getValue(effect) : () -> null);
     }
 
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        return facing == Direction.DOWN && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        return facing == Direction.DOWN && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
-    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-        return worldIn.getBlockState(pos.down()).getMaterial().isSolid();
+    public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+        return worldIn.getBlockState(pos.below()).getMaterial().isSolid();
     }
 
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(new Property[]{FACING, BITES});
     }
 
 
-    public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-        return (4 - blockState.get(BITES)) * 2;
+    public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+        return (4 - blockState.getValue(BITES)) * 2;
     }
 
-    public boolean hasComparatorInputOverride(BlockState state) {
+    public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
-    public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+    public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
         return false;
     }
 
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return (BlockState)this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing());
+        return (BlockState)this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
     }
 }

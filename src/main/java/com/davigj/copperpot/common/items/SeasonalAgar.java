@@ -23,16 +23,16 @@ public class SeasonalAgar extends Item {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        super.onItemUseFinish(stack, worldIn, entityLiving);
-        if (!worldIn.isRemote) {
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        super.finishUsingItem(stack, worldIn, entityLiving);
+        if (!worldIn.isClientSide) {
             extendEffect(entityLiving);
         }
         return stack;
     }
 
     public void extendEffect(LivingEntity player) {
-        Iterator effects = player.getActivePotionEffects().iterator();
+        Iterator effects = player.getActiveEffects().iterator();
         while(effects.hasNext()) {
             EffectInstance effect = (EffectInstance)effects.next();
             double rand = Math.random();
@@ -41,19 +41,19 @@ public class SeasonalAgar extends Item {
                 durationBonus = 200;
             } else { durationBonus = 400; }
             for(String i : effectList) {
-                if (effect.getDuration() > 10 && effect.getEffectName().equals(i)) {
-                    player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() +
-                            durationBonus, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+                if (effect.getDuration() > 10 && effect.getDescriptionId().equals(i)) {
+                    player.addEffect(new EffectInstance(effect.getEffect(), effect.getDuration() +
+                            durationBonus, effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon()));
                 }
             }
         }
     }
 
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         IFormattableTextComponent prefix = TextUtils.getTranslation("tooltip.seasonal_agar.prefix", new Object[0]);
-        tooltip.add(prefix.mergeStyle(TextFormatting.BLUE));
+        tooltip.add(prefix.withStyle(TextFormatting.BLUE));
         StringTextComponent effectDescription;
-        for(Iterator var6 = effectList.iterator(); var6.hasNext(); tooltip.add(effectDescription.mergeStyle(TextFormatting.AQUA))) {
+        for(Iterator var6 = effectList.iterator(); var6.hasNext(); tooltip.add(effectDescription.withStyle(TextFormatting.AQUA))) {
             effectDescription = new StringTextComponent("");
             IFormattableTextComponent effectName = new TranslationTextComponent((String) var6.next());
             effectDescription.append(effectName);

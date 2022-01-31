@@ -12,7 +12,7 @@ public class CopperPotResultSlot extends SlotItemHandler {
         super(inventoryIn, index, xPosition, yPosition);
     }
 
-    public boolean isItemValid(ItemStack stack) {
+    public boolean mayPlace(ItemStack stack) {
         return false;
     }
 }

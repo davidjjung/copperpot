@@ -19,6 +19,8 @@ import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.item.Item.Properties;
+
 public class CarrotCupcake extends Item {
     String effectName;
 
@@ -28,29 +30,29 @@ public class CarrotCupcake extends Item {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        super.onItemUseFinish(stack, worldIn, entityLiving);
-        if (!worldIn.isRemote) {
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        super.finishUsingItem(stack, worldIn, entityLiving);
+        if (!worldIn.isClientSide) {
             intensify(entityLiving);
         }
         return stack;
     }
 
     public void intensify (LivingEntity player) {
-        Iterator effects = player.getActivePotionEffects().iterator();
+        Iterator effects = player.getActiveEffects().iterator();
         while(effects.hasNext()) {
             EffectInstance effect = (EffectInstance)effects.next();
-            if (effect.getDuration() > 10 && effect.getEffectName().equals(effectName) && Math.random() > 0.2 * (effect.getAmplifier() + 1)) {
-                player.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration(),
-                        effect.getAmplifier() + 1, effect.isAmbient(), effect.doesShowParticles(), effect.isShowIcon()));
+            if (effect.getDuration() > 10 && effect.getDescriptionId().equals(effectName) && Math.random() > 0.2 * (effect.getAmplifier() + 1)) {
+                player.addEffect(new EffectInstance(effect.getEffect(), effect.getDuration(),
+                        effect.getAmplifier() + 1, effect.isAmbient(), effect.isVisible(), effect.showIcon()));
             }
         }
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         IFormattableTextComponent tip = TextUtils.getTranslation("tooltip.carrot_cupcake.tip");
-        tooltip.add(tip.mergeStyle(TextFormatting.BLUE));
+        tooltip.add(tip.withStyle(TextFormatting.BLUE));
     }
 }

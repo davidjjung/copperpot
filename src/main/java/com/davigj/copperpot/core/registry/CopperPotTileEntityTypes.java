@@ -15,7 +15,7 @@ public class CopperPotTileEntityTypes {
     static {
         TILES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, "copperpot");
         COPPER_POT_TILE = TILES.register("copper_pot", () -> {
-            return TileEntityType.Builder.create(CopperPotTileEntity::new, new Block[]{(Block)CopperPotBlocks.COPPER_POT.get()}).build((Type)null);
+            return TileEntityType.Builder.of(CopperPotTileEntity::new, new Block[]{(Block)CopperPotBlocks.COPPER_POT.get()}).build((Type)null);
         });
     }
 }

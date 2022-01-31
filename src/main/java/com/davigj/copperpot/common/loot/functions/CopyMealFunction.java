@@ -16,6 +16,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
+import net.minecraft.loot.LootFunction.Builder;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class CopyMealFunction extends LootFunction {
@@ -26,15 +28,15 @@ public class CopyMealFunction extends LootFunction {
     }
 
     public static Builder<?> builder() {
-        return builder(CopyMealFunction::new);
+        return simpleBuilder(CopyMealFunction::new);
     }
 
-    protected ItemStack doApply(ItemStack stack, LootContext context) {
-        TileEntity tile = (TileEntity)context.get(LootParameters.BLOCK_ENTITY);
+    protected ItemStack run(ItemStack stack, LootContext context) {
+        TileEntity tile = (TileEntity)context.getParamOrNull(LootParameters.BLOCK_ENTITY);
         if (tile instanceof CopperPotTileEntity) {
             CompoundNBT tag = ((CopperPotTileEntity)tile).writeMeal(new CompoundNBT());
             if (!tag.isEmpty()) {
-                stack.setTagInfo("BlockEntityTag", tag);
+                stack.addTagElement("BlockEntityTag", tag);
             }
         }
 
@@ -42,7 +44,7 @@ public class CopyMealFunction extends LootFunction {
     }
 
     @Nullable
-    public LootFunctionType getFunctionType() {
+    public LootFunctionType getType() {
         return null;
     }
 
