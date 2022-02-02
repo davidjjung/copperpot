@@ -24,7 +24,7 @@
     }
   ],
   "effecttrue": true,
-  "effect": "minecraft:poison",
+  "effect": "savageandravage:weight",
   "effectduration": 60,
   "effectamplifier": 2
 }
