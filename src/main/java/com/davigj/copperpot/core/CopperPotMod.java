@@ -29,7 +29,6 @@ public class CopperPotMod {
 
 		bus.addListener(ClientEventHandler::init);
 		bus.addListener(CommonEventHandler::init);
-
 		bus.addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
 
 		REGISTRY_HELPER.register(bus);
