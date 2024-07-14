@@ -1,0 +1,33 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "fruitsdelight:lemon"
+    },
+    {
+      "item": "fruitsdelight:lemon"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "fruitsdelight:lemon_jelly"
+  },
+  "container": {
+    "item": "minecraft:glass_bottle",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "fruitsdelight"
+    }
+  ],
+  "effect": {
+    "type":"minecraft:mining_fatigue",
+    "amplifier": 1
+  },
+  "cookingtime": 200,
+  "experience": 0.2
+}

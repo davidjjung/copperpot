@@ -1,0 +1,31 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "fruitsdelight:durian_flesh"
+    },
+    {
+      "item": "fruitsdelight:lemon_slice"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "fruitsdelight:durian_jelly"
+  },
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "fruitsdelight"
+    }
+  ],
+  "effect": {
+    "type":"fruitsdelight:suspicious_smell"
+  },
+  "cookingtime": 100,
+  "experience": 0.1
+}

@@ -1,0 +1,31 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "fruitsdelight:cranberry"
+    },
+    {
+      "item": "fruitsdelight:cranberry"
+    },
+    {
+      "item": "fruitsdelight:lemon_slice"
+    }
+  ],
+  "result": {
+    "item": "fruitsdelight:cranberry_jelly"
+  },
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "fruitsdelight"
+    }
+  ],
+  "effect": {
+    "type":"minecraft:blindness"
+  },
+  "cookingtime": 100,
+  "experience": 0.1
+}

@@ -1,0 +1,31 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "fruitsdelight:hawberry"
+    },
+    {
+      "item": "fruitsdelight:hawberry"
+    },
+    {
+      "item": "fruitsdelight:lemon_slice"
+    }
+  ],
+  "result": {
+    "item": "fruitsdelight:hawberry_jelly"
+  },
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "fruitsdelight"
+    }
+  ],
+  "effect": {
+    "type":"minecraft:hunger"
+  },
+  "cookingtime": 100,
+  "experience": 0.1
+}

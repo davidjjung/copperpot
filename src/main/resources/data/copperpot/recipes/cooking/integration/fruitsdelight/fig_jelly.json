@@ -1,0 +1,32 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "fruitsdelight:fig"
+    },
+    {
+      "item": "fruitsdelight:lemon_slice"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "fruitsdelight:fig_jelly"
+  },
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "fruitsdelight"
+    }
+  ],
+  "effect": {
+    "type":"minecraft:hunger",
+    "amplifier": 1
+  },
+  "cookingtime": 100,
+  "experience": 0.1
+}

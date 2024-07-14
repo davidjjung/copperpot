@@ -1,0 +1,31 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "minecraft:glow_berries"
+    },
+    {
+      "item": "minecraft:glow_berries"
+    },
+    {
+      "item": "fruitsdelight:lemon_slice"
+    }
+  ],
+  "result": {
+    "item": "fruitsdelight:glowberry_jelly"
+  },
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "fruitsdelight"
+    }
+  ],
+  "effect": {
+    "type":"minecraft:glowing"
+  },
+  "cookingtime": 100,
+  "experience": 0.1
+}

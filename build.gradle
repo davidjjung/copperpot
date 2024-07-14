@@ -92,6 +92,18 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        forRepositories(fg.repository) // Only add this if you're using ForgeGradle, otherwise remove this line
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 sourceSets.main.resources {
@@ -105,16 +117,10 @@ dependencies {
 
     implementation fg.deobf("curse.maven:neapolitan-382016:5296594")
     implementation fg.deobf("curse.maven:autumnity-365045:5292346")
-    // environmental is still being worked on
-    // abundance has not been updated
-    // fruitful??
-    // atmospheric is still being worked on
-    // abnormals delight is probably coming out after atmospheric
     implementation fg.deobf("curse.maven:buzzier-bees-355458:5229011")
     implementation fg.deobf("curse.maven:upgrade-aquatic-326895:5296565")
-    // savage and ravage is not out
     implementation fg.deobf("curse.maven:diet-443570:4813904")
-    // peculiars is not out
+    implementation fg.deobf("maven.modrinth:fruits-delight:k6SnqxMm")
 
     // compile against the JEI API but do not include it at runtime
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
