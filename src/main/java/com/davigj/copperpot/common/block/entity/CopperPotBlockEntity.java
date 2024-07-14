@@ -329,11 +329,12 @@ public class CopperPotBlockEntity extends SyncedBlockEntity implements MenuProvi
             double x;
             double y;
             double z;
-            if (random.nextFloat() < 0.08F && copperPot.hasEffect()) {
+            if (random.nextFloat() < 0.08F) {
                 x = (double) pos.getX() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
                 y = (double) pos.getY() + 0.4D;
                 z = (double) pos.getZ() + 0.5D + (random.nextDouble() * 0.4D - 0.2D);
-                if (!copperPot.hasEffect() || copperPot.cookTime == 0) {
+                Optional<? extends CopperPotRecipe> recipe = copperPot.getMatchingRecipe(new RecipeWrapper(copperPot.inventory));
+                if (!copperPot.hasEffect() || !(recipe.isPresent() && copperPot.canCook(recipe.get()))) {
                     if (random.nextBoolean()) {
                         level.addParticle(ParticleTypes.EFFECT, x, y, z, 0.0D, 0.0D, 0.0D);
                     }
