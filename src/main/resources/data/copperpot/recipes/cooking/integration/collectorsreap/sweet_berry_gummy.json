@@ -1,0 +1,29 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "minecraft:sweet_berries"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:kelp"
+    }
+  ],
+  "result": {
+    "item": "collectorsreap:sweet_berry_gummy"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "collectorsreap"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "seasonals"
+    }
+  ],
+  "cookingtime": 100,
+  "experience": 1.0
+}

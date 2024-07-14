@@ -1,0 +1,29 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "collectorsreap:lime"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:kelp"
+    }
+  ],
+  "result": {
+    "item": "collectorsreap:lime_gummy"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "collectorsreap"
+    }
+  ],
+  "effect": {
+    "type":"minecraft:slowness",
+    "amplifier": 1
+  },
+  "cookingtime": 100,
+  "experience": 1.0
+}

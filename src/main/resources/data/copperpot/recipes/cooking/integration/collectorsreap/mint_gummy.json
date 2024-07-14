@@ -1,0 +1,33 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "neapolitan:mint_leaves"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:kelp"
+    }
+  ],
+  "result": {
+    "item": "collectorsreap:mint_gummy"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "collectorsreap"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "neapolitan"
+    }
+  ],
+  "effect": {
+    "type":"minecraft:strength",
+    "amplifier": 1
+  },
+  "cookingtime": 100,
+  "experience": 1.0
+}

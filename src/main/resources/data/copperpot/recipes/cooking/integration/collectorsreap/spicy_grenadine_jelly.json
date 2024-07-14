@@ -1,0 +1,32 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:bullet_pepper"
+    },
+    {
+      "item": "minecraft:bullet_pepper"
+    },
+    {
+      "item": "collectorsreap:pomegranate_slice"
+    }
+  ],
+  "result": {
+    "item": "collectorsreap:spicy_grenadine_jelly"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "collectorsreap"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mynethersdelight"
+    }
+  ],
+  "effect": {
+    "type":"minecraft:fire_resistance"
+  },
+  "cookingtime": 400,
+  "experience": 1.0
+}

@@ -31,6 +31,10 @@ public class CPCreativeTab {
     }
 
     private static void buildFoodAndDrinksTabContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(CPItems.MERINGUE_BLOCK.get());
+        }
+
         if (event.getTabKey() != CreativeModeTabs.FOOD_AND_DRINKS) return;
 
         acceptFoodAndDrinkItems(event);
@@ -42,12 +46,8 @@ public class CPCreativeTab {
 
 
     private static void acceptFoodAndDrinkItems(BuildCreativeModeTabContentsEvent event) {
-//      if (!event.getEntries().contains(CPItems.COFFEE_BERRIES.get().getDefaultInstance())) {
-//         event.accept(CPItems.COFFEE_BERRIES);
-//      }
 //      CreativeModeTabContentsPopulator.mod(CopperPot.MODID).tab(CreativeModeTabs.FOOD_AND_DRINKS)
 //                      .addItemsAfter();
-        event.accept(CPItems.MERINGUE_BLOCK.get());
         event.accept(CPItems.RAW_MERINGUE.get());
         event.accept(CPItems.MERINGUE.get());
         event.accept(CPItems.AUTUMNAL_AGAR.get());
@@ -55,8 +55,7 @@ public class CPCreativeTab {
         event.accept(CPItems.BRUMAL_AGAR.get());
         event.accept(CPItems.VERNAL_AGAR.get());
         event.accept(CPItems.CARROT_CUPCAKE.get());
-        event.accept(CPItems.INCENDIARY_MERINGUE.get());
-
+//        event.accept(CPItems.INCENDIARY_MERINGUE.get());
 
         if (isModLoaded("neapolitan")) {
             event.accept(CPItems.BAKED_ALASKA_BLOCK.get());
@@ -64,10 +63,10 @@ public class CPCreativeTab {
             event.accept(CPItems.PEPPERMINT_BARK_MERINGUE.get());
         }
 
-        if (isModLoaded("abundance") && isModLoaded("fruitful")) {
-            event.accept(CPItems.SPICED_APPLE_JAM.get());
-            event.accept(CPItems.PORK_SANDWICH.get());
-        }
+//        if (isModLoaded("abundance") && isModLoaded("fruitful")) {
+//            event.accept(CPItems.SPICED_APPLE_JAM.get());
+//            event.accept(CPItems.PORK_SANDWICH.get());
+//        }
 
         if (isModLoaded("savage_and_ravage")) {
             event.accept(CPItems.CREEPING_YOGURT.get());
@@ -87,8 +86,8 @@ public class CPCreativeTab {
             event.accept(CPItems.TROPICAL_MERINGUE.get());
         }
 
-        if (isModLoaded("upgrade_aquatic")) {
-            event.accept(CPItems.GUARDIAN_SOUFFLE.get());
-        }
+//        if (isModLoaded("upgrade_aquatic")) {
+//            event.accept(CPItems.GUARDIAN_SOUFFLE.get());
+//        }
     }
 }

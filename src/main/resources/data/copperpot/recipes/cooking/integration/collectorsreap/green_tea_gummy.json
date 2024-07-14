@@ -1,0 +1,29 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "farmersrespite:green_tea_leaves"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:kelp"
+    }
+  ],
+  "result": {
+    "item": "collectorsreap:green_tea_gummy"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "collectorsreap"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersrespite"
+    }
+  ],
+  "cookingtime": 100,
+  "experience": 1.0
+}

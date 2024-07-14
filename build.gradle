@@ -121,6 +121,8 @@ dependencies {
     implementation fg.deobf("curse.maven:upgrade-aquatic-326895:5296565")
     implementation fg.deobf("curse.maven:diet-443570:4813904")
     implementation fg.deobf("maven.modrinth:fruits-delight:k6SnqxMm")
+    implementation fg.deobf("maven.modrinth:collectors-reap:A4sqyvVP")
+    implementation fg.deobf("maven.modrinth:my-nethers-delight:TGGzLEMg")
 
     // compile against the JEI API but do not include it at runtime
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")

@@ -1,0 +1,33 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "neapolitan:strawberries"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:kelp"
+    }
+  ],
+  "result": {
+    "item": "collectorsreap:strawberry_gummy"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "collectorsreap"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "neapolitan"
+    }
+  ],
+  "effect": {
+    "type":"minecraft:slowness",
+    "amplifier": 1
+  },
+  "cookingtime": 100,
+  "experience": 1.0
+}

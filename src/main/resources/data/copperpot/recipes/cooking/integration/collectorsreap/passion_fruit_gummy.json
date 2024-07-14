@@ -1,0 +1,32 @@
+{
+  "type": "copperpot:cooking",
+  "ingredients": [
+    {
+      "item": "atmospheric:passion_fruit"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:kelp"
+    }
+  ],
+  "result": {
+    "item": "collectorsreap:passion_fruit_gummy"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "collectorsreap"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "peculiars"
+    }
+  ],
+  "effect": {
+    "type":"atmospheric:relief"
+  },
+  "cookingtime": 100,
+  "experience": 1.0
+}
