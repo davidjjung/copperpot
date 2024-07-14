@@ -27,5 +27,6 @@
   "effect": {
     "type":"minecraft:water_breathing",
     "duration": 100
-  }
+  },
+  "experience": 0.35
 }

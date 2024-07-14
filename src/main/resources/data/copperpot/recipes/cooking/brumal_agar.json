@@ -16,5 +16,6 @@
   },
   "effect": {
     "type": "minecraft:fire_resistance"
-  }
+  },
+  "experience": 0.35
 }

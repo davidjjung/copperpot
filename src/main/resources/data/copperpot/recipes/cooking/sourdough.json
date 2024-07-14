@@ -22,7 +22,8 @@
   ],
   "cookingtime": 200,
   "effect": {
-        "type": "minecraft:poison",
-        "amplifier": 1
-    }
+    "type": "minecraft:poison",
+    "amplifier": 1
+  },
+  "experience": 1.0
 }

@@ -30,5 +30,6 @@
   "effect": {
     "type":"minecraft:slowness",
     "amplifier": 1
-  }
+  },
+  "experience": 0.35
 }

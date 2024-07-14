@@ -16,5 +16,6 @@
   },
   "effect": {
     "type": "minecraft:jump_boost"
-  }
+  },
+  "experience": 0.35
 }

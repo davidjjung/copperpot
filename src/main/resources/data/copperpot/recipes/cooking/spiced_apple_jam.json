@@ -32,5 +32,6 @@
     "type":"minecraft:weakness",
     "duration": 200,
     "amplifier": 1
-  }
+  },
+  "experience": 0.35
 }

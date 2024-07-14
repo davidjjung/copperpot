@@ -12,7 +12,7 @@ credits = "HUGE thanks to OnesAndZer0s for the 1.20.1 port! Thanks to Nary for a
 authors = "DavigJ"
 displayName = "Copper Pot"
 description = '''
-An unofficial add-on for Farmer's Delight! Adds a copper pot for those stuck waiting on the iron age.
+An add-on for Farmer's Delight! Adds a copper pot for those stuck waiting on the iron age.
     '''
 itemIcon = "copperpot:copper_pot_block"
 configBackground = "minecraft:textures/block/bricks.png"

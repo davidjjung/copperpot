@@ -32,5 +32,6 @@
   "effect": {
     "type":"atmospheric:persistence",
     "duration": 100
-  }
+  },
+  "experience": 0.35
 }

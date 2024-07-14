@@ -16,5 +16,6 @@
   },
   "effect": {
     "type":"minecraft:strength"
-  }
+  },
+  "experience": 0.35
 }

@@ -31,14 +31,14 @@ public class Mooncake extends Item {
    @Override
    public ItemStack finishUsingItem( ItemStack pStack, Level pLevel, LivingEntity pLivingEntity ) {
       super.finishUsingItem(pStack, pLevel, pLivingEntity);
-      for (String i : CopperPotConfig.COMMON.mooncakeBadReactDims.get()) {
-         if (pLivingEntity.getCommandSenderWorld().dimensionType().effectsLocation().toString().equals(i)) {
-            pLivingEntity.playSound(SoundEvents.GENERIC_EXPLODE, 1.0F, 1.0F);
-            pLivingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 480));
-         } else {
-            moonlight(pLivingEntity, pLevel);
-         }
-      }
+//      for (String i : CopperPotConfig.COMMON.mooncakeBadReactDims.get()) {
+//         if (pLivingEntity.getCommandSenderWorld().dimensionType().effectsLocation().toString().equals(i)) {
+//            pLivingEntity.playSound(SoundEvents.GENERIC_EXPLODE, 1.0F, 1.0F);
+//            pLivingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 480));
+//         } else {
+//            moonlight(pLivingEntity, pLevel);
+//         }
+//      }
       return pStack;
    }
 

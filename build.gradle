@@ -115,14 +115,14 @@ dependencies {
     implementation fg.deobf("curse.maven:blueprint-382216:5292242")
     implementation fg.deobf("curse.maven:farmersdelight-398521:5051242")
 
-    implementation fg.deobf("curse.maven:neapolitan-382016:5296594")
-    implementation fg.deobf("curse.maven:autumnity-365045:5292346")
-    implementation fg.deobf("curse.maven:buzzier-bees-355458:5229011")
-    implementation fg.deobf("curse.maven:upgrade-aquatic-326895:5296565")
-    implementation fg.deobf("curse.maven:diet-443570:4813904")
-    implementation fg.deobf("maven.modrinth:fruits-delight:k6SnqxMm")
-    implementation fg.deobf("maven.modrinth:collectors-reap:A4sqyvVP")
-    implementation fg.deobf("maven.modrinth:my-nethers-delight:TGGzLEMg")
+//    implementation fg.deobf("curse.maven:neapolitan-382016:5296594")
+//    implementation fg.deobf("curse.maven:autumnity-365045:5292346")
+//    implementation fg.deobf("curse.maven:buzzier-bees-355458:5229011")
+//    implementation fg.deobf("curse.maven:upgrade-aquatic-326895:5296565")
+//    implementation fg.deobf("curse.maven:diet-443570:4813904")
+//    implementation fg.deobf("maven.modrinth:fruits-delight:k6SnqxMm")
+//    implementation fg.deobf("maven.modrinth:collectors-reap:A4sqyvVP")
+//    implementation fg.deobf("maven.modrinth:my-nethers-delight:TGGzLEMg")
 
     // compile against the JEI API but do not include it at runtime
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")

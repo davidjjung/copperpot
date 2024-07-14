@@ -24,5 +24,6 @@
     "type":"minecraft:mining_fatigue",
     "duration": 100,
     "amplifier": 2
-  }
+  },
+  "experience": 1.0
 }

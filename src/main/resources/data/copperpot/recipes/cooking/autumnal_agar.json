@@ -16,5 +16,6 @@
   },
   "effect": {
     "type":"minecraft:resistance"
-  }
+  },
+  "experience": 0.35
 }

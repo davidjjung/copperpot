@@ -27,5 +27,6 @@
     "type":"savageandravage:weight",
     "duration": 60,
     "amplifier": 2
-  }
+  },
+  "experience": 1.0
 }

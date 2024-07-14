@@ -71,16 +71,15 @@ public class CPCreativeTab {
         if (isModLoaded("savage_and_ravage")) {
             event.accept(CPItems.CREEPING_YOGURT.get());
             event.accept(CPItems.SOURDOUGH.get());
-
         }
 
         if (isModLoaded("buzzier_bees")) {
             event.accept(CPItems.ROYAL_JELLY.get());
         }
 
-        if (isModLoaded("neapolitan") && (isModLoaded("bayou_blues") || isModLoaded("environmental"))) {
-            event.accept(CPItems.MOONCAKE.get());
-        }
+//        if (isModLoaded("neapolitan") && (isModLoaded("bayou_blues") || isModLoaded("environmental"))) {
+//            event.accept(CPItems.MOONCAKE.get());
+//        }
 
         if (isModLoaded("neapolitan") && isModLoaded("atmospheric")) {
             event.accept(CPItems.TROPICAL_MERINGUE.get());
