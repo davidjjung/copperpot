@@ -5,7 +5,7 @@
       "item": "fruitsdelight:lemon"
     },
     {
-      "item": "fruitsdelight:lemon"
+      "item": "fruitsdelight:lemon_slice"
     },
     {
       "item": "minecraft:sugar"
@@ -15,8 +15,7 @@
     "item": "fruitsdelight:lemon_jelly"
   },
   "container": {
-    "item": "minecraft:glass_bottle",
-    "count": 2
+    "item": "minecraft:glass_bottle"
   },
   "conditions": [
     {
@@ -28,6 +27,6 @@
     "type":"minecraft:mining_fatigue",
     "amplifier": 1
   },
-  "cookingtime": 200,
+  "cookingtime": 100,
   "experience": 0.2
 }
