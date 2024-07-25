@@ -8,7 +8,7 @@
       "tag": "forge:milk"
     },
     {
-      "item": "savageandravage:creeper_spores"
+      "item": "savage_and_ravage:creeper_spores"
     }
   ],
   "result": {
@@ -20,11 +20,11 @@
   "conditions": [
     {
       "type": "forge:mod_loaded",
-      "modid": "savageandravage"
+      "modid": "savage_and_ravage"
     }
   ],
   "effect": {
-    "type":"savageandravage:weight",
+    "type":"savage_and_ravage:weight",
     "duration": 60,
     "amplifier": 2
   },

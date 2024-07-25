@@ -28,7 +28,7 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import java.util.List;
 
 public class Sourdough extends Item {
-   public static final ResourceLocation CREEPIE = new ResourceLocation("savageandravage", "creepie");
+   public static final ResourceLocation CREEPIE = new ResourceLocation("savage_and_ravage", "creepie");
 
    public Sourdough(Properties properties) {
       super(properties);
@@ -45,7 +45,7 @@ public class Sourdough extends Item {
 
    public void hissss(LivingEntity player, Level worldIn, ItemStack stack) {
       for ( MobEffectInstance effect : player.getActiveEffects()) {
-         if (effect.getDuration() > 10 && ModList.get().isLoaded("savageandravage")) {
+         if (effect.getDuration() > 10 && ModList.get().isLoaded("savage_and_ravage")) {
             EntityType<?> creepieType = ForgeRegistries.ENTITY_TYPES.getValue(CREEPIE);
             BlockPos pos = player.blockPosition();
             ServerLevel server = worldIn.getServer().getLevel(worldIn.dimension());

@@ -76,7 +76,7 @@ public class CreepingYogurt extends Item {
       }
       double resist = 0;
 //         TODO: Find out how to implement SR explosive damage reduction
-//        if (ModList.get().isLoaded("savageandravage")) {
+//        if (ModList.get().isLoaded("savage_and_ravage")) {
 //            resist = (double)player.getAttributeValue(SRAttributes.EXPLOSIVE_DAMAGE_REDUCTION.get());
 //            LOGGER.debug(resist);
 //        }
