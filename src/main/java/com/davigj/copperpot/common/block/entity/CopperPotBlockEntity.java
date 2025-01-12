@@ -66,7 +66,7 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 
-public class CopperPotBlockEntity extends SyncedBlockEntity implements MenuProvider, HeatableBlockEntity, Nameable, RecipeHolder {
+public class CopperPotBlockEntity extends SyncedBlockEntity implements MenuProvider, SemiHeatableBlockEntity, Nameable, RecipeHolder {
     public static final int MEAL_DISPLAY_SLOT = 3;
     public static final int CONTAINER_SLOT = 4;
     public static final int OUTPUT_SLOT = 5;
@@ -324,7 +324,7 @@ public class CopperPotBlockEntity extends SyncedBlockEntity implements MenuProvi
     }
 
     public static void animationTick(Level level, BlockPos pos, BlockState state, CopperPotBlockEntity copperPot) {
-        if (copperPot.isHeated(level, pos)) {
+        if (copperPot.isHeated(level, pos) && CopperPotConfig.CLIENT.potParticles.get()) {
             RandomSource random = level.getRandom();
             double x;
             double y;

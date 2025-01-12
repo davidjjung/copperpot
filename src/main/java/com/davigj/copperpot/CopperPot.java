@@ -18,6 +18,7 @@ public class CopperPot
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CopperPotConfig.COMMON_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CopperPotConfig.CLIENT_SPEC);
 
         CPItems.ITEMS.register(modEventBus);
         CPBlocks.BLOCKS.register(modEventBus);
