@@ -1,6 +1,7 @@
 package com.davigj.copperpot.common.item;
 
 import com.davigj.copperpot.CopperPot;
+import com.davigj.copperpot.CopperPotConfig;
 import com.davigj.copperpot.core.registry.CPItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
@@ -90,6 +91,7 @@ public class RoyalJelly extends Item {
    @Override
    @OnlyIn(Dist.CLIENT)
    public void appendHoverText( ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced ) {
+      if (!CopperPotConfig.CLIENT.tooltips.get()) return;
       MutableComponent textWhenFeeding = Component.translatable("copperpot.tooltip.royal_jelly.when_feeding");
       MutableComponent textWhenEating = Component.translatable("copperpot.tooltip.royal_jelly.when_eating");
       pTooltipComponents.add(textWhenEating.withStyle(ChatFormatting.BLUE));

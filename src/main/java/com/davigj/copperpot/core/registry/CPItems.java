@@ -1,7 +1,6 @@
 package com.davigj.copperpot.core.registry;
 
 import com.davigj.copperpot.CopperPot;
-import com.davigj.copperpot.CopperPotConfig;
 import com.davigj.copperpot.common.item.*;
 import com.davigj.copperpot.core.tags.CPMobEffectTags;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -14,7 +13,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.common.registry.ModEffects;
-import vectorwing.farmersdelight.common.tag.ModTags;
 
 public class CPItems {
    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CopperPot.MODID);

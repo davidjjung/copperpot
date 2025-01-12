@@ -1,5 +1,6 @@
 package com.davigj.copperpot.common.item;
 
+import com.davigj.copperpot.CopperPotConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -52,6 +53,7 @@ public class SeasonalAgarItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced ) {
+        if (!CopperPotConfig.CLIENT.tooltips.get()) return;
         MutableComponent prefix = Component.translatable("copperpot.tooltip.seasonal_agar.prefix");
         pTooltipComponents.add(prefix.withStyle(ChatFormatting.GRAY));
         ITag<MobEffect> tag = Objects.requireNonNull(ForgeRegistries.MOB_EFFECTS.tags()).getTag(this.effects);

@@ -1,5 +1,6 @@
 package com.davigj.copperpot.common.item;
 
+import com.davigj.copperpot.CopperPotConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -16,7 +17,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
-import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.Iterator;
 import java.util.List;
@@ -77,6 +77,7 @@ public class MintMeringue extends Item {
    @Override
    @OnlyIn(Dist.CLIENT)
    public void appendHoverText( ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced ) {
+      if (!CopperPotConfig.CLIENT.tooltips.get()) return;
       MutableComponent tip = Component.translatable("copperpot.tooltip.mint_meringue.tip");
       MutableComponent tip2 = Component.translatable("copperpot.tooltip.mint_meringue.tip2");
       pTooltipComponents.add(tip.withStyle(ChatFormatting.BLUE));

@@ -1,11 +1,7 @@
 package com.davigj.copperpot;
 
-import com.google.common.collect.Lists;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
-import vectorwing.farmersdelight.common.tag.ModTags;
-
-import java.util.List;
 
 public class CopperPotConfig {
 
@@ -43,10 +39,13 @@ public class CopperPotConfig {
 
    public static class Client {
       public final ForgeConfigSpec.ConfigValue<Boolean> potParticles;
+      public final ForgeConfigSpec.BooleanValue tooltips;
 
       public Client(ForgeConfigSpec.Builder builder) {
          builder.push("client");
          potParticles = builder.comment("Copper pots emit effect particles when cooking or ready to cook").define("Cooking particles", true);
+         tooltips = builder.comment("Specialized food items have details in their tooltips")
+                 .define("tooltips", true);
          builder.pop();
       }
    }

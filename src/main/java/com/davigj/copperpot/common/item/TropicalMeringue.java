@@ -1,5 +1,6 @@
 package com.davigj.copperpot.common.item;
 
+import com.davigj.copperpot.CopperPotConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -16,10 +17,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
-import vectorwing.farmersdelight.common.utility.TextUtils;
 
-import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class TropicalMeringue extends Item {
@@ -58,24 +58,23 @@ public class TropicalMeringue extends Item {
    }
 
    public void intensify(LivingEntity player) {
-      Iterator<MobEffectInstance> effects = player.getActiveEffects().iterator();
-      while (effects.hasNext()) {
-         MobEffectInstance effect = effects.next();
-         double rand = Math.random();
-         if (effect != null && effect.getDuration() > 10 && effect.getDescriptionId().equals(effect1) || effect.getDescriptionId().equals(effect2)) {
-            if (rand < 0.7) {
-               player.addEffect(new MobEffectInstance(effect.getEffect(), effect.getDuration() + 80, effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon()));
-            }
-            if (effect.getDescriptionId().equals(effect1) && rand > Math.min(0.5, (float)1 / (effect.getAmplifier() + 1))) {
-               player.addEffect(new MobEffectInstance(effect.getEffect(), effect.getDuration(), effect.getAmplifier() + 1, effect.isAmbient(), effect.isVisible(), effect.showIcon()));
-            }
-         }
-      }
+       for (MobEffectInstance effect : player.getActiveEffects()) {
+           double rand = Math.random();
+           if (effect != null && effect.getDuration() > 10 && effect.getDescriptionId().equals(effect1) || Objects.requireNonNull(effect).getDescriptionId().equals(effect2)) {
+               if (rand < 0.7) {
+                   player.addEffect(new MobEffectInstance(effect.getEffect(), effect.getDuration() + 80, effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon()));
+               }
+               if (effect.getDescriptionId().equals(effect1) && rand > Math.min(0.5, (float) 1 / (effect.getAmplifier() + 1))) {
+                   player.addEffect(new MobEffectInstance(effect.getEffect(), effect.getDuration(), effect.getAmplifier() + 1, effect.isAmbient(), effect.isVisible(), effect.showIcon()));
+               }
+           }
+       }
    }
 
    @Override
    @OnlyIn(Dist.CLIENT)
    public void appendHoverText( ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced ) {
+      if (!CopperPotConfig.CLIENT.tooltips.get()) return;
       MutableComponent tip = Component.translatable("copperpot.tooltip.tropical_meringue.tip");
       MutableComponent tip2 = Component.translatable("copperpot.tooltip.tropical_meringue.tip2");
       pTooltipComponents.add(tip.withStyle(ChatFormatting.BLUE));

@@ -115,7 +115,8 @@ dependencies {
     implementation fg.deobf("curse.maven:blueprint-382216:5292242")
     implementation fg.deobf("curse.maven:farmersdelight-398521:5051242")
 
-//    implementation fg.deobf("curse.maven:neapolitan-382016:5296594")
+    runtimeOnly fg.deobf("maven.modrinth:neapolitan:bSOBBF52")
+    runtimeOnly fg.deobf("maven.modrinth:atmospheric:wFKEIHk8")
 //    implementation fg.deobf("curse.maven:autumnity-365045:5292346")
 //    implementation fg.deobf("curse.maven:buzzier-bees-355458:5229011")
 //    implementation fg.deobf("curse.maven:upgrade-aquatic-326895:5296565")

@@ -1,5 +1,6 @@
 package com.davigj.copperpot.common.item;
 
+import com.davigj.copperpot.CopperPotConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -23,7 +24,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
-import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.List;
 
@@ -80,6 +80,7 @@ public class Sourdough extends Item {
    @Override
    @OnlyIn(Dist.CLIENT)
    public void appendHoverText( ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced ) {
+      if (!CopperPotConfig.CLIENT.tooltips.get()) return;
       MutableComponent tip = Component.translatable("copperpot.tooltip.sourdough.tip");
       pTooltipComponents.add(tip.withStyle(ChatFormatting.GREEN));
    }

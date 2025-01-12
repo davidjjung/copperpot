@@ -1,5 +1,6 @@
 package com.davigj.copperpot.common.item;
 
+import com.davigj.copperpot.CopperPotConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,7 +21,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
-import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -96,6 +96,7 @@ public class CreepingYogurt extends Item {
    @Override
    @OnlyIn(Dist.CLIENT)
    public void appendHoverText( ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced ) {
+      if (!CopperPotConfig.CLIENT.tooltips.get()) return;
       MutableComponent tip = Component.translatable("copperpot.tooltip.creeping_yogurt.tip");
       pTooltipComponents.add(tip.withStyle(ChatFormatting.GREEN));
    }
